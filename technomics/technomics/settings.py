@@ -1,10 +1,12 @@
 # Django settings for technomics project.
-
-DEBUG = True
+import os
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
+
+fillpath = lambda x: os.path.join(os.path.dirname(__file__), x)
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ('Remya', 'sremya218@gmail.com'),
 )
 
 MANAGERS = ADMINS
@@ -29,7 +31,7 @@ ALLOWED_HOSTS = []
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
 # In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'Asia/Kolkata'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -47,25 +49,35 @@ USE_L10N = True
 
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
+# Full filesystem path to the project.
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
+# Name of the directory for the project.
+PROJECT_DIRNAME = PROJECT_ROOT.split(os.sep)[-1]
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = fillpath('media')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://example.com/media/", "http://media.example.com/"
-MEDIA_URL = ''
+MEDIA_URL = '/site_media/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = fillpath('static')
+
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
 STATIC_URL = '/static/'
+
+# URL prefix for admin static files -- CSS, JavaScript and images.
+# Make sure to use a trailing slash.
+# Examples: "http://foo.com/static/admin/", "/static/admin/".
+ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -114,16 +126,20 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
+    'web',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+    'django.contrib.admin',
+    'django.contrib.admindocs',
+    'django_wsgiserver',
+    'sorl.thumbnail',
+    'mediagenerator',
+    'south',
+    'tinymce',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -154,3 +170,54 @@ LOGGING = {
         },
     }
 }
+
+MEDIA_DEV_MODE = True
+DEV_MEDIA_URL = '/devstatic/'
+PRODUCTION_MEDIA_URL = '/static/'
+
+GLOBAL_MEDIA_DIRS = () #(os.path.join(os.path.dirname(__file__), 'static'),)
+
+
+MEDIA_BUNDLES = (
+    # ('main.css',
+    #     'less/base.less',        
+    # ),    
+    ('mootools.js',
+        {'filter': 'mediagenerator.filters.media_url.MediaURL'},
+        'js/mootools-core-1.4.2-full-compat-yc.js',
+        'js/mootools-more-1.4.0.1.js',        
+    ),
+    # ('main.js',
+    #     'js/common.js',
+    # ),
+)
+
+ROOT_MEDIA_FILTERS = {
+    'js': 'mediagenerator.filters.yuicompressor.YUICompressor',
+    'css': 'mediagenerator.filters.yuicompressor.YUICompressor',
+}
+
+YUICOMPRESSOR_PATH = os.path.join(os.path.dirname(__file__), '../tools', 'yuicompressor-2.4.6.jar')
+print YUICOMPRESSOR_PATH
+TINYMCE_JS_URL= (MEDIA_URL + 'js/tiny_mce/tiny_mce.js')
+    #The URL of the TinyMCE javascript file.
+TINYMCE_JS_ROOT = (MEDIA_ROOT + '/js/tiny_mce')
+    #The filesystem location of the TinyMCE files.
+# TINYMCE_DEFAULT_CONFIG = ({'theme': "advanced", 'relative_urls': False,
+TINYMCE_DEFAULT_CONFIG = ({'theme': "advanced", 'relative_urls': False,
+                        'theme_advanced_disable' : "styleselect",
+                        'theme_advanced_toolbar_location' : "top",
+                        'plugins' : "paste",
+                        'theme_advanced_buttons3_add' : "pastetext,pasteword,selectall",
+                        'paste_auto_cleanup_on_paste' : True,})
+    #The default TinyMCE configuration to use. See the TinyMCE manual for all options. To set the configuration for a specific TinyMCE editor, see the mce_attrs parameter for the widget.
+TINYMCE_SPELLCHECKER = False
+    #Whether to use the spell checker through the supplied view. You must add spellchecker to the TinyMCE plugin list yourself, it is not added automatically.
+TINYMCE_COMPRESSOR = False
+    #Whether to use the TinyMCE compressor, which gzips all Javascript files into a single stream. This makes the overall download size 75% smaller and also reduces the number of requests. The overall initialization time for TinyMCE will be reduced dramatically if you use this option.
+#TINYMCE_FILEBROWSER (True if 'filebrowser' in INSTALLED_APPS, else False)
+
+try:
+   from local_settings import *
+except:
+   pass
