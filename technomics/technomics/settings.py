@@ -105,6 +105,7 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'mediagenerator.middleware.MediaMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -142,6 +143,7 @@ INSTALLED_APPS = (
     'tinymce',
 )
 
+GENERATED_MEDIA_ROOT = fillpath('../_generated_media')
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error when DEBUG=False.
@@ -179,9 +181,9 @@ GLOBAL_MEDIA_DIRS = () #(os.path.join(os.path.dirname(__file__), 'static'),)
 
 
 MEDIA_BUNDLES = (
-    # ('main.css',
-    #     'less/base.less',        
-    # ),    
+    ('main.css',
+        'less/style.less',        
+    ),    
     ('mootools.js',
         {'filter': 'mediagenerator.filters.media_url.MediaURL'},
         'js/mootools-core-1.4.2-full-compat-yc.js',
