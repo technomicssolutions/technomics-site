@@ -6,7 +6,7 @@ TEMPLATE_DEBUG = DEBUG
 
 fillpath = lambda x: os.path.join(os.path.dirname(__file__), x)
 ADMINS = (
-    ('Remya', 'sremya218@gmail.com'),
+    ('geethu', 'geethusureh@gmail.com'),
 )
 
 MANAGERS = ADMINS
@@ -104,6 +104,17 @@ TEMPLATE_LOADERS = (
 #     'django.template.loaders.eggs.Loader',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.request',
+    'django.core.context_processors.static',
+    'technomics.context_processors.site_variables',
+    'django.contrib.messages.context_processors.messages',
+)
+
 MIDDLEWARE_CLASSES = (
     'mediagenerator.middleware.MediaMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -182,16 +193,18 @@ GLOBAL_MEDIA_DIRS = () #(os.path.join(os.path.dirname(__file__), 'static'),)
 
 MEDIA_BUNDLES = (
     ('main.css',
-        'less/style.less',        
+        'less/style.less', 
+        'less/slideshow.less',       
     ),    
     ('mootools.js',
         {'filter': 'mediagenerator.filters.media_url.MediaURL'},
         'js/mootools-core-1.4.2-full-compat-yc.js',
         'js/mootools-more-1.4.0.1.js',        
     ),
-    # ('main.js',
-    #     'js/common.js',
-    # ),
+    ('main.js',
+        'js/contact_form.js',
+        'js/slideshow.js',
+    ),
 )
 
 ROOT_MEDIA_FILTERS = {
