@@ -1,20 +1,20 @@
-{% load media %}
-{% load thumbnail %}
-{% block body_tags %}{% endblock body_tags %}
-{% block content %}
-    Header Logo
-    <div class="menus">
-	    <ul class="menu">
-	    	<li><a href="feature.html">Features</a></li>
-	    	<li><a href="testimonial.html">Testimonials</a></li>
-	    	<li><a href="about.html">About</a></li>
-	    	<li><a href="{% url 'services' %}">Services</a></li>
-	    	<li><a href="support.html">Support</a></li>
-	    	<li><a href="contact.html">Contact</a></li>
-	    </ul>
-    </div>
-    <div class="contact_no">
-    	<!-- Background image -->
-    	<p>Customer Care : 59539 000 97</p>
-    </div>
-{% endblock %}
+
+<div class="header" >
+    {% if context_header %}
+        <img src="/site_media/{{ context_header.logo }} " alt="logo" >
+        <div class="contact_no" >
+            <!-- Background image -->
+            <p>Customer Care : {{ context_header.customer_care }}</p>
+        </div>
+        <div class="menus">
+            <ul class="menu">
+                <li><a href="feature.html">Features</a></li>
+                <li><a href="testimonial.html">Testimonials</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="{% url 'services' %}">Services</a></li>
+                <li><a href="support.html">Support</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    {% endif %}
+</div>

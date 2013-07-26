@@ -41,7 +41,7 @@ class Newsevents(Dates):
     title = models.CharField('Content head', max_length=100, null=True, blank=True, help_text='Heading of the content in the page')
     description = models.TextField('Content description', null=True, blank=True, help_text='Content description')
     event_date = models.DateTimeField('Event date')
-    image = models.ImageField(upload_to='uploads/images/', help_text="Upload image to be displayed in the content section")
+    image = models.ImageField(upload_to='uploads/images/', help_text="Upload image to be displayed in the content section", null= True, blank= True)
 
     class Meta:
         verbose_name = 'News & Events'
@@ -100,7 +100,7 @@ class Comment(Dates):
 
 class Services(Dates):
     title = models.CharField('Content Subhead', max_length=100, null=True, blank=True, help_text='Heading of the content in the page')
-    banner_image = banner = models.ImageField(upload_to='uploads/images/', help_text="Upload banner to be displayed in home page")
+    banner_image = models.ImageField(upload_to='uploads/images/', help_text="Upload banner to be displayed in home page")
     content_subhead = models.CharField('Content Subhead', max_length=100, null=True, blank=True, help_text='Sub heading of the content in the page')
     description = models.TextField('Content description', null=True, blank=True, help_text='Content description')
 
@@ -145,18 +145,35 @@ class Testimonials(Dates):
     image_thumb.allow_tags = True
 
 class Slideshow(Dates):
-    image = models.ImageField(upload_to='uploads/images/', help_text="Upload image to be displayed as slideshow in the page")
-    slogan = models.ImageField(upload_to='uploads/images/', help_text="Upload slogan to be displayed as a text in the slideshow")
-    description = models.TextField('Content description', null=True, blank=True, help_text='Content description')       
-    
+    left_arrow = models.ImageField(upload_to='uploads/images/', help_text="Upload image to be displayed in the banner" )
+    right_arrow = models.ImageField(upload_to='uploads/images', help_text="Upload image to be displayed in the banner" )
+    max_slide_count = models.IntegerField('Slide Count', help_text='Maximum number of slides to be appear in the banner', default=3)
     class Meta:
         verbose_name = 'Slideshow'
         verbose_name_plural = 'Slideshow'
             
 
+    def left_arrow_thumb(self):
+        return '<img height="50px" src="/site_media/%s"/>' % self.left_arrow
+    left_arrow_thumb.allow_tags = True 
+
+    def right_arrow_thumb(self):
+        return '<img height="50px" src="/site_media/%s"/>' % self.right_arrow
+    right_arrow_thumb.allow_tags = True
+
+class Slide(Dates):
+    text = models.CharField('Slogan', max_length=200, null=True, blank=True, help_text='Slogan to be displayed in the banner')
+    image = models.ImageField(upload_to='uploads/images/', help_text='Upload image to be displayed as slideshow')
+    slideshow_id = models.ForeignKey(Slideshow, help_text='Corresponding Slideshow image')
+
+    class Meta:
+        verbose_name = 'Slides'
+        verbose_name_plural = 'Slides'
+
     def image_thumb(self):
         return '<img height="50px" src="/site_media/%s"/>' % self.image
-    image_thumb.allow_tags = True                   
+    image_thumb.allow_tags = True 
+                          
         
                         
         

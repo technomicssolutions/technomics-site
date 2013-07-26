@@ -1,0 +1,10 @@
+
+<div  class= "banner" id="banner" >
+    <div id = "slideshow" >
+        {% if slideshow %}
+            {% for img in slideshow.slide_set.all %}
+                <img src="/site_media/{{ img.image }}">
+            {% endfor %}
+        {% endif %}
+    </div>  
+</div>

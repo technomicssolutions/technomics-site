@@ -2,10 +2,13 @@ from django.conf.urls import patterns, include, url
 from django.conf import settings
 from django.contrib import admin
 from django.views.generic import TemplateView
+from technomics import views
+
 admin.autodiscover()
 
+
 urlpatterns = patterns('',
-    url(r'^$', TemplateView.as_view(template_name='home.html'), name="home"),
+    url(r'^$',views.home, name="home"),
     url(r'^services$', TemplateView.as_view(template_name='services.html'), name="services"),
     # url(r'^technomics/', include('technomics.foo.urls')),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
