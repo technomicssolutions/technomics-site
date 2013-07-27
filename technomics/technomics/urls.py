@@ -9,7 +9,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$',views.home, name="home"),
-    url(r'^services$', TemplateView.as_view(template_name='services.html'), name="services"),
+    url(r'^services$', views.services, name="services"),
     # url(r'^technomics/', include('technomics.foo.urls')),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 	url(r'^admin/', include(admin.site.urls)),

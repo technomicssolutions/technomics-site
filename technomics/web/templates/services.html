@@ -1,28 +1,41 @@
 {% extends "base.html" %}
-
 {% load media %}
 {% load thumbnail %}
 {% block title %}<title> Home | Technomics Solutions </title>{% endblock title %}
 {% block body_tags %}id="services_page"{% endblock body_tags %}
-{% block content %}
-    Contents
-    <div id="custm_softwe_dev"  >
-    	<h3> Custom Software Development </h3>
-    	<p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
-    	<a href="software_development.html" > Read More > </a>
+{% block banner %}
+    <div class="banner" >
+        <img src="/site_media/{{ services_page.banner_image }}">
+        <!-- Banner -->
     </div>
-    <div id="below_content" >
-        <div id="staffing" >
-            <!-- background image -->
-        	<h3>  Dedicated Staffing </h3>
-        	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        	<a href="staffing.html"> Read More > </a>
+{% endblock banner %}
+
+
+{% block content %}
+    <div id="content_section">
+        {% if services_page %}
+            <h3> {{ services_page.title }} </h3>
+            <h3> {{ services_page.content_subhead }} </h3>
+            <p>  {{ services_page.description }} </p>
+            <a href="software_development.html"> Read More > </a>
+        {% endif %}
+    </div>
+    <div id="services_section">
+        <div class="left_section">
+            {% if services_left %} 
+                <img src="/site_media/{{ services_left.section_image }}">
+                <h3> {{ services_left.section_head }} </h3>
+                <p> {{ services_left.description }} </p>
+                <a href="s.html"> Read More > </a>
+            {% endif %}   
         </div>
-        <div id="qa" >
-            <!-- background image -->
-        	<h3> Quality Assurance </h3>
-        	<p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        	<a href="qa.html"> Read More > </a>
+        <div class="right_section">
+            {% if services_right %} 
+                <img src="/site_media/{{ services_right.section_image }}">
+                <h3> {{ services_right.section_head }} </h3>
+                <p> {{ services_right.description }} </p>
+                <a href="qa.html"> Read More > </a>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
