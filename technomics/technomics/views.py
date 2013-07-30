@@ -34,5 +34,16 @@ def contact_us(request):
         contact_us.send_contact_notification_mail_to_admins();
     return HttpResponse('Contact mail sent')
 
+def services(request):
+    services_page = Services.objects.latest('id')
+    services_section = Services_section.objects.all()
+    services_left = services_section[1]
+    services_right = services_section[0]
+    context = {'services_page': services_page,
+               'services_left': services_left,
+               'services_right': services_right
+    }
+    return render(request, 'services.html', context)
+
 
 

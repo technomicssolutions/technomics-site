@@ -18,22 +18,16 @@
         <div id="contact_us" >
             <h3> Contact Us </h3>
             <hr>
-            <form id="contact_form" >
+            <form id="contact_form" method="post" >{% csrf_token %}
                 <ul>
                     <li> 
-                        <span id ="name_span" >
-                        <input type="text" class="overTxtLabel" name="name" id="name" title="Name" value="" />
-                        </span>
+                        <input type="text" name="name" id="name" title="Name" value="" />
                     </li>
                     <li>
-                        <span id= "email_span" >
-                            <input type="email" name="email" id="email" title="Email" value="" />
-                        </span>
+                        <input type="email" name="email" id="email" title="Email" value="" />
                     </li>
                     <li>
-                        <span id= "msg_span"  >
-                            <textarea name="msg" id="msg" title="Message" ></textarea>
-                        </span>
+                        <textarea name="msg" id="msg" title="Message" ></textarea>
                     </li>
                     <li>
                         <input type="button" name="send" id="send" >
@@ -42,9 +36,39 @@
             </form>
         </div>
         <div id="technomics_blog" >
-            <div id="blog" >
-                <h3> Technomics Blog </h3>
-                <hr>
+            <h3> Technomics Blog </h3>
+            <hr>
+            <div id="first_blog" >
+                {% if context_fblog %}
+                    <h6> {{ context_fblog.title }} </h6>
+                    <p> 
+                        {{ context_fblog.description }} 
+                        <br>
+                        {{ context_fblog.author }}
+                    </p>
+                    <hr>
+                {% endif %}
+            </div>
+            <div id="second_blog">
+                {% if context_sblog %}
+                    <h6> {{ context_sblog.title }} </h6>
+                    <p> 
+                        {{ context_sblog.description }} 
+                        <br>
+                        {{ context_sblog.author }}
+                    </p>
+                    <hr>
+                {% endif %}
+            </div>
+            <div id="third_blog">
+                {% if context_tblog %}
+                    <h6> {{ context_tblog.title }} </h6>
+                    <p> 
+                        {{ context_tblog.description }} 
+                        <br>
+                        {{ context_tblog.author }}
+                    </p>
+                {% endif %}
             </div>
         </div>
     </div>
