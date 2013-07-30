@@ -120,7 +120,6 @@ class Comment(Dates):
             
 
 class Services(Dates):
-    title = models.CharField('Content Subhead', max_length=100, null=True, blank=True, help_text='Heading of the content in the page')
     banner_image = models.ImageField(upload_to='uploads/images/', help_text="Upload banner to be displayed in home page")
     content_subhead = models.CharField('Content Subhead', max_length=100, null=True, blank=True, help_text='Sub heading of the content in the page')
     description = models.TextField('Content description', null=True, blank=True, help_text='Content description')
@@ -128,9 +127,6 @@ class Services(Dates):
     class Meta:
         verbose_name = 'Services'
         verbose_name_plural = 'Services'
-
-    def __unicode__(self):
-        return self.title
 
     def banner_thumb(self):
         return '<img height="50px" src="/site_media/%s"/>' % self.banner_image

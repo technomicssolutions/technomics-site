@@ -36,7 +36,7 @@ class CommentAdmin(admin.ModelAdmin):
     list_display = ('author', 'description')
 
 class ServicesAdmin(admin.ModelAdmin):
-    list_display = ('title', 'banner_thumb', 'content_subhead', 'description')
+    list_display = ('banner_thumb', 'content_subhead', 'description')
     formfield_overrides = {
         models.ImageField: {'widget': AdminImageWidget()},
     }
