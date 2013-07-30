@@ -1,5 +1,9 @@
 from django.db import models
-
+from django.template.loader import render_to_string
+from django.core.mail import BadHeaderError, mail_managers, send_mail, EmailMessage, mail_admins
+from django.contrib.auth.models import User
+from django.contrib.sites.models import Site
+from django.conf import settings
 # Create your models here.
 
 class Dates(models.Model):
@@ -69,7 +73,24 @@ class Contactus(Dates):
     name = models.CharField(max_length=80, help_text='Name of the user')
     email_id = models.EmailField(help_text='Email id of the user')
     message = models.TextField(blank=True, null=True, help_text='The message sent by the user')
-    # send button
+    
+    def __unicode__(self):
+        return self.name
+
+    def send_contact_notification_mail_to_admins(self):
+        root_url = 'http://%s'%(Site.objects.get_current().domain)
+        subject =  'Contact Me: '+self.name
+        message = render_to_string('contactus_notification.html', {
+            'name': self.name,
+            'email': self.email_id,
+            'content': self.message,
+            'root_url': root_url,
+        })
+        try:
+            mail_admins(subject, message, fail_silently=False, connection=None, html_message=None)
+            # mail_managers(subject, '',fail_silently=False, connection=None, html_message=message)
+        except BadHeaderError:
+            return HttpResponse('Invalid Header Found')
 
     class Meta:
         verbose_name = 'Contact Us'
@@ -148,6 +169,8 @@ class Slideshow(Dates):
     left_arrow = models.ImageField(upload_to='uploads/images/', help_text="Upload image to be displayed in the banner" )
     right_arrow = models.ImageField(upload_to='uploads/images', help_text="Upload image to be displayed in the banner" )
     max_slide_count = models.IntegerField('Slide Count', help_text='Maximum number of slides to be appear in the banner', default=3)
+    bullet_active = models.ImageField(upload_to='uploads/images/', help_text="Upload image to be displayed as the active bullet in the banner" )
+    bullet_inactive = models.ImageField(upload_to='uploads/images/', help_text="Upload image to be displayed as the inactive bullet in the banner" )
     class Meta:
         verbose_name = 'Slideshow'
         verbose_name_plural = 'Slideshow'
@@ -160,6 +183,14 @@ class Slideshow(Dates):
     def right_arrow_thumb(self):
         return '<img height="50px" src="/site_media/%s"/>' % self.right_arrow
     right_arrow_thumb.allow_tags = True
+
+    def bullet_active_thumb(self):
+        return '<img height="19px" src="/site_media/%s"/>' % self.bullet_active
+    bullet_active.allow_tags = True
+
+    def bullet_inactive_thumb(self):
+        return '<img height="19px" src="/site_media/%s"/>' % self.bullet_inactive
+    bullet_inactive.allow_tags = True
 
 class Slide(Dates):
     text = models.CharField('Slogan', max_length=200, null=True, blank=True, help_text='Slogan to be displayed in the banner')

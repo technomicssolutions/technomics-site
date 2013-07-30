@@ -4,6 +4,7 @@ import os
 from django.conf import settings
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect
+from django.views.decorators.csrf import csrf_exempt
 from django.core.urlresolvers import reverse
 from django.db import models
 from web.models import Contactus, Dates, Homepage, Feature, Newsevents, Aboutus, Blog, Comment, Slideshow, Services, Services_section, Testimonials
@@ -17,9 +18,21 @@ def home(request):
         'latest_content': latest_content,
         'latest_events': latest_events,
         'testimonials' : testimonials,
-        'slideshow' : slideshow
+        'slideshow' : slideshow,
     }
     return render(request, 'home.html',context)
+
+@csrf_exempt
+def contact_us(request):
+    context = {}
+    if request.method == 'POST':
+        contact_us = Contactus();
+        contact_us.name = request.POST['name']
+        contact_us.email_id = request.POST['email']
+        contact_us.message = request.POST['msg']
+        contact_us.save();
+        contact_us.send_contact_notification_mail_to_admins();
+    return HttpResponse('Contact mail sent')
 
 
 

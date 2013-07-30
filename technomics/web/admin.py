@@ -63,7 +63,7 @@ class SlidesAdmin(admin.TabularInline):
 
 class SlideshowAdmin(admin.ModelAdmin):
     inlines = [SlidesAdmin]
-    list_display = ('right_arrow_thumb', 'left_arrow_thumb', 'max_slide_count')
+    list_display = ('right_arrow_thumb', 'left_arrow_thumb', 'max_slide_count','bullet_active_thumb', 'bullet_inactive_thumb')
     formfield_overrides = {
         models.ImageField: {'widget': AdminImageWidget()},
     }

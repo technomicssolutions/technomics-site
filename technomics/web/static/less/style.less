@@ -42,6 +42,13 @@ body {
             margin: 20px 0 20px 39px;
         }
     }
+    /*#slogan {
+        display: block;
+        z-index: 2;
+        border: 1px solid red;
+        height: 20px;
+        width: 20px;
+    }*/
 }
 
 .content {
@@ -169,7 +176,7 @@ body {
             width: 100%;
             height: 337px;
             #about_us {  
-                width: 349px;
+                width: 34%;
                 height:300px;
                 float: left;
                 p{
@@ -182,30 +189,44 @@ body {
                 }
             }
             #contact_us {
-                width: 277px;
+                width: 27%;
                 height: 337px;
                 float: left;
                 margin-left: 20px;
                 #contact_form {
                     ul {
                         list-style: none;
+                        padding: 0;
                         li {
                             position: relative;
+                            label {
+                                font-family: comic sans ms;
+                                font-size: 13px;
+                                left: 4px;
+                                line-height: normal;
+                                position: absolute;
+                                top: 15px;
+                            }
                             input {
-                                width: 200px;
-                                margin-bottom: 15px;
+                                width: 267px;
+                                height: 44px;
+                                margin-bottom: 10px;
                                 color: black;
                                 background-color: gray;
                                 border: none;
+                                display: block;
+                                padding: 5px;
                             }
                             textarea {
                                 width: 200px;
-                                margin-bottom: 15px;
+                                margin-bottom: 10px;
                                 color: black;
                                 background-color: gray;
                                 border: none;
-                                width: 233px;
-                                height: 73px;
+                                width: 267px;
+                                height: 77px;
+                                display: block;
+                                padding: 5px;
                             }
                             input[type='button'] {
                                 width: 107px;
@@ -214,27 +235,77 @@ body {
                                 display: block;
                                 height: 39px;
                             }
-                            span {
-                                background-color: gray;
-                                display: block;
-                                height: 52px;
-                                margin-bottom: 10px;
-                            }
-                            #msg_span {
-                                background-color: gray;
-                                display: block;
-                                height: 77px;
-                                margin-bottom: 10px;
-                            }
                         }
                     }
                 }
             }
             #technomics_blog {
-                width: 358px;
+                width: 35% ;
                 height: 300px;
                 float: left;
                 margin-left: 20px;
+                #first_blog {
+                    color: white;
+                    display: block;
+                    height: 24%;
+                    width: 100%;
+                    h6 {
+                        font-family: comic sans ms;
+                        font-size: 13px;
+                        font-weight: normal;
+                        margin: 0 0 4px 0;
+                        text-align: left;
+                    }
+                    p {
+                        font-family: comic sans ms;
+                        font-size: 11px;
+                        font-weight: normal;
+                        margin: 0;
+                        text-align: justify;
+                    }
+                }
+                #second_blog {
+                    color: white;
+                    display: block;
+                    height: 24%;
+                    width: 100%;
+                    margin-top: 7px;
+                    h6 {
+                        font-family: comic sans ms;
+                        font-size: 13px;
+                        font-weight: normal;
+                        margin: 0 0 4px 0;
+                        text-align: left;
+                    }
+                    p {
+                        font-family: comic sans ms;
+                        font-size: 11px;
+                        font-weight: normal;
+                        margin: 0;
+                        text-align: justify;
+                    }
+                }
+                #third_blog {
+                    color: white;
+                    display: block;
+                    height: 24%;
+                    width: 100%;
+                    margin-top: 7px;
+                    h6 {
+                        font-family: comic sans ms;
+                        font-size: 13px;
+                        font-weight: normal;
+                        margin: 0 0 4px 0;
+                        text-align: left;
+                    }
+                    p {
+                        font-family: comic sans ms;
+                        font-size: 11px;
+                        font-weight: normal;
+                        margin: 0;
+                        text-align: justify;
+                    }
+                }
             }
         }
         #footer_below {
@@ -250,4 +321,7 @@ body {
     }
 }
 
-.overTxtLabel { color:#FFF; }
+.overTxtLabel { 
+    color: #FFF; 
+    top: 15px;
+}

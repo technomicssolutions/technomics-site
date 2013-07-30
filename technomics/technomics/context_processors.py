@@ -17,10 +17,23 @@ def site_variables(request):
     else:
         aboutus = ''
 
+    footer_blog = Blog.objects.all();
+    if (footer_blog):
+        first_blog = footer_blog[0];
+        second_blog = footer_blog[1];
+        third_blog = footer_blog[2];
+    else :
+        first_blog = '';
+        second_blog = '';
+        third_blog = '';
+
     return {
         'SITE_ROOT_URL_S': 'http://%s/'%(current_site.domain),
         'SITE_ROOT_URL': 'http://%s'%(current_site.domain),
         'context_header': header_obj,
-        'context_abtus': aboutus
+        'context_abtus': aboutus,
+        'context_fblog': first_blog,
+        'context_sblog': second_blog,
+        'context_tblog': third_blog
     }
  

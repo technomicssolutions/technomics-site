@@ -1,0 +1,25 @@
+{% block body_tags %}id="services_page"{% endblock body_tags %}
+{% block content %}
+
+	<div id="contact_us" >
+        <h3> Contact Us </h3>
+        <hr>
+        <form id="contact_form" >
+            <ul>
+                <li> 
+                    <input type="text" name="name" id="name" title="Name" value="" />
+                </li>
+                <li>
+                    <input type="email" name="email" id="email" title="Email" value="" />
+                </li>
+                <li>
+                    <textarea name="msg" id="msg" title="Message" ></textarea>
+                </li>
+                <li>
+                    <input type="button" name="send" id="send">
+                </li>
+            </ul>
+        </form>
+    </div>
+
+{% endblock %}
