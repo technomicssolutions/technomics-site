@@ -86,9 +86,9 @@ class Contactus(Dates):
             'content': self.message,
             'root_url': root_url,
         })
+        print 
         try:
             mail_admins(subject, message, fail_silently=False, connection=None, html_message=None)
-            # mail_managers(subject, '',fail_silently=False, connection=None, html_message=message)
         except BadHeaderError:
             return HttpResponse('Invalid Header Found')
 
@@ -192,7 +192,7 @@ class Slide(Dates):
     text = models.CharField('Slogan', max_length=200, null=True, blank=True, help_text='Slogan to be displayed in the banner')
     image = models.ImageField(upload_to='uploads/images/', help_text='Upload image to be displayed as slideshow')
     slideshow_id = models.ForeignKey(Slideshow, help_text='Corresponding Slideshow image')
-
+    extra = 3
     class Meta:
         verbose_name = 'Slides'
         verbose_name_plural = 'Slides'
