@@ -53,8 +53,12 @@ class TestimonialsAdmin(admin.ModelAdmin):
         models.ImageField: {'widget': AdminImageWidget()},
     }
 
-class SlidesAdmin(admin.TabularInline):
+class SlideInline(admin.TabularInline):
     model = Slide
+    initial_forms = 3
+    max_num = 3
+    extra = 0
+
     fk_name = 'slideshow_id'
     list_display = ('text', 'image_thumb')
     formfield_overrides = {
@@ -62,7 +66,7 @@ class SlidesAdmin(admin.TabularInline):
     }
 
 class SlideshowAdmin(admin.ModelAdmin):
-    inlines = [SlidesAdmin]
+    inlines = [SlideInline]
     list_display = ('right_arrow_thumb', 'left_arrow_thumb', 'max_slide_count','bullet_active_thumb', 'bullet_inactive_thumb')
     formfield_overrides = {
         models.ImageField: {'widget': AdminImageWidget()},
