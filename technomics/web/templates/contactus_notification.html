@@ -1,5 +1,5 @@
-{% block content %}
-    Name : {{ name }}
-    Email id : {{ email }}
-    Message : {{ content }}
-{% endblock %}
+
+Name : {{ name | safe }}
+Email id : {{ email | safe }}
+Message : {{ content | safe }}
+
