@@ -3,9 +3,9 @@
     <div id="footer_above" >
         <div id="about_us" >
             {% if context_abtus %}
-                <h3> {{ context_abtus.title }} </h3>
+                <h3> <a name="about"> {{ context_abtus.title }} </a></h3>
                 <hr>
-                <p> {{ context_abtus.description }} </p>
+                <p> {{ context_abtus.description|truncatechars:400|safe }} </p>
                 <!-- image us background -->
                 <img src="static/images/facebook.jpg" id="fb" >
                 <img src="static/images/twitter.jpg" id="twtr" >
@@ -16,7 +16,7 @@
             {% endif %}
         </div>
         <div id="contact_us" >
-            <h3> Contact Us </h3>
+            <h3> <a name="contact">Contact Us</a> </h3>
             <hr>
             <form id="contact_form" method="post" >{% csrf_token %}
                 <ul>

@@ -2,6 +2,7 @@
 
 {% load media %}
 {% load thumbnail %}
+{% load base_tags %}
 {% block title %}<title>Home | Technomics Solutions </title>{% endblock title %}
 {% block body_tags %}id="home_page"{% endblock body_tags %}
 {% block banner %}
@@ -11,8 +12,8 @@
     <div id="contents">
         <div id="site_feature"  >
             {% if latest_content %}
-                    <h3> {{ latest_content.title }} </h3>
-                    <p> {{ latest_content.description }} 
+                    <h3><a name="feature"> {{ latest_content.title }} </a></h3>
+                    <p> {{ latest_content.description|truncatechars:400|safe }} 
                         <br>   
                         <a href="feature.html" > Read More > </a>
                     </p>
@@ -21,19 +22,21 @@
         </div>
         <div id="news_events" >
             {% if latest_events %}
-                <h3> {{ latest_events.title }} </h3>
-                <p> {{ latest_events.description }} </p>
-                <a href="events.html"> Read More > </a>
+                <h3> {{ latest_events.title }} </a></h3>
+                <p> {{ latest_events.description|truncatechars:400|safe }} 
+                    <br>
+                    <a href="events.html"> Read More > </a>
+                </p>
             {% endif %}
         </div>
     </div>
     <div id="testimonial_bg" >
         <div id="testimonial" >
             {% if testimonials %}
-                <h3> {{ testimonials.title }} </h3>
-                <p> {{ testimonials.description }} 
+                <h3><a name="testimonial"> {{ testimonials.title }} </a></h3>
+                <p> {{ testimonials.description|truncatechars:400|safe }} 
                     <br> 
-                    <a href="events.html"> Read More > </a>
+                    <a href="events.html" id="testimonial_readmore"> Read More > </a>
                 </p>
             {% endif %}
         </div>
