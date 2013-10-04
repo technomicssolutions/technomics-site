@@ -1,7 +1,7 @@
 
 <div class="header" >
     {% if context_header %}
-        <img src="/site_media/{{ context_header.logo }} " alt="logo" width="193" height="66">
+        <a href="{% url 'home' %}"><img src="/site_media/{{ context_header.logo }} " alt="logo" width="193" height="66"></a>
         <div class="contact_no" >
             <!-- Background image -->
             <p>Customer Care : {{ context_header.customer_care }}</p>
