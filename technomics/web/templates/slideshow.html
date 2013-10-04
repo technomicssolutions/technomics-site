@@ -3,7 +3,7 @@
     <div id = "slideshow" class = "slideshow">
         {% if slideshow %}
             {% for slide in slideshow.slide_set.all %}
-                <img src="/site_media/{{ slide.image }}">
+                <img src="/site_media/{{ slide.image }}" width="1550" height="477">
                 <div id="slogan" >
                     {% autoescape off %}
                         {{ slide.text | safe }} 
