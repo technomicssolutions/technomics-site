@@ -8,10 +8,37 @@
                 padding: 10px 0 10px 10px;
                 list-style: none;
                 position: relative;
+                width: 163px;
+                height: auto;
                 a {
                     text-decoration: none;
                     color: #000000;
                     font-size: 16px;
+                    font-family: Verdana;
+                }
+                ul {
+                    display: none;
+                }
+            }
+        }
+        ul li:hover > ul.submenu {
+            display: block;
+            list-style: none;
+            position: relative;
+            li {
+                clear:both;
+                border-style:none;
+                width: 162px;
+                height: 20px;
+                padding: 0;
+                background-color: #F1F1F1;
+                right: 39px;
+                border: 1px solid #FFFFFF;
+                z-index: 2;
+                a {
+                    text-decoration: none;
+                    color: #000000;
+                    font-size: 12px;
                     font-family: Verdana;
                 }
             }
