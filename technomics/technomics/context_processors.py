@@ -27,7 +27,7 @@ def site_variables(request):
         second_blog = '';
         third_blog = '';
 
-    menu_obj = Menu.objects.all().order_by('-order');
+    menu_obj = Menu.objects.all().order_by('order');
 
     return {
         'SITE_ROOT_URL_S': 'http://%s/'%(current_site.domain),
