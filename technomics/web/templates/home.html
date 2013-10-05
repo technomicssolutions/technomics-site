@@ -23,10 +23,10 @@
         <div id="news_events" >
             {% if latest_events %}
                 <h3> {{ latest_events.title }} </a></h3>
-                <p> {{ latest_events.description|truncatechars:400|safe }} 
+                 {{ latest_events.description|truncatechars:400|safe }} 
                     <br>
                     <!-- <a href="events.html"> Read More > </a> -->
-                </p>
+                
             {% endif %}
         </div>
     </div>
