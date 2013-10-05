@@ -76,12 +76,12 @@ class SubmenuInline(admin.TabularInline):
     model = Submenu
 
     fk_name = 'menu'
-    list_display = ('sub_title', 'slug')
+    list_display = ('sub_title', 'slug', 'order')
     exclude = ('slug',)
 
 class MenuAdmin(admin.ModelAdmin):
     inlines = [SubmenuInline]
-    list_display = ('title', 'slug')
+    list_display = ('title', 'slug', 'order')
     exclude = ('slug',)
         
         

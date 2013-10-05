@@ -204,7 +204,8 @@ class Slide(Dates):
 class Menu(Dates):
     title = models.CharField('Menu', max_length = 50, null = True, blank = True, help_text = 'Name of the menu')
     slug = models.CharField('Slug', max_length = 100, null = True, blank = True, help_text = 'Slug of the menu')
-
+    order = models.IntegerField('Order', max_length = 10, null = True, blank = True, default = '1', help_text = 'Order of the menus')
+    
     class Meta:
         verbose_name = 'Menu'
         verbose_name_plural = 'Menus'
@@ -217,6 +218,7 @@ class Submenu(Dates):
     menu = models.ForeignKey(Menu, help_text = 'Corresponding menu')
     title = models.CharField('Submenu', max_length = 200 , null = True, blank = True, help_text = 'Nmae of the submenu')
     slug = models.CharField('Slug', max_length = 200, null = True, blank = True, help_text = 'Slug of the submenu')
+    order = models.IntegerField('Order', max_length = 10, null = True, blank = True, default = '1', help_text = 'Order of the submenu')
 
     def save(self, *args, **kwargs):
         self.slug = slug(self.title)
