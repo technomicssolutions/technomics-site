@@ -11,11 +11,11 @@
             <ul class="menu">
                 {% for menu in context_menu %}                        
                     <li><a href="{% url 'render_page' slug=menu.slug %}">{{ menu.title }}</a>
-                <ul class="submenu">
-                        {% for submenu in menu.submenu_set.all %}
-                            <li><a href="#">{{ submenu.title }}</a></li>
-                        {% endfor %}
-                </ul>
+                        <ul class="submenu">
+                            {% for submenu in menu.submenu_set.all %}
+                                <li><a href="#">{{ submenu.title }}</a></li>
+                            {% endfor %}
+                        </ul>
                     </li>                        
                 {% endfor %}
             </ul>
