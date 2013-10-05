@@ -32,8 +32,8 @@ class Feature(Dates):
     image = models.ImageField(upload_to='uploads/images/', help_text="Upload image to be displayed in the content section")
     
     class Meta:
-        verbose_name = 'Feature'
-        verbose_name_plural = 'Feature'
+        verbose_name = 'Home Left Section'
+        verbose_name_plural = 'Home Left Section'
             
     def __unicode__(self):
         return self.title
@@ -49,8 +49,8 @@ class Newsevents(Dates):
     image = models.ImageField(upload_to='uploads/images/', help_text="Upload image to be displayed in the content section", null= True, blank= True)
 
     class Meta:
-        verbose_name = 'News & Events'
-        verbose_name_plural = 'News & Events'
+        verbose_name = 'Home Right Section'
+        verbose_name_plural = 'Home Right Section'
 
     def __unicode__(self):
         return self.title
