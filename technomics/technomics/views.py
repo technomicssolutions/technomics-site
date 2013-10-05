@@ -21,6 +21,20 @@ def home(request):
         'slideshow' : slideshow,
     }
     return render(request, 'home.html',context)
+    
+def renderpage(request, slug):
+    if slug:
+        template = "%s.html" % slug
+        services_page = Services.objects.latest('id')
+        services_section = Services_section.objects.all()
+        services_left = services_section[0]
+        services_right = services_section[1]
+        context = {'services_page': services_page,
+                   'services_left': services_left,
+                   'services_right': services_right
+        }
+        return render(request, template, context)
+
 
 @csrf_exempt
 def contact_us(request):
@@ -32,7 +46,7 @@ def contact_us(request):
         contact_us.message = request.POST['msg']
         contact_us.save();
         contact_us.send_contact_notification_mail_to_admins();
-    return HttpResponse('You have successfully sent the Message1')
+    return HttpResponse('You have successfully sent the Message')
 
 def services(request):
     services_page = Services.objects.latest('id')

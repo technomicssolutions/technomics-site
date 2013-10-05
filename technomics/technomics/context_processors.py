@@ -1,6 +1,6 @@
 from django.contrib.sites.models import Site
 from django.db import models
-from web.models import Contactus, Dates, Homepage, Feature, Newsevents, Aboutus, Blog, Comment, Slideshow, Services, Services_section, Testimonials
+from web.models import Contactus, Dates, Homepage, Feature, Newsevents, Aboutus, Blog, Comment, Slideshow, Services, Services_section, Testimonials, Menu
 
 def site_variables(request):
     current_site = Site.objects.get_current()
@@ -17,7 +17,7 @@ def site_variables(request):
     else:
         aboutus = ''
 
-    footer_blog = Blog.objects.all();
+    footer_blog = Blog.objects.all()
     if (footer_blog):
         first_blog = footer_blog[0];
         second_blog = footer_blog[1];
@@ -27,6 +27,8 @@ def site_variables(request):
         second_blog = '';
         third_blog = '';
 
+    menu_obj = Menu.objects.all().order_by('-order');
+
     return {
         'SITE_ROOT_URL_S': 'http://%s/'%(current_site.domain),
         'SITE_ROOT_URL': 'http://%s'%(current_site.domain),
@@ -34,6 +36,7 @@ def site_variables(request):
         'context_abtus': aboutus,
         'context_fblog': first_blog,
         'context_sblog': second_blog,
-        'context_tblog': third_blog
+        'context_tblog': third_blog,
+        'context_menu': menu_obj,
     }
  

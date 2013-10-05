@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.db import models
-from models import Contactus, Dates, Homepage, Feature, Newsevents, Aboutus, Blog, Comment, Slideshow, Services, Services_section, Testimonials, Slide
+from models import Contactus, Dates, Homepage, Feature, Newsevents, Aboutus, Blog, Comment, Slideshow, Services, Services_section, Testimonials, Slide, Menu, Submenu
 from adminthumbnail import AdminImageWidget
 from django.views.generic.list import ListView
 
@@ -71,6 +71,18 @@ class SlideshowAdmin(admin.ModelAdmin):
     formfield_overrides = {
         models.ImageField: {'widget': AdminImageWidget()},
     }
+
+class SubmenuInline(admin.TabularInline):
+    model = Submenu
+
+    fk_name = 'menu'
+    list_display = ('sub_title', 'slug', 'order')
+    exclude = ('slug',)
+
+class MenuAdmin(admin.ModelAdmin):
+    inlines = [SubmenuInline]
+    list_display = ('title', 'slug', 'order')
+    exclude = ('slug',)
         
         
 admin.site.register(Homepage, HomepageAdmin)
@@ -84,3 +96,4 @@ admin.site.register(Services, ServicesAdmin)
 admin.site.register(Services_section, Services_sectionAdmin)
 admin.site.register(Testimonials, TestimonialsAdmin)
 admin.site.register(Slideshow, SlideshowAdmin)
+admin.site.register(Menu, MenuAdmin)

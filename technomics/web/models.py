@@ -4,6 +4,7 @@ from django.core.mail import BadHeaderError, mail_managers, send_mail, EmailMess
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.conf import settings
+from .utils import slug
 # Create your models here.
 
 class Dates(models.Model):
@@ -85,8 +86,7 @@ class Contactus(Dates):
             'email': self.email_id,
             'content': self.message,
             'root_url': root_url,
-        })
-        print 
+        }) 
         try:
             mail_admins(subject, message, fail_silently=False, connection=None, html_message=None)
         except BadHeaderError:
@@ -189,10 +189,10 @@ class Slideshow(Dates):
     bullet_inactive.allow_tags = True
 
 class Slide(Dates):
-    text = models.CharField('Slogan', max_length=200, null=True, blank=True, help_text='Slogan to be displayed in the banner')
+    text = models.CharField('Slogan', max_length = 200, null=True, blank=True, help_text='Slogan to be displayed in the banner')
     image = models.ImageField(upload_to='uploads/images/', help_text='Upload image to be displayed as slideshow')
     slideshow_id = models.ForeignKey(Slideshow, help_text='Corresponding Slideshow image')
-    extra = 3
+    
     class Meta:
         verbose_name = 'Slides'
         verbose_name_plural = 'Slides'
@@ -200,7 +200,29 @@ class Slide(Dates):
     def image_thumb(self):
         return '<img height="50px" src="/site_media/%s"/>' % self.image
     image_thumb.allow_tags = True 
-                          
+
+class Menu(Dates):
+    title = models.CharField('Menu', max_length = 50, null = True, blank = True, help_text = 'Name of the menu')
+    slug = models.CharField('Slug', max_length = 100, null = True, blank = True, help_text = 'Slug of the menu')
+    order = models.IntegerField('Order', max_length = 10, null = True, blank = True, default = '1', help_text = 'Order of the menus')
+    
+    class Meta:
+        verbose_name = 'Menu'
+        verbose_name_plural = 'Menus'
+
+    def save(self, *args, **kwargs):
+        self.slug = slug(self.title)
+        super(Menu, self).save(*args, **kwargs)
+
+class Submenu(Dates):
+    menu = models.ForeignKey(Menu, help_text = 'Corresponding menu')
+    title = models.CharField('Submenu', max_length = 200 , null = True, blank = True, help_text = 'Nmae of the submenu')
+    slug = models.CharField('Slug', max_length = 200, null = True, blank = True, help_text = 'Slug of the submenu')
+    order = models.IntegerField('Order', max_length = 10, null = True, blank = True, default = '1', help_text = 'Order of the submenu')
+
+    def save(self, *args, **kwargs):
+        self.slug = slug(self.title)
+        super(Submenu, self).save(*args, **kwargs)                      
         
                         
         

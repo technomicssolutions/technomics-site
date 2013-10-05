@@ -4,17 +4,22 @@
         <a href="{% url 'home' %}"><img src="/site_media/{{ context_header.logo }} " alt="logo"></a>
         <div class="contact_no" >
             <!-- Background image -->
-            <p>Customer Care : {{ context_header.customer_care }}</p>
+            <p>{{ context_header.customer_care }}</p>
         </div>
         <div class="menus">
-            <ul class="menu">
-                <li><a href="#feature">Features</a></li>
-                <li><a href="#testimonial">Testimonials</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="{% url 'services' %}">Services</a></li>
-                <li><a href="support.html">Support</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+            {% if context_menu %}
+                {% for menu in context_menu %}
+                        <ul class="menu">
+                            <li><a href="{% url 'render_page' slug=menu.slug %}">{{ menu.title }}</a>
+                                <!-- {% for submenu in menu.submenu_set.all %}
+                                    <ul class="submenu">
+                                        <li><a href="#">{{ submenu.title }}</a></li>
+                                    </ul>
+                                {% endfor %} -->
+                            </li>
+                        </ul>
+                {% endfor %}
+            {% endif %}
         </div>
     {% endif %}
 </div>
