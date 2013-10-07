@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load media %}
+{% load thumbnail %}
+{% block title %}<title> Contact Us | Technomics Solutions </title>{% endblock title %}
+{% block body_tags %}id="contactus"{% endblock body_tags %}
+{% block banner %}
+    {% include 'slideshow.html' %}
+{% endblock banner %}
+
+
+{% block content %}
+    <div id="contactus_section">
+        <p> For more information regarding our IT services please contact us.</p>
+        <div id="contactus">
+            <h3> Technomics Software Solutions Pvt.Ltd. </h3>
+            <h4> Cochin Office :</h4>
+            <p> 
+                1 Floor, Mundukottackal Estate SA Road,<br>
+                Kadavanthra Jn, Cochin<br>
+                Kerala, India - 682020
+            </p> 
+            <p>
+                +91-0484-4064333 <br>
+                +91-9846128353<br><br>
+                Email : info@technomicssolutions.com
+            </p>
+        </div> 
+        <div id="contact_us" >
+            <form id="contact_form" method="post" >{% csrf_token %}
+                <ul>
+                    <li> 
+                        <label title="Name" for="name">Name</label>
+                        <input type="text" name="name" id="name" title="Name"/>
+                    </li>
+                    <li>
+                        <label title="Email" for="email">Email</label>
+                        <input type="email" name="email" id="email" title="Email"/>
+                    </li>
+                    <li>
+                        <label for="subject" title="Name">Subject</label>
+                        <input type="text" name="subject" id="subject" title="Subject">
+                    </li>
+                    <li>
+                        <label for="message" title="Message">Message</label>
+                        <textarea name="message" id="message" title="Message" ></textarea>
+                    </li>
+                    <li>
+                        <input type="button" name="send" id="send" >
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+{% endblock %}

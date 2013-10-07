@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load media %}
+{% load thumbnail %}
+{% block title %}<title> Services | Linux Managed Services | Technomics Solutions </title>{% endblock title %}
+{% block body_tags %}id="lms"{% endblock body_tags %}
+{% block banner %}
+    <div class="banner" style='background: url(/site_media/{{ services_page.banner_image }}) no-repeat;'>   
+    </div>
+{% endblock banner %}
+
+
+{% block content %}
+	<div id="lms_section">
+		<div id="left_section">
+			<p>OS: Centos, Debian, Suse, Red Hat <br>
+				Hypervisors: KVM, Xen, Virtualbox, ESXi <br>
+				Webserver: Apache, Nginx, Lighthttpd <br>
+				Database: Postgresql, Mysql <br>
+				Mail Server: Exim, Qmail, Postfix, PowerMTA <br>
+				Scripting: Bash, Perl, Python <br>
+				Software Versioning Tools: SVN, Git <br>
+				Configuration management tools: Puppet, Chef <br>
+				Monitoring Tools: Nagios, Opennms, Zabbix, Zenoss
+			</p>
+		</div>
+		<div id="right_section">
+			<p>	Public Cloud: AWS, Rackspace <br>
+				Private Cloud: Openstack, Opennebula, OpenQrm, Applogic, Vmware, XCP, Microsoft Azure <br>
+				High Availability Tools: Pacemaker, DRBD <br>
+				Backup: rsync, bacula, r1soft <br>
+				Storage: Glusterfs, sheepdog, LVM, iscsi <br>
+				Firewall: Sonic Firewall, iptables <br>
+				Controlpanels: Cpanel, Plesk, VirtualMin, Webmin <br>
+				Hardware Support: Driver Install and Support 
+			</p>
+		</div>
+	</div>
+{% endblock %}
