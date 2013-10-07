@@ -63,6 +63,8 @@ class Newsevents(Dates):
 class Aboutus(Dates):
     title = models.CharField('Content head', max_length=100, null=True, blank=True, help_text='Heading of the content in the page')
     description = models.TextField('Content description', null=True, blank=True, help_text='Content description')
+    # left_content = models.TextField('Left content description', null=True, blank=True, help_text='Left content description')
+    # right_content = models.TextField('Right content description', null=True, blank=True, help_text='Right content description')
     class Meta:
         verbose_name = 'About Us'
         verbose_name_plural = 'About Us'
@@ -73,6 +75,7 @@ class Aboutus(Dates):
 class Contactus(Dates):
     name = models.CharField(max_length=80, help_text='Name of the user')
     email_id = models.EmailField(help_text='Email id of the user')
+    subject = models.CharField(max_length = 100, help_text='Subject of the user')
     message = models.TextField(blank=True, null=True, help_text='The message sent by the user')
     
     def __unicode__(self):
@@ -80,11 +83,13 @@ class Contactus(Dates):
 
     def send_contact_notification_mail_to_admins(self):
         root_url = 'http://%s'%(Site.objects.get_current().domain)
-        subject =  'Contact Me: '+self.name
+        subject = self.subject
+        # contact_us/subject = 'Contact me'. self.name
         message = render_to_string('contactus_notification.html', {
             'name': self.name,
             'email': self.email_id,
             'content': self.message,
+            'subject': self.subject,
             'root_url': root_url,
         }) 
         try:
@@ -222,6 +227,7 @@ class Submenu(Dates):
 
     def save(self, *args, **kwargs):
         self.slug = slug(self.title)
+        print "slug =", self.slug
         super(Submenu, self).save(*args, **kwargs)                      
         
                         

@@ -1,24 +1,21 @@
 
 window.addEvent('domready', function(){
-    new OverText("name",{
-
-    });
-    new OverText("email",{
-
-    })
-    new OverText("msg",{
-        
-    })
+    
     $('send').addEvent('click', function(e){
         e.stop();
         var contact_data = $('contact_form').toQueryString();
+        console.log('data'+contact_data);
         var ajaxRequest = new Request({ 
             url: '/contactus',
             method: 'POST',
             data: contact_data,
-            onComplete: function(){
-                alert('You have successfully sent the Message');
+            onSuccess: function(){
+                console.log('You have successfully sent the Message');
             }
+            // onFailure: function(){
+            //     console.log('error :'+ data);
+            // }
+
         }); 
         ajaxRequest.send(); 
 	});  

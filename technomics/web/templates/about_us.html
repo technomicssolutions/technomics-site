@@ -10,11 +10,14 @@
 
 {% block content %}
     <div id="aboutus_section">
-        <div class="left_section">
-            <p>TECHNOMICS IS LOCATED IN THE Gods own country Kerala-India having its head quarters in Cochin and branches in US and Oman.We have a pool of  energetic and talented team to support our customers. Our expertise in custom software development, Offshore team management, Outsourcing and IT Infrastructure management had successfully fulfilled our customer needs in cost effective way .We see innovation in building relationships and sharing knowledge. As we move to a more connected world, our success in selling to new and existing customers will rely heavily on our ability to track and manage all of them very effectively. And as we grow our business we found more opportunity there than we thought possible. </p>
-        </div>
-        <div class="right_section">
-            <p> Technologies had a profound impact on the way we live, communicate and do business globally - particularly in the last decade. As digital citizens, we live in a world where devices and applications deliver an increasing volume of information, faster, in more forms and available when we choose to consume or create, publish and share it with the rest of the world. Technology reduces business complexities, make the work efficient and give a better satisfaction to the customers. TECHNOMICS as a startup tried to implement these innovations. We are market expertise from IT infrastructure management, Custom software devolvement and Business Development. </p>
-        </div>
+        {% if aboutus %}
+            <h2>{{ aboutus.title }}</h2>
+            <div class="left_section">
+                <p>TECHNOMICS IS LOCATED IN THE Gods own country Kerala-India having its head quarters in Cochin and branches in US and Oman.We have a pool of  energetic and talented team to support our customers. Our expertise in custom software development, Offshore team management, Outsourcing and IT Infrastructure management had successfully fulfilled our customer needs in cost effective way .We see innovation in building relationships and sharing knowledge. As we move to a more connected world, our success in selling to new and existing customers will rely heavily on our ability to track and manage all of them very effectively. And as we grow our business we found more opportunity there than we thought possible. </p>
+            </div>
+            <div class="right_section">
+                <p> Technologies had a profound impact on the way we live, communicate and do business globally - particularly in the last decade. As digital citizens, we live in a world where devices and applications deliver an increasing volume of information, faster, in more forms and available when we choose to consume or create, publish and share it with the rest of the world. Technology reduces business complexities, make the work efficient and give a better satisfaction to the customers. TECHNOMICS as a startup tried to implement these innovations. We are market expertise from IT infrastructure management, Custom software devolvement and Business Development. </p>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}

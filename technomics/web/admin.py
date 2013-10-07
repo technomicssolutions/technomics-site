@@ -27,7 +27,7 @@ class AboutusAdmin(admin.ModelAdmin):
     list_display = ('title', 'description')
 
 class ContactusAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email_id', 'message')
+    list_display = ('name', 'email_id', 'subject', 'message')
 
 class BlogAdmin(admin.ModelAdmin):
     list_display = ('title', 'description', 'author')
@@ -77,7 +77,7 @@ class SubmenuInline(admin.TabularInline):
 
     fk_name = 'menu'
     list_display = ('sub_title', 'slug', 'order')
-    exclude = ('slug',)
+    # exclude = ('slug',)
 
 class MenuAdmin(admin.ModelAdmin):
     inlines = [SubmenuInline]
