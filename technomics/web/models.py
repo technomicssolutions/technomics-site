@@ -7,6 +7,7 @@ from django.conf import settings
 from .utils import slug
 # Create your models here.
 
+
 class Dates(models.Model):
     created_date = models.DateTimeField('Created Date', auto_now_add=True, null=True, blank=True)
     modified_date = models.DateTimeField('Modified Date', auto_now=True, null=True, blank=True)
@@ -230,9 +231,28 @@ class Submenu(Dates):
         print "slug =", self.slug
         super(Submenu, self).save(*args, **kwargs)                      
         
-                        
-        
-        
-        
-        
-        
+
+
+class Vacancy(Dates):
+    name = models.CharField('Name', max_length = 200, null=True, blank=True, help_text='Name of vacancy')
+    no_of_vacancy = models.IntegerField('No of Vacancy', max_length = 10, null = True, blank = True, default = '0', help_text = 'No of vacancies')
+    opening_date = models.DateField()
+    closing_date = models.DateField()
+
+
+class Candidate(Dates):
+    resume = models.FileField(upload_to = "uploads/images/", max_length=20000,  blank=True)
+
+
+class Freshers(Candidate):
+    Qualification = models.CharField(max_length=200)
+
+
+CATEGORY_CHOICES = (
+            ('P','Python'),
+            ('H','hr'),
+            )
+class Experienced(Candidate):
+    candidate_type = models.CharField(max_length=200, choices = CATEGORY_CHOICES)
+
+
