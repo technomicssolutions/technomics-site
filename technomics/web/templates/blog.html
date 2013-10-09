@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load media %}
+{% load thumbnail %}
+{% block title %}<title> Contact Us | Technomics Solutions </title>{% endblock title %}
+{% block body_tags %}id="contactus"{% endblock body_tags %}
+{% block banner %}
+    {% include 'slideshow.html' %}
+{% endblock banner %}
+
+
+{% block content %}
+    {% if blog %}
+        <p> 
+            {{ blog.title }}
+            {{ blog.description }}
+            {{ blog.author }}
+            <br> 
+        </p>
+    {% endif %}
+
+    <div id="contactus_section">
+        <p> For more information regarding our IT services please contact us.</p>
+        </div> 
+        <div id="contact_us" >
+            <form id="blogs_form" method="post" >{% csrf_token %}
+                <ul>
+                    <li> 
+                        <label title="Name" for="name">Name</label>
+                        <input type="text" name="title" id="name" title="Name"/>
+                    </li>
+                    <li>
+                        <label title="Email" for="email">Email</label>
+                        <input type="email" name="email" id="email" title="Email"/>
+                    </li>
+                    <li>
+                        <label for="subject" title="Name">Subject</label>
+                        <input type="text" name="subject" id="subject" title="Subject">
+                    </li>
+                    <li>
+                        <input type="submit" value="Submit">
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+{% endblock %}
