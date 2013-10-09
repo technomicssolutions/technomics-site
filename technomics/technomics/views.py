@@ -7,9 +7,8 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.urlresolvers import reverse
 from django.db import models
-from web.models import Contactus, Dates, Homepage, Feature, Newsevents, Aboutus, Blog, Comment, Slideshow, Services, Services_section, Testimonials
-from web.forms import CommentForm
-from web.forms import FresherForm
+from web.models import Contactus, Dates, Homepage, Feature, Newsevents, Aboutus, Blog, Comment, Slideshow, Services, Services_section, Testimonials, Candidate
+from web.forms import CommentForm, FresherForm
 
 def home(request):
     latest_content = Feature.objects.latest('id')
@@ -132,6 +131,7 @@ def renderpage(request, slug):
             from django.forms.formsets import formset_factory
             CommentFormSet = formset_factory(CommentForm, max_num=len(blogs))
             formset = CommentFormSet()
+            print formset
             context = {
             'slideshow': slideshow,
             'blogs_formset': zip(blogs,formset),
@@ -139,6 +139,7 @@ def renderpage(request, slug):
             }
         elif slug == 'fresher':
             fresherform = FresherForm()
+            print fresherform
             context = {
             'slideshow': slideshow,
             'fresherform': fresherform,
@@ -175,7 +176,19 @@ def services(request):
     }
     return render(request, 'services.html', context)
 
-#def add_blog(request):
-#    
-
+def freshers_detail(request):
+    context = {}
+    if request.method == 'POST':
+        candidate = Candidate();
+#        candidate.name = request.POST['name']
+        print "name : ",request.POST['name']
+#        candidate.degree = request.POST['degree']
+        print "degree :",request.POST['degree']
+        print "marks : ",request.POST['marks']
+#        candidate.marks = request.POST['marks']
+        print "percentage : ",request.POST['percentage']
+#        candidate.marks = request.POST['percentage']
+#        candidate.save();
+#        candidate.send_contact_notification_mail_to_admins();
+    return HttpResponse('You have successfully submited details')
 

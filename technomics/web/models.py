@@ -240,19 +240,27 @@ class Vacancy(Dates):
     closing_date = models.DateField()
 
 
-class Candidate(Dates):
+class Candidate(Dates):##wrong model
     resume = models.FileField(upload_to = "uploads/images/", max_length=20000,  blank=True)
 
 
-class Freshers(Candidate):
+class Freshers(Candidate):##wrong  model
     Qualification = models.CharField(max_length=200)
 
+#Expected model design
+#
+#class CandidateProfile(Dates):
+#    name = models.CharField(max_length=200)
+#    degree = models.CharField(max_length=200)
+#    marks = models.IntegerField(max_length = 10)
+#    percentage = models.FloatField(max_length = 10)
+#    resume = models.FileField(upload_to = "uploads/images/", max_length=20000,  blank=True)
 
-CATEGORY_CHOICES = (
-            ('P','Python'),
-            ('H','hr'),
-            )
-class Experienced(Candidate):
-    candidate_type = models.CharField(max_length=200, choices = CATEGORY_CHOICES)
+#CATEGORY_CHOICES = (
+#            ('P','Python'),
+#            ('H','hr'),
+#            )
+#class Experienced(CandidateProfile):
+#    candidate_type = models.CharField(max_length=200, choices = CATEGORY_CHOICES)
 
 
