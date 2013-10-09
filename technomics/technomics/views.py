@@ -124,6 +124,12 @@ def renderpage(request, slug):
             context = {
                 'services_page': services_page,
             }
+	elif slug == 'blog':
+            blog = Blog.objects.latest('id')          
+            context = {
+                'slideshow' : slideshow,
+                'blog' : blog,
+            }
 
         return render(request, template, context)
 
