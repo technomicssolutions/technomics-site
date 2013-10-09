@@ -8,6 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.urlresolvers import reverse
 from django.db import models
 from web.models import Contactus, Dates, Homepage, Feature, Newsevents, Aboutus, Blog, Comment, Slideshow, Services, Services_section, Testimonials
+from web.forms import CommentForm
 
 def home(request):
     latest_content = Feature.objects.latest('id')
@@ -124,12 +125,17 @@ def renderpage(request, slug):
             context = {
                 'services_page': services_page,
             }
-	elif slug == 'blog':
-            blog = Blog.objects.latest('id')          
-            context = {
-                'slideshow' : slideshow,
-                'blog' : blog,
-            }
+        elif slug == 'blog':
+                blogs = Blog.objects.all()
+#                comments = Comment.objects.filter(blog_id=blog.id)
+                from django.forms.formsets import formset_factory
+                CommentFormSet = formset_factory(CommentForm, max_num=len(blogs))
+                formset = CommentFormSet()
+                context = {
+                    'slideshow': slideshow,
+                    'blogs_formset': zip(blogs,formset),
+#                    'comments': comments
+                }
 
         return render(request, template, context)
 
