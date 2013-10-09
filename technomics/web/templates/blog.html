@@ -9,32 +9,54 @@
 
 
 {% block content %}
-    {% if blog %}
-        <p> 
-            {{ blog.title }}
-            {{ blog.description }}
-            {{ blog.author }}
-            <br> 
-        </p>
+    
+    {% if blogs_formset.0 %}
+        {% for blog, form in blogs_formset %}
+<!--        form in formset.forms-->
+            <h1> 
+                {{ blog.title }}
+                {{ blog.description }}
+                {{ blog.author }}
+                <br> 
+            </h1>
+            <h2>Comments</h2>
+            {% with comments=blog.comment_set.all %}
+<!--                form for adding comment-->
+                {{ form.as_p }}
+                {% if comments %}
+                    {% for comment in comments %}
+                        <p>
+                            {{ comment.author }}
+                            {{ comment.description }}
+                            <br>
+                        </p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        
+        {% endfor %}
     {% endif %}
+    
+<!-- here a comment form is needed   -->
 
-    <div id="contactus_section">
-        <p> For more information regarding our IT services please contact us.</p>
+
+    <div id="">
+        <h1> Add blog</h1>
         </div> 
-        <div id="contact_us" >
-            <form id="blogs_form" method="post" >{% csrf_token %}
+        <div id="" >
+            <form id="blogs_form" method="post" action="add_blog" >{% csrf_token %}
                 <ul>
                     <li> 
-                        <label title="Name" for="name">Name</label>
-                        <input type="text" name="title" id="name" title="Name"/>
+                        <label title="Title" for="title">Title</label>
+                        <input type="text" name="title" id="title" title="Title"/>
                     </li>
                     <li>
-                        <label title="Email" for="email">Email</label>
-                        <input type="email" name="email" id="email" title="Email"/>
+                        <label title="Description" for="description">Description</label>
+                        <input type="text" name="description" id="description" title="Description"/>
                     </li>
                     <li>
-                        <label for="subject" title="Name">Subject</label>
-                        <input type="text" name="subject" id="subject" title="Subject">
+                        <label for="Author" title="author">Author</label>
+                        <input type="text" name="author" id="author" title="Author">
                     </li>
                     <li>
                         <input type="submit" value="Submit">
