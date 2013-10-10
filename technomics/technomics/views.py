@@ -8,7 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.urlresolvers import reverse
 from django.db import models
 from web.models import Contactus, Dates, Homepage, Feature, Newsevents, Aboutus, Blog, Comment, Slideshow, Services, Services_section, Testimonials, Candidate
-from web.forms import CommentForm, FresherForm
+from web.forms import CommentForm, FresherForm, CandidateExperiencedForm
 
 def home(request):
     latest_content = Feature.objects.latest('id')
@@ -26,7 +26,7 @@ def home(request):
 def rendermenu(request, menuslug):
     if menuslug:
         template = "%s.html" % menuslug
-        slideshow = Slideshow.objects.latest('id')
+        services_page = Services.objects.latest('id')
         if menuslug == 'services':
             services_page = Services.objects.latest('id')
             services_section = Services_section.objects.all()
@@ -40,11 +40,11 @@ def rendermenu(request, menuslug):
             aboutus = Aboutus.objects.latest('id')
             context = { 
                 'aboutus': aboutus,
-                'slideshow' : slideshow,
+                'services_page': services_page,
             }
         elif menuslug == 'contact_us':
             context = {
-                'slideshow' : slideshow,
+                'services_page': services_page,
             }
         elif menuslug == 'blog':
             blogs = Blog.objects.all()
@@ -52,22 +52,21 @@ def rendermenu(request, menuslug):
             from django.forms.formsets import formset_factory
             CommentFormSet = formset_factory(CommentForm, max_num=len(blogs))
             formset = CommentFormSet()
-            print formset
             context = {
-            'slideshow': slideshow,
+            'services_page': services_page,
             'blogs_formset': zip(blogs,formset),
             #                    'comments': comments
             }
 
         return render(request, template, context)
-def rendersubmenu(request, menuslug, submenuslug):
-    if menuslug:
+
+def rendersubmenu(request, menu_slug, submenuslug):
+    if menu_slug:
         if submenuslug:
             print "submenu", submenuslug
             template = "%s.html" % submenuslug
-            slideshow = Slideshow.objects.latest('id')
+            services_page = Services.objects.latest('id')
             if submenuslug == 'school_resource_planning':
-                services_page = Services.objects.latest('id')
                 context = {
                     'services_page': services_page,
                 }
@@ -147,11 +146,18 @@ def rendersubmenu(request, menuslug, submenuslug):
                 }
             elif submenuslug == 'freshers':
                 fresherform = FresherForm()
-                print fresherform
                 context = {
                 'slideshow': slideshow,
                 'fresherform': fresherform,
                 }
+            elif submenuslug == 'experienced':
+                experienced_form = CandidateExperiencedForm()
+                print "experienced", experienced_form
+                context = {
+                    'services_page': services_page,
+                    'form': experienced_form,
+                }
+                print "cxt", context
             return render(request, template, context)
 
 

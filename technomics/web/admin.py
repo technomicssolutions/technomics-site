@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.db import models
-from models import Contactus, Dates, Homepage, Feature, Newsevents, Aboutus, Blog, Comment, Slideshow, Services, Services_section, Testimonials, Slide, Menu, Submenu
+from models import Contactus, Dates, Homepage, Feature, Newsevents, Aboutus, Blog, Comment, Slideshow, Services, Services_section, Testimonials, Slide, Menu, Submenu, Vacancy, Candidate
 from adminthumbnail import AdminImageWidget
 from django.views.generic.list import ListView
 
@@ -83,6 +83,14 @@ class MenuAdmin(admin.ModelAdmin):
     inlines = [SubmenuInline]
     list_display = ('title', 'slug', 'order')
     exclude = ('slug',)
+
+class  CandidateAdmin(admin.ModelAdmin):
+    list_display = ('name', 'candidate_type', 'email', 'phone', 'address', 'qualification', 'resume')
+    
+class VacancyAdmin(admin.ModelAdmin):
+    list_display = ('name', 'no_of_vacancy', 'opening_date', 'closing_date')
+        
+        
         
         
 admin.site.register(Homepage, HomepageAdmin)
@@ -97,3 +105,5 @@ admin.site.register(Services_section, Services_sectionAdmin)
 admin.site.register(Testimonials, TestimonialsAdmin)
 admin.site.register(Slideshow, SlideshowAdmin)
 admin.site.register(Menu, MenuAdmin)
+admin.site.register(Candidate, CandidateAdmin)
+admin.site.register(Vacancy, VacancyAdmin)

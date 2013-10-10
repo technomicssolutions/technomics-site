@@ -4,10 +4,18 @@
 {% block title %}<title> Careers | Technomics Solutions </title>{% endblock title %}
 {% block body_tags %}id="contactus"{% endblock body_tags %}
 {% block banner %}
-    {% include 'slideshow.html' %}
+    <!-- {% include 'slideshow.html' %} -->
+    <div class="banner" style='background: url(/site_media/{{ services_page.banner_image }}) no-repeat;'>   
+    </div>
 {% endblock banner %}
-
-
+	
 {% block content %}
+	<form  method="post">
+        <table>
+            {{ form }}
+        </table>
+        {% csrf_token %}
+        <input type="submit" value="Submit">
+    </form>
     
 {% endblock %}
