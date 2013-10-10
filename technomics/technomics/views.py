@@ -46,7 +46,7 @@ def rendermenu(request, menuslug):
             context = {
                 'slideshow' : slideshow,
             }
-        elif slug == 'blog':
+        elif menuslug == 'blog':
             blogs = Blog.objects.all()
             #                comments = Comment.objects.filter(blog_id=blog.id)
             from django.forms.formsets import formset_factory
