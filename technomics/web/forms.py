@@ -1,4 +1,11 @@
 from django import forms
+from django.forms import ModelForm
+# from crispy_forms.helper import FormHelper
+# from crispy_forms.layout import Div, Fieldset, Layout, Submit
+
+# from crispy_forms.bootstrap import FormActions
+
+from .models import Candidate
 DEGREE = (
        (1, ("B.Tech")),
        (2, ("B.Sc")), 
@@ -19,3 +26,9 @@ class FresherForm(forms.Form):
     def clean(self):
         upload_to = 'uploads/images/'
         upload_to += self.cleaned_data['resume'].name
+
+class CandidateExperiencedForm(ModelForm):
+
+    class Meta:
+        model = Candidate
+        fields = ('name', 'email','phone', 'address','qualification','resume')

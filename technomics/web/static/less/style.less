@@ -1,5 +1,6 @@
 body {
     font-family: Lucida Grande, Lucida Sans Unicode, Arial, Verdana, sans-serif;
+    background-color: #F4F4F4;
 }
 .header {
     width: 100%;
@@ -91,142 +92,6 @@ body {
         width: 1024px;
         margin: auto;
         height: auto;
-        /*#footer_above {
-            width: 100%;
-            height: 337px;
-            #about_us {  
-                width: 34%;
-                height:300px;
-                float: left;
-                p{
-                    text-align: justify;
-                    width: 349px;
-                    height: 54%;
-                    float: left;
-                    font-family: Verdana;
-                    font-size: 13px;                    
-                }
-            }
-            #contact_us {
-                width: 27%;
-                height: 337px;
-                float: left;
-                margin-left: 20px;
-                #contact_form {
-                    ul {
-                        list-style: none;
-                        padding: 0;
-                        li {
-                            position: relative;
-                            label {
-                                font-family: Verdana;
-                                font-size: 13px;
-                                left: 4px;
-                                line-height: normal;
-                                position: absolute;
-                                top: 15px;
-                            }
-                            input {
-                                width: 267px;
-                                height: 44px;
-                                margin-bottom: 10px;
-                                color: black;
-                                background-color: gray;
-                                border: none;
-                                display: block;
-                                padding: 5px;
-                            }
-                            textarea {
-                                width: 200px;
-                                margin-bottom: 10px;
-                                color: black;
-                                background-color: gray;
-                                border: none;
-                                width: 267px;
-                                height: 77px;
-                                display: block;
-                                padding: 5px;
-                            }
-                            input[type='button'] {
-                                width: 107px;
-                                background-image: url(images/sendButton.jpg);
-                                background-repeat: no-repeat;
-                                display: block;
-                                height: 39px;
-                            }
-                        }
-                    }
-                }
-            }
-            #technomics_blog {
-                width: 35% ;
-                height: 300px;
-                float: left;
-                margin-left: 20px;
-                #first_blog {
-                    color: white;
-                    display: block;
-                    height: 24%;
-                    width: 100%;
-                    h6 {
-                        font-family: Verdana;
-                        font-size: 13px;
-                        font-weight: normal;
-                        margin: 0 0 4px 0;
-                        text-align: left;
-                    }
-                    p {
-                        font-family: Verdana;
-                        font-size: 11px;
-                        font-weight: normal;
-                        margin: 0;
-                        text-align: justify;
-                    }
-                }
-                #second_blog {
-                    color: white;
-                    display: block;
-                    height: 24%;
-                    width: 100%;
-                    margin-top: 7px;
-                    h6 {
-                        font-family: Verdana;
-                        font-size: 13px;
-                        font-weight: normal;
-                        margin: 0 0 4px 0;
-                        text-align: left;
-                    }
-                    p {
-                        font-family: Verdana;
-                        font-size: 11px;
-                        font-weight: normal;
-                        margin: 0;
-                        text-align: justify;
-                    }
-                }
-                #third_blog {
-                    color: white;
-                    display: block;
-                    height: 24%;
-                    width: 100%;
-                    margin-top: 7px;
-                    h6 {
-                        font-family: Verdana;
-                        font-size: 13px;
-                        font-weight: normal;
-                        margin: 0 0 4px 0;
-                        text-align: left;
-                    }
-                    p {
-                        font-family: Verdana;
-                        font-size: 11px;
-                        font-weight: normal;
-                        margin: 0;
-                        text-align: justify;
-                    }
-                }
-            }
-        }*/
         #footer_below {
             width: 100%;
             height: 24px;
@@ -252,11 +117,26 @@ body {
     width: 1024px;
     height: 100%;
     margin: auto;
+    .content {
+        min-height: 300px;
+        font-size: 13px;
+        color:gray;
+        text-align: justify;
+        margin-top: 285px;
+        a{
+            text-decoration: none;
+        }
+    }
+    .banner {
+        width: 100%;
+        height: 370px;
+        left: 0;
+        position: absolute;
+    }
 }
 
 
 #home_page {
-    background-color: #F1F1F1;
     .content {
         height: 562px;
         width: 100%;
@@ -275,18 +155,14 @@ body {
                     margin: 27px 0 6px 0;
                 }
                 p {
-                    text-align: justify;
                     width: 349px;
                     height: 54%;
                     float: left;
-                    font-size: 13px;
                     display: block;
                     line-height: 20px;
                     a {
                         float: left;
                         display: block;
-                        font-size: 13px;
-                        text-decoration: none;
                         color: red;
                         margin-top: 22px;
                     }
@@ -303,7 +179,6 @@ body {
                 width:350px;
                 height:300px;
                 margin-left: 40px;
-                font-size: 13px;
                 h3 {
                     color: #7F7F7F;
                     font-size: 27px;
@@ -373,82 +248,56 @@ body {
         }
     }
 }
-
+.clear {
+    clear: both;
+}
 #services_page {
-    background-color: #F4F4F4;
     .container {
-        .banner {
-            left: 0;
-            position: absolute;
-            width: 100%;
-            height: 270px;
-        }
-        #content_section {
-           
-            font-size: 13px;
-            color:gray;
-            text-align:justify;
-            padding-bottom: 22px;
-            h3{
-                font-size: 26px;
-                font-weight: 200;
-            }
-        }
-
         .content {
-            margin-top: 300px;
-            font-size: 13px;
-            color:gray;
-            a{
-                text-decoration: none;
-                color: red;
+            #content_section {           
+                padding-bottom: 22px;
+                h3{
+                    font-size: 26px;
+                    font-weight: 200;
+                }
             }
-        }
-        #services_section{
-            display: block;
-            display: block;
-            height: 475px;
-            width: 100%;
-            text-align:justify;
-            h3{
-                color: white;
-                font-size: large;
-                font-weight: bold;
-                text-align: left;
-                width: 96%;
-                text-decoration: none;
-                background-color: gray;
-                height: 35px;
-                padding-top: 12px;
-                padding-left: 20px;
+            #services_section{
+                display: block;
+                height: 475px;
+                width: 100%;
+                text-align:justify;
+                h3{
+                    color: white;
+                    font-size: large;
+                    font-weight: bold;
+                    text-align: left;
+                    width: 96%;
+                    text-decoration: none;
+                    background-color: gray;
+                    height: 35px;
+                    padding-top: 12px;
+                    padding-left: 20px;
+                }
             }
-        }
-        .left_section{
-            display: block;
-            float: left;
-            width: 475px;
-            padding-right: 74px;
-
-
-        }
-        .right_section{
-            display: block;
-            float: left;
-            width: 475px;
+            .left_section{
+                display: block;
+                float: left;
+                width: 475px;
+                padding-right: 74px;
+            }
+            .right_section{
+                display: block;
+                float: left;
+                width: 475px;
+            }
         }
     }
 }
 
 
 #aboutus {
-    background-color: #F4F4F4;
     .container {
         .content {
-            margin-top: 500px;
-            font-size: 13px;
-            color:gray;
-            width: 100%;
-            height: 250px;
             h2 {
                 text-align: center;
             }
@@ -458,11 +307,11 @@ body {
                 float: left;
                 margin-right: 15px;
                 p{
-                    text-align: justify;
                     width: auto;
                     height: auto;
-                    font-size: 13px;
-                    color: #000000;                    
+                    font-size: 14px;
+                    color: #000000;  
+                    line-height: 20px;                  
                 }
             }
             .right_section {
@@ -475,8 +324,9 @@ body {
                     text-align: justify;
                     width: auto;
                     height: auto;
-                    font-size: 13px;
-                    color: #000000;                    
+                    font-size: 14px;
+                    color: #000000;    
+                    line-height: 20px;                    
                 }
             }
             a{
@@ -488,14 +338,11 @@ body {
 }
 
 #contactus {
-    background-color: #F4F4F4;
     .container {
         .content {
-            margin-top: 500px;
+            height: 400px;
             font-size: 15px;
             color: #000000;
-            width: 100%;
-            height: 400px;
             #contact_us {
                 width: 50%;
                 height: 337px;
@@ -552,16 +399,12 @@ body {
     }
 }
 
-#srp {
-    background-color: #F4F4F4;
+#schoolresourceplanning {
     .container {
         .content {
-            margin-top: 270px;
             font-size: 15px;
             color: #000000;
-            width: 100%;
-            height: 530px;
-            text-align: justify;
+            height: 570px;
             #left_content {
                 width: 49%;
                 height: auto;
@@ -578,124 +421,50 @@ body {
 }
 
 #smartbook {
-   background-color: #F4F4F4;
     .container {
-        .content {
-            margin-top: 500px;
-            font-size: 15px;
-            color: #000000;
-            width: 100%;
-            height: 400px;
-        }
     } 
 }
 
 #education {
-   background-color: #F4F4F4;
     .container {
-        .content {
-            margin-top: 500px;
-            font-size: 15px;
-            color: #000000;
-            width: 100%;
-            height: 400px;
-        }
     } 
 }
 
 #itinfrastructure{
-    background-color: #F4F4F4;
     .container {
-        .content {
-            margin-top: 500px;
-            font-size: 15px;
-            color: #000000;
-            width: 100%;
-            height: 400px;
-        }
     } 
 }
 
 #ebusiness {
-    background-color: #F4F4F4;
     .container {
-        .content {
-            margin-top: 500px;
-            font-size: 15px;
-            color: #000000;
-            width: 100%;
-            height: 400px;
-        }
     } 
 }
 
 #bankingandfinancial {
-    background-color: #F4F4F4;
     .container {
-        .content {
-            margin-top: 500px;
-            font-size: 15px;
-            color: #000000;
-            width: 100%;
-            height: 400px;
-        }
     } 
 }
 
 #retailandcustomer {
-    background-color: #F4F4F4;
     .container {
-        .content {
-            margin-top: 500px;
-            font-size: 15px;
-            color: #000000;
-            width: 100%;
-            height: 400px;
-        }
     } 
 }
 
 #industrialmanufacturing {
-    background-color: #F4F4F4;
     .container {
-        .content {
-            margin-top: 500px;
-            font-size: 15px;
-            color: #000000;
-            width: 100%;
-            height: 400px;
-        }
-    }
+     }
 }
 
 #hospitality {
-    background-color: #F4F4F4;
     .container {
-        .content {
-            margin-top: 500px;
-            font-size: 15px;
-            color: #000000;
-            width: 100%;
-            height: 400px;
-        }
     }
 }
 
 #lms {
-    background-color: #F4F4F4;
     .container {
-        .banner {
-            left: 0;
-            position: absolute;
-            width: 100%;
-            height: 270px;
-        }
         .content {
-            margin-top: 270px;
             font-size: 15px;
             color: #000000;
-            width: 100%;
-            height: 230px;
             #lms_section {
                 #left_section{
                     width: 45%;
@@ -717,77 +486,25 @@ body {
 }
 
 #cloudservices {
-    background-color: #F4F4F4;
     .container {
-        .banner {
-            left: 0;
-            position: absolute;
-            width: 100%;
-            height: 270px;
-        }
-        .content {
-            margin-top: 270px;
-            font-size: 15px;
-            color: #000000;
-            width: 100%;
-            height: 230px;
-        }
     }
 }
 
 #erp_page {
-    background-color: #F4F4F4;
     .container {
-        .banner {
-            left: 0;
-            position: absolute;
-            width: 100%;
-            height: 270px;
-        }
-        .content {
-            margin-top: 270px;
-            font-size: 15px;
-            color: #000000;
-            width: 100%;
-            height: 230px;
-        }
     }
 }
 
 #csd_page {
-    background-color: #F4F4F4;
     .container {
-        .banner {
-            left: 0;
-            position: absolute;
-            width: 100%;
-            height: 270px;
-        }
-        .content {
-            margin-top: 270px;
-            font-size: 15px;
-            color: #000000;
-            width: 100%;
-            height: 230px;
-        }
     }
 }
 
 #ods_page {
-    background-color: #F4F4F4;
     .container {
-        .banner {
-            left: 0;
-            position: absolute;
-            width: 100%;
-            height: 270px;
-        }
         .content {
-            margin-top: 270px;
             font-size: 15px;
             color: #000000;
-            width: 100%;
-            height: 255px;
             h2 {
                 margin: auto;
                 display: block;
@@ -798,77 +515,22 @@ body {
 }
 
 #webapplication_page {
-    background-color: #F4F4F4;
     .container {
-        .banner {
-            left: 0;
-            position: absolute;
-            width: 100%;
-            height: 270px;
-        }
-        .content {
-            margin-top: 270px;
-            font-size: 15px;
-            color: #000000;
-            width: 100%;
-            height: 230px;
-        }
+        
     }
 }
 
 #ecommerce_page {
-    background-color: #F4F4F4;
     .container {
-        .banner {
-            left: 0;
-            position: absolute;
-            width: 100%;
-            height: 270px;
-        }
-        .content {
-            margin-top: 270px;
-            font-size: 15px;
-            color: #000000;
-            width: 100%;
-            height: 230px;
-        }
     }
 }
 
 #oss_page {
-    background-color: #F4F4F4;
     .container {
-        .banner {
-            left: 0;
-            position: absolute;
-            width: 100%;
-            height: 270px;
-        }
-        .content {
-            margin-top: 270px;
-            font-size: 15px;
-            color: #000000;
-            width: 100%;
-            height: 230px;
-        }
     }
 }
 
 #mpd_page {
-    background-color: #F4F4F4;
     .container {
-        .banner {
-            left: 0;
-            position: absolute;
-            width: 100%;
-            height: 270px;
-        }
-        .content {
-            margin-top: 270px;
-            font-size: 15px;
-            color: #000000;
-            width: 100%;
-            height: 230px;
-        }
     }
 }

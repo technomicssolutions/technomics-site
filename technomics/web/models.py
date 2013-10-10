@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.conf import settings
 from .utils import slug
+from web import CANDIDATE_TYPE, CANDIDATE_TYPE_FRESHER, QUALIFICATION_TYPE, QUALIFICATION_TYPE_BSC
 # Create your models here.
 
 
@@ -126,10 +127,9 @@ class Comment(Dates):
             
 
 class Services(Dates):
-    banner_image = models.ImageField(upload_to='uploads/images/', help_text="Upload banner to be displayed in home page")
     content_subhead = models.CharField('Content Subhead', max_length=100, null=True, blank=True, help_text='Sub heading of the content in the page')
     description = models.TextField('Content description', null=True, blank=True, help_text='Content description')
-
+    banner_image = models.ImageField(upload_to='uploads/images/', help_text="Upload banner to be displayed in the corresponding page")
     class Meta:
         verbose_name = 'Services'
         verbose_name_plural = 'Services'
@@ -208,9 +208,10 @@ class Slide(Dates):
     image_thumb.allow_tags = True 
 
 class Menu(Dates):
-    title = models.CharField('Menu', max_length = 50, null = True, blank = True, help_text = 'Name of the menu')
-    slug = models.CharField('Slug', max_length = 100, null = True, blank = True, help_text = 'Slug of the menu')
-    order = models.IntegerField('Order', max_length = 10, null = True, blank = True, default = '1', help_text = 'Order of the menus')
+    title = models.CharField('Menu', max_length = 50, help_text = 'Name of the menu')
+    slug = models.CharField('Slug', max_length = 100, help_text = 'Slug of the menu')
+    order = models.IntegerField('Order', max_length = 10, default = '1', help_text = 'Order of the menus')
+    # banner_image = models.ImageField(upload_to='uploads/images/', help_text="Upload banner to be displayed in the corresponding page")
     
     class Meta:
         verbose_name = 'Menu'
@@ -222,29 +223,56 @@ class Menu(Dates):
 
 class Submenu(Dates):
     menu = models.ForeignKey(Menu, help_text = 'Corresponding menu')
-    title = models.CharField('Submenu', max_length = 200 , null = True, blank = True, help_text = 'Nmae of the submenu')
-    slug = models.CharField('Slug', max_length = 200, null = True, blank = True, help_text = 'Slug of the submenu')
-    order = models.IntegerField('Order', max_length = 10, null = True, blank = True, default = '1', help_text = 'Order of the submenu')
+    title = models.CharField('Submenu', max_length = 200 , help_text = 'Name of the submenu')
+    slug = models.CharField('Slug', max_length = 200, help_text = 'Slug of the submenu')
+    order = models.IntegerField('Order', max_length = 10, default = '1', help_text = 'Order of the submenu')
+    # banner_image = models.ImageField(upload_to='uploads/images/', help_text="Upload banner to be displayed in the corresponding page")
 
     def save(self, *args, **kwargs):
         self.slug = slug(self.title)
-        print "slug =", self.slug
         super(Submenu, self).save(*args, **kwargs)                      
         
 
 
 class Vacancy(Dates):
-    name = models.CharField('Name', max_length = 200, null=True, blank=True, help_text='Name of vacancy')
+    name = models.CharField('Name', max_length = 200, null=True, blank=True, help_text='Name of the Post')
     no_of_vacancy = models.IntegerField('No of Vacancy', max_length = 10, null = True, blank = True, default = '0', help_text = 'No of vacancies')
-    opening_date = models.DateField()
-    closing_date = models.DateField()
+    opening_date = models.DateField('Opening Date', null = True, blank = True, help_text = 'Opening date')
+    closing_date = models.DateField('Closing Date', null = True, blank = True, help_text = 'Closing date')
+
+    class Meta:
+        verbose_name = 'Vacancy'
+        verbose_name_plural = 'Vacancies'
+
+    def __unicode__(self):
+        return self.name
+            
+
+class  Candidate(Dates):
+    name = models.CharField('Name', max_length = 100)
+    candidate_type = models.CharField('Candidate type', max_length = 50, choices = CANDIDATE_TYPE, default = CANDIDATE_TYPE_FRESHER)
+    email = models.EmailField('Email', max_length = 100)
+    phone = models.CharField('Phone', max_length = 15)
+    address = models.TextField('Address', max_length = 500, null = True, blank = True)
+    qualification = models.CharField('Qualification', max_length = 50, choices = QUALIFICATION_TYPE, default = QUALIFICATION_TYPE_BSC)
+    resume = models.FileField(upload_to='uploads/resumes/')
+    vacancy = models.ForeignKey('Vacancy', null = True, blank = True)
+
+    class Meta:
+        verbose_name = 'Candidate'
+        verbose_name_plural = 'Candidates'
+
+    def __unicode__(self):
+        return self.name
 
 
-class Candidate(Dates):##wrong model
-    resume = models.FileField(upload_to = "uploads/images/", max_length=20000,  blank=True)
+## Soumyas models
+
+# class Candidate(Dates):##wrong model
+#     resume = models.FileField(upload_to = "uploads/images/", max_length=20000,  blank=True)
 
 
-class Freshers(Candidate):##wrong  model
-    Qualification = models.CharField(max_length=200)
+# class Freshers(Candidate):##wrong  model
+#     Qualification = models.CharField(max_length=200)
 
 

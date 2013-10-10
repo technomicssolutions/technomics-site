@@ -13,7 +13,7 @@
                     <li><a href="{% url 'render_menupage' menuslug=menu.slug %}">{{ menu.title }}</a>
                         <ul class="submenu">
                             {% for submenu in menu.submenu_set.all %}
-                                <li><a href="{% url 'render_submenupage' menuslug=menu.slug submenuslug=submenu.slug %}">{{ submenu.title }}</a></li>
+                                <li><a href="{% url 'render_submenupage' menu_slug=menu.slug submenuslug=submenu.slug %}">{{ submenu.title }}</a></li>
                             {% endfor %}
                         </ul>
                     </li>                        
