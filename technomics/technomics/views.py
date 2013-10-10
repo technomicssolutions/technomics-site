@@ -23,11 +23,11 @@ def home(request):
     }
     return render(request, 'home.html',context)
     
-def renderpage(request, slug):
-    if slug:
-        template = "%s.html" % slug
+def rendermenu(request, menuslug):
+    if menuslug:
+        template = "%s.html" % menuslug
         slideshow = Slideshow.objects.latest('id')
-        if slug == 'services':
+        if menuslug == 'services':
             services_page = Services.objects.latest('id')
             services_section = Services_section.objects.all()
             services_left = services_section[0]
@@ -36,94 +36,15 @@ def renderpage(request, slug):
                        'services_left': services_left,
                        'services_right': services_right
             }
-        elif slug == 'about_us':
+        elif menuslug == 'about_us':
             aboutus = Aboutus.objects.latest('id')
             context = { 
                 'aboutus': aboutus,
                 'slideshow' : slideshow,
             }
-        elif slug == 'contact_us':
+        elif menuslug == 'contact_us':
             context = {
                 'slideshow' : slideshow,
-            }
-        elif slug == 'school_resource_planning':
-            services_page = Services.objects.latest('id')
-            context = {
-                'services_page': services_page,
-            }
-        elif slug == 'smartbook':
-            context = {
-                'slideshow' : slideshow,
-            }
-        elif slug == 'education':
-            context = {
-                'slideshow': slideshow,
-            }
-        elif slug == 'e_business':
-            context = {
-                'slideshow': slideshow,
-            }
-        elif slug == 'banking_and_financial':
-            context = {
-                'slideshow': slideshow,
-            }
-        elif slug == 'retail_and_customer_products':
-            context = {
-                'slideshow': slideshow,
-            }
-        elif slug == 'industrial_manufacturing':
-            context = {
-                'slideshow': slideshow,
-            }
-        elif slug == 'hospitality':
-            context = {
-                'slideshow': slideshow,
-            }
-        elif slug == 'linux_managed_services':
-            services_page = Services.objects.latest('id')
-            context = {
-                'services_page': services_page,
-            }
-        elif slug == 'cloud_services':
-            services_page = Services.objects.latest('id')
-            context = {
-                'services_page': services_page,
-            }
-        elif slug == 'erp_consultation':
-            services_page = Services.objects.latest('id')
-            print "services", services_page
-            context = {
-                'services_page': services_page,
-            }
-        elif slug == 'customized_software_development':
-            services_page = Services.objects.latest('id')
-            context = {
-                'services_page': services_page,
-            }
-        elif slug == 'offshore_dedicated_staffing':
-            services_page = Services.objects.latest('id')
-            context = {
-                'services_page': services_page,
-            }
-        elif slug == 'web_application':
-            services_page = Services.objects.latest('id')
-            context = {
-                'services_page': services_page,
-            }
-        elif slug == 'e_commerce':
-            services_page = Services.objects.latest('id')
-            context = {
-                'services_page': services_page,
-            }
-        elif slug == 'open_source_solutions':
-            services_page = Services.objects.latest('id')
-            context = {
-                'services_page': services_page,
-            }
-        elif slug == 'mobile_platform_development':
-            services_page = Services.objects.latest('id')
-            context = {
-                'services_page': services_page,
             }
         elif slug == 'blog':
             blogs = Blog.objects.all()
@@ -137,15 +58,101 @@ def renderpage(request, slug):
             'blogs_formset': zip(blogs,formset),
             #                    'comments': comments
             }
-        elif slug == 'fresher':
-            fresherform = FresherForm()
-            print fresherform
-            context = {
-            'slideshow': slideshow,
-            'fresherform': fresherform,
-            }
 
         return render(request, template, context)
+def rendersubmenu(request, menuslug, submenuslug):
+    if menuslug:
+        if submenuslug:
+            print "submenu", submenuslug
+            template = "%s.html" % submenuslug
+            slideshow = Slideshow.objects.latest('id')
+            if submenuslug == 'school_resource_planning':
+                services_page = Services.objects.latest('id')
+                context = {
+                    'services_page': services_page,
+                }
+            elif submenuslug == 'smartbook':
+                context = {
+                    'slideshow' : slideshow,
+                }
+            elif submenuslug == 'education':
+                context = {
+                    'slideshow': slideshow,
+                }
+            elif submenuslug == 'e_business':
+                context = {
+                    'slideshow': slideshow,
+                }
+            elif submenuslug == 'banking_and_financial':
+                context = {
+                    'slideshow': slideshow,
+                }
+            elif submenuslug == 'retail_and_customer_products':
+                context = {
+                    'slideshow': slideshow,
+                }
+            elif submenuslug == 'industrial_manufacturing':
+                context = {
+                    'slideshow': slideshow,
+                }
+            elif submenuslug == 'hospitality':
+                context = {
+                    'slideshow': slideshow,
+                }
+            elif submenuslug == 'linux_managed_services':
+                services_page = Services.objects.latest('id')
+                context = {
+                    'services_page': services_page,
+                }
+            elif submenuslug == 'cloud_services':
+                services_page = Services.objects.latest('id')
+                context = {
+                    'services_page': services_page,
+                }
+            elif submenuslug == 'erp_consultation':
+                services_page = Services.objects.latest('id')
+                print "services", services_page
+                context = {
+                    'services_page': services_page,
+                }
+            elif submenuslug == 'customized_software_development':
+                services_page = Services.objects.latest('id')
+                context = {
+                    'services_page': services_page,
+                }
+            elif submenuslug == 'offshore_dedicated_staffing':
+                services_page = Services.objects.latest('id')
+                context = {
+                    'services_page': services_page,
+                }
+            elif submenuslug == 'web_application':
+                services_page = Services.objects.latest('id')
+                context = {
+                    'services_page': services_page,
+                }
+            elif submenuslug == 'e_commerce':
+                services_page = Services.objects.latest('id')
+                context = {
+                    'services_page': services_page,
+                }
+            elif submenuslug == 'open_source_solutions':
+                services_page = Services.objects.latest('id')
+                context = {
+                    'services_page': services_page,
+                }
+            elif submenuslug == 'mobile_platform_development':
+                services_page = Services.objects.latest('id')
+                context = {
+                    'services_page': services_page,
+                }
+            elif submenuslug == 'freshers':
+                fresherform = FresherForm()
+                print fresherform
+                context = {
+                'slideshow': slideshow,
+                'fresherform': fresherform,
+                }
+            return render(request, template, context)
 
 
 @csrf_exempt

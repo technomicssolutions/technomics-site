@@ -16,7 +16,7 @@ class FeatureAdmin(admin.ModelAdmin):
     formfield_overrides = {
         models.ImageField: {'widget': AdminImageWidget()},
     }
-
+    
 class NewseventsAdmin(admin.ModelAdmin):
     list_display = ('title', 'description', 'event_date', 'image_thumb')
     formfield_overrides = {
@@ -77,7 +77,7 @@ class SubmenuInline(admin.TabularInline):
 
     fk_name = 'menu'
     list_display = ('sub_title', 'slug', 'order')
-    # exclude = ('slug',)
+    exclude = ('slug',)
 
 class MenuAdmin(admin.ModelAdmin):
     inlines = [SubmenuInline]

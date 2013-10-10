@@ -10,10 +10,10 @@
             {% if context_menu %}
             <ul class="menu">
                 {% for menu in context_menu %}                        
-                    <li><a href="{% url 'render_page' slug=menu.slug %}">{{ menu.title }}</a>
+                    <li><a href="{% url 'render_menupage' menuslug=menu.slug %}">{{ menu.title }}</a>
                         <ul class="submenu">
                             {% for submenu in menu.submenu_set.all %}
-                                <li><a href="{% url 'render_page' slug=submenu.slug %}">{{ submenu.title }}</a></li>
+                                <li><a href="{% url 'render_submenupage' menuslug=menu.slug submenuslug=submenu.slug %}">{{ submenu.title }}</a></li>
                             {% endfor %}
                         </ul>
                     </li>                        

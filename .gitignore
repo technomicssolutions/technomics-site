@@ -1,5 +1,5 @@
+# ignore python files
 *.pyc
-*~
-local_settings.py
-
-media/
+*.egg
+*egg*
+technomics/technomics/media
