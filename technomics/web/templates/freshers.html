@@ -9,16 +9,16 @@
 
 
 {% block content %}
-    {% if fresherform.errors %}
-        <p style="color: red;">
-            Please correct the error{{ form.errors|pluralize }} below.
-        </p>
-    {% endif %}
+<!--    {% if freshersform.errors %}-->
+<!--        <p style="color: red;">-->
+<!--            Please correct the error{{ freshersform.errors|pluralize }} below.-->
+<!--        </p>-->
+<!--    {% endif %}-->
 
     <form action="{% url 'freshers_detail' %}" method="post">
-        <table>
-            {{ fresherform.as_p }}
-        </table>
+        <div>
+            {{ freshersform.as_p }}
+        </div>
         {% csrf_token %}
         <input type="submit" value="Submit">
     </form>

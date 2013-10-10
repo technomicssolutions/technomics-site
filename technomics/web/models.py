@@ -265,14 +265,6 @@ class  Candidate(Dates):
     def __unicode__(self):
         return self.name
 
-
-## Soumyas models
-
-# class Candidate(Dates):##wrong model
-#     resume = models.FileField(upload_to = "uploads/images/", max_length=20000,  blank=True)
-
-
-# class Freshers(Candidate):##wrong  model
-#     Qualification = models.CharField(max_length=200)
-
-
+    def send_contact_notification_mail_to_admins(self):
+        root_url = 'http://%s'%(Site.objects.get_current().domain)
+        print root_url

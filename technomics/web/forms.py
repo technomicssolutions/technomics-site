@@ -16,16 +16,12 @@ class CommentForm(forms.Form):
     description = forms.CharField(widget=forms.Textarea)
 
 
-class FresherForm(forms.Form):
-    name = forms.CharField(max_length=100, required=True)
-    degree = forms.ChoiceField(choices=DEGREE, required=True)
-    marks = forms.IntegerField(required=True)
-    percentage = forms.FloatField(required=True)
-    resume = forms.FileField(required=True)
+class CandidateFreshersForm(ModelForm):
 
-    def clean(self):
-        upload_to = 'uploads/images/'
-        upload_to += self.cleaned_data['resume'].name
+    class Meta:
+        model = Candidate
+        fields = ('name', 'email','phone', 'address','qualification','resume')
+
 
 class CandidateExperiencedForm(ModelForm):
 

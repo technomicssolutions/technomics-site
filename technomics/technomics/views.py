@@ -8,7 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.urlresolvers import reverse
 from django.db import models
 from web.models import Contactus, Dates, Homepage, Feature, Newsevents, Aboutus, Blog, Comment, Slideshow, Services, Services_section, Testimonials, Candidate
-from web.forms import CommentForm, FresherForm, CandidateExperiencedForm
+from web.forms import CommentForm, CandidateFreshersForm, CandidateExperiencedForm
 
 def home(request):
     latest_content = Feature.objects.latest('id')
@@ -66,6 +66,7 @@ def rendersubmenu(request, menu_slug, submenuslug):
             print "submenu", submenuslug
             template = "%s.html" % submenuslug
             services_page = Services.objects.latest('id')
+            slideshow = Slideshow.objects.latest('id')
             if submenuslug == 'school_resource_planning':
                 context = {
                     'services_page': services_page,
@@ -145,10 +146,10 @@ def rendersubmenu(request, menu_slug, submenuslug):
                     'services_page': services_page,
                 }
             elif submenuslug == 'freshers':
-                fresherform = FresherForm()
+                freshersform = CandidateFreshersForm()
                 context = {
                 'slideshow': slideshow,
-                'fresherform': fresherform,
+                'freshersform': freshersform,
                 }
             elif submenuslug == 'experienced':
                 experienced_form = CandidateExperiencedForm()
@@ -192,15 +193,19 @@ def services(request):
 def freshers_detail(request):
     context = {}
     if request.method == 'POST':
-        candidate = Candidate();
-#        candidate.name = request.POST['name']
+#        candidate = Candidate();
         print "name : ",request.POST['name']
-#        candidate.degree = request.POST['degree']
-        print "degree :",request.POST['degree']
-        print "marks : ",request.POST['marks']
-#        candidate.marks = request.POST['marks']
-        print "percentage : ",request.POST['percentage']
-#        candidate.marks = request.POST['percentage']
+#        candidate.name = request.POST['name']
+        print "email :",request.POST['email']
+#        candidate.email = request.POST['email']
+        print "phone : ",request.POST['phone']
+#        candidate.phone = request.POST['phone']
+        print "address : ",request.POST['address']
+#        candidate.address = request.POST['address']
+        print "qualification : ",request.POST['qualification']
+#        candidate.qualification = request.POST['qualification']
+        print "resume : ",request.POST['resume']
+#        candidate.resume = request.POST['resume']
 #        candidate.save();
 #        candidate.send_contact_notification_mail_to_admins();
     return HttpResponse('You have successfully submited details')
