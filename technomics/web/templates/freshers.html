@@ -2,18 +2,19 @@
 {% load media %}
 {% load thumbnail %}
 {% block title %}<title> Careers | Technomics Solutions </title>{% endblock title %}
-{% block body_tags %}id="contactus"{% endblock body_tags %}
+{% block body_tags %}id="freshers"{% endblock body_tags %}
 {% block banner %}
-    {% include 'slideshow.html' %}
+    <div class="banner" style='background: url(/site_media/{{ services_page.banner_image }}) no-repeat;'>   
+    </div>
 {% endblock banner %}
 
 
 {% block content %}
-<!--    {% if freshersform.errors %}-->
-<!--        <p style="color: red;">-->
-<!--            Please correct the error{{ freshersform.errors|pluralize }} below.-->
-<!--        </p>-->
-<!--    {% endif %}-->
+    {% if freshersform.errors %}
+        <p style="color: red;">
+            Please correct the error{{ freshersform.errors|pluralize }} below.
+        </p>
+    {% endif %}
 
     <form action="{% url 'freshers_detail' %}" method="post">
         <div>
