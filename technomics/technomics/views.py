@@ -7,7 +7,10 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.urlresolvers import reverse
 from django.db import models
-from web.models import Contactus, Dates, Homepage, Feature, Newsevents, Aboutus, Blog, Comment, Slideshow, Services, Services_section, Testimonials, Candidate
+from django.views.generic.base import View
+
+from web.models import Contactus, Dates, Homepage, Feature, Newsevents, Aboutus, Blog, Comment, Slideshow, Services, Services_section, \
+Testimonials, Candidate, Vacancy
 from web.forms import CommentForm, CandidateFreshersForm, CandidateExperiencedForm
 from web import CANDIDATE_TYPE_FRESHER, CANDIDATE_TYPE_EXPERIENCED
 
@@ -64,7 +67,6 @@ def rendermenu(request, menuslug):
 def rendersubmenu(request, menu_slug, submenuslug):
     if menu_slug:
         if submenuslug:
-            print "submenu", submenuslug
             template = "%s.html" % submenuslug
             services_page = Services.objects.latest('id')
             slideshow = Slideshow.objects.latest('id')
@@ -112,7 +114,6 @@ def rendersubmenu(request, menu_slug, submenuslug):
                 }
             elif submenuslug == 'erp_consultation':
                 services_page = Services.objects.latest('id')
-                print "services", services_page
                 context = {
                     'services_page': services_page,
                 }
@@ -153,29 +154,66 @@ def rendersubmenu(request, menu_slug, submenuslug):
                 'freshersform': freshersform,
                 }
             elif submenuslug == 'experienced':
-                experienced_form = CandidateExperiencedForm()
-                print "experienced", experienced_form
+                vacancies = Vacancy.objects.all()
+                # experienced_form = CandidateExperiencedForm()
                 context = {
                     'services_page': services_page,
-                    'form': experienced_form,
+                    'vacancies': vacancies,
                 }
-                print "cxt", context
             return render(request, template, context)
-def careers_experienced(request):
-    context = {}
-    data_dict = request.POST
-    print "file", request.FILES['resume']
-    if request.method == 'POST':
-        candidate = Candidate()
-        candidate.name = data_dict['name']
-        candidate.candidate_type = CANDIDATE_TYPE_EXPERIENCED
-        candidate.email = data_dict['email']
-        candidate.phone = data_dict['phone']
-        candidate.address = data_dict['address']
-        candidate.qualification = data_dict['qualification']
-        # candidate.resume = 
-        # candidate.save()
-    return HttpResponse('You have successfully registered')
+
+class CareersView(View):
+    def get(self, request, vacancy_id):
+        print "in get"
+        template_name = 'experienced.html'
+        services_page = Services.objects.latest('id')
+        context = {}
+        experienced_form = CandidateExperiencedForm()
+        context = {
+            'form':experienced_form,
+            'services_page': services_page,
+        }
+        return render(request, template_name, context)
+
+    def post(self, request,vacancy_id):
+        print "in views"
+        context = {}
+        data_dict_form = CandidateFreshersForm(request.POST,request.FILES)
+        data = request.POST
+        # print "data_dict = ", data_dict_form
+        # print "file", request.FILES['resume']
+        resume_candidate = 'uploads/resumes/experienced_%s'%(data['name'])
+        print "resume", resume_candidate
+        if request.method == 'POST':
+            if data_dict_form.is_valid():
+                candidate = Candidate()
+                candidate.name = data['name']
+                candidate.candidate_type = CANDIDATE_TYPE_EXPERIENCED
+                candidate.email = data['email']
+                candidate.phone = data['phone']
+                candidate.address = data['address']
+                candidate.qualification = data['qualification']
+                # candidate.resume = 
+            # candidate.save()
+        return HttpResponse('You have successfully registered')
+        
+# def careers_experienced(request):
+#     print "in views"
+#     context = {}
+#     data_dict = CandidateFreshersForm(request.POST, request.FILES)
+#     print "data_dict", data_dict
+#     # print "file", request.FILES['resume']
+#     if request.method == 'POST':
+#         candidate = Candidate()
+#         candidate.name = data_dict['name']
+#         candidate.candidate_type = CANDIDATE_TYPE_EXPERIENCED
+#         candidate.email = data_dict['email']
+#         candidate.phone = data_dict['phone']
+#         candidate.address = data_dict['address']
+#         candidate.qualification = data_dict['qualification']
+#         # candidate.resume = 
+#         # candidate.save()
+#     return HttpResponse('You have successfully registered')
 
 @csrf_exempt
 def contact_us(request):
@@ -183,13 +221,9 @@ def contact_us(request):
     if request.method == 'POST':
         contact_us = Contactus()
         contact_us.name = request.POST['name']
-        print "name : ",request.POST['name']
         contact_us.email_id = request.POST['email']
-        print "email : ",request.POST['email']
         contact_us.message = request.POST['message']
-        print "message :",request.POST['message']
         contact_us.subject = request.POST['subject']
-        print "subject :",request.POST['subject']
         contact_us.save();
         contact_us.send_contact_notification_mail_to_admins();
     return HttpResponse('You have successfully sent the Message')

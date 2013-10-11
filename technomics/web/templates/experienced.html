@@ -2,17 +2,33 @@
 {% load media %}
 {% load thumbnail %}
 {% block title %}<title> Careers | Technomics Solutions </title>{% endblock title %}
-{% block body_tags %}id="contactus"{% endblock body_tags %}
+{% block body_tags %}id=experienced{% endblock body_tags %}
 {% block banner %}
     <!-- {% include 'slideshow.html' %} -->
     <div class="banner" style='background: url(/site_media/{{ services_page.banner_image }}) no-repeat;'>   
     </div>
 {% endblock banner %}
 {% block content %}
-<div id="experienced_form">
-    <form id="form_experienced" method="post" enctype="multipart/form-data" >{% csrf_token %}
-        {{ form }}
-    </form>
-    <input type="button" name="submit" id="submit_form" value="Submit">
-</div>  
+{% if vacancies %}
+    <div id="vacancy_details">
+        {% for vacancy in vacancies%}
+            <ul>
+                <li>{{ vacancy.name }}</li>
+                <li>{{ vacancy.no_of_vacancy}}</li>
+                <li>{{ vacancy.opening_date}}</li>
+                <li>{{ vacancy.closing_date}}</li>
+                <a href="{% url 'experienced_apply' vacancy_id=vacancy.id %}">Apply</a>
+            </ul>
+        {% endfor %}
+    </div>
+    {% if form %}
+        <div id="experienced_form">
+            <form id="form_experienced" action="{% url 'experienced_apply' vacancy_id=vacancy.id %}" method="post" enctype="multipart/form-data" >{% csrf_token %}
+                {{ form}} 
+                <input type="submit" name="submit" id="submit_form" value="Submit">
+            </form>
+        </div> 
+    {% endif %}
+{% endif %}
+ 
 {% endblock %}
