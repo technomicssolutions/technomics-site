@@ -11,7 +11,7 @@
 {% block content %}
     {% if fresherform.errors %}
         <p style="color: red;">
-            Please correct the error{{ form.errors|pluralize }} below.
+            Please correct the error{{ fresherform.errors|pluralize }} below.
         </p>
     {% endif %}
 

@@ -265,30 +265,6 @@ class  Candidate(Dates):
     def __unicode__(self):
         return self.name
 
-
-## Soumyas models
-
-# class Candidate(Dates):##wrong model
-#     resume = models.FileField(upload_to = "uploads/images/", max_length=20000,  blank=True)
-
-
-# class Freshers(Candidate):##wrong  model
-#     Qualification = models.CharField(max_length=200)
-
-#Expected model design
-#
-#class CandidateProfile(Dates):
-#    name = models.CharField(max_length=200)
-#    degree = models.CharField(max_length=200)
-#    marks = models.IntegerField(max_length = 10)
-#    percentage = models.FloatField(max_length = 10)
-#    resume = models.FileField(upload_to = "uploads/images/", max_length=20000,  blank=True)
-
-#CATEGORY_CHOICES = (
-#            ('P','Python'),
-#            ('H','hr'),
-#            )
-#class Experienced(CandidateProfile):
-#    candidate_type = models.CharField(max_length=200, choices = CATEGORY_CHOICES)
-
-
+    def send_contact_notification_mail_to_admins(self):
+        root_url = 'http://%s'%(Site.objects.get_current().domain)
+        print root_url
