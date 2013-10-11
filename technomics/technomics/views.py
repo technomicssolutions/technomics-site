@@ -3,6 +3,7 @@
 import os
 import re
 import os.path
+print "path=======", os.path.dirname(__file__)
 from django.conf import settings
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
@@ -152,11 +153,11 @@ def rendersubmenu(request, menu_slug, submenuslug):
             elif submenuslug == 'freshers':
                 freshersform = CandidateFreshersForm()
                 context = {
-                'slideshow': slideshow,
-                'freshersform': freshersform,
+                    'services_page': services_page,
+                    'form': freshersform,
                 }
             elif submenuslug == 'experienced':
-                vacancies = Vacancy.objects.all()
+                vacancies = Vacancy.objects.all().exclude(name = 'Freshers')
                 # experienced_form = CandidateExperiencedForm()
                 context = {
                     'services_page': services_page,
@@ -179,18 +180,20 @@ class CareersView(View):
 
     def post(self, request, vacancy_id):
         context = {}
-        data_dict_form = CandidateFreshersForm(request.POST,request.FILES)
+        data_dict_form = CandidateExperiencedForm(request.POST,request.FILES)
         data = request.POST
-        vacancy = Vacancy.objects.get(id = vacancy_id)
-        vacancy_name = re.sub(r"\s+", '_', vacancy.name.lower())
-        candidate_name = re.sub(r"\s+", '_', data['name'].lower())
-        resume_name = 'experienced_%s_%s'%(vacancy_name,candidate_name)
-        fileobj = request.FILES['resume']
-        file_extension = fileobj.name.split(".")[-1]
-        file_name = '%s.%s'%(resume_name, file_extension)
         if request.method == 'POST':
             if data_dict_form.is_valid():
                 candidate = Candidate()
+                vacancy = Vacancy.objects.get(id = vacancy_id)
+                vacancy_name = re.sub(r"\s+", '_', vacancy.name.lower())
+                candidate_name = re.sub(r"\s+", '_', data['name'].lower())
+                fileobj = request.FILES['resume']
+                file_extension = fileobj.name.split(".")[-1]
+                path = os.path.dirname(__file__)
+                resume_file_name = '%s_%s_%s'%(candidate_name, str(vacancy_id), str(candidate.id))+"."+file_extension
+                resume_name = path+'/media/uploads/resumes/%s'%(resume_file_name)
+                file_name = '%s'%(resume_name)
                 candidate.name = data['name']
                 candidate.candidate_type = CANDIDATE_TYPE_EXPERIENCED
                 candidate.email = data['email']
@@ -201,28 +204,10 @@ class CareersView(View):
                 with open(file_name, 'wb+') as destination:
                     for chunk in fileobj.chunks():
                         destination.write(chunk)
-                candidate.resume = file_name
+                candidate.resume.name = "uploads/resumes/"+resume_file_name
                 candidate.save()
                 # candidate.send_contact_notification_mail_to_admins()
         return HttpResponse('You have successfully registered')
-        
-# def careers_experienced(request):
-#     print "in views"
-#     context = {}
-#     data_dict = CandidateFreshersForm(request.POST, request.FILES)
-#     print "data_dict", data_dict
-#     # print "file", request.FILES['resume']
-#     if request.method == 'POST':
-#         candidate = Candidate()
-#         candidate.name = data_dict['name']
-#         candidate.candidate_type = CANDIDATE_TYPE_EXPERIENCED
-#         candidate.email = data_dict['email']
-#         candidate.phone = data_dict['phone']
-#         candidate.address = data_dict['address']
-#         candidate.qualification = data_dict['qualification']
-#         # candidate.resume = 
-#         # candidate.save()
-#     return HttpResponse('You have successfully registered')
 
 @csrf_exempt
 def contact_us(request):
@@ -250,21 +235,31 @@ def services(request):
 
 def freshers_detail(request):
     context = {}
+    data_dict_form = CandidateFreshersForm(request.POST,request.FILES)
+    data = request.POST
     if request.method == 'POST':
-        candidate = Candidate();
-        print "name : ",request.POST['name']
-        candidate.name = request.POST['name']
-        print "email :",request.POST['email']
-        candidate.email = request.POST['email']
-        print "phone : ",request.POST['phone']
-        candidate.phone = request.POST['phone']
-        print "address : ",request.POST['address']
-        candidate.address = request.POST['address']
-        print "qualification : ",request.POST['qualification']
-        candidate.qualification = request.POST['qualification']
-        print "resume : ",request.POST['resume']
-        candidate.resume = request.POST['resume']
-        candidate.save();
-        candidate.send_contact_notification_mail_to_admins();
-    return HttpResponse('You have successfully submited details')
-
+        if data_dict_form.is_valid():
+            candidate = Candidate()
+            vacancy = Vacancy.objects.get(name = 'Freshers')
+            vacancy_name = re.sub(r"\s+", '_', vacancy.name.lower())
+            candidate_name = re.sub(r"\s+", '_', data['name'].lower())
+            fileobj = request.FILES['resume']
+            file_extension = fileobj.name.split(".")[-1]
+            path = os.path.dirname(__file__)
+            resume_file_name = '%s_%s_%s'%(candidate_name, str(vacancy.id), str(candidate.id))+"."+file_extension
+            resume_name = path+'/media/uploads/resumes/%s'%(resume_file_name)
+            file_name = '%s'%(resume_name)
+            candidate.name = data['name']
+            candidate.candidate_type = CANDIDATE_TYPE_FRESHER
+            candidate.email = data['email']
+            candidate.phone = data['phone']
+            candidate.address = data['address']
+            candidate.qualification = data['qualification']
+            candidate.vacancy = vacancy
+            with open(file_name, 'wb+') as destination:
+                for chunk in fileobj.chunks():
+                    destination.write(chunk)
+            candidate.resume.name = "uploads/resumes/"+resume_file_name
+            candidate.save()
+            # candidate.send_contact_notification_mail_to_admins()
+    return HttpResponse('You have successfully sent the Message')

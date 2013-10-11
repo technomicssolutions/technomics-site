@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load media %}
 {% load thumbnail %}
-{% block title %}<title> Careers | Technomics Solutions </title>{% endblock title %}
+{% block title %}<title> Careers | Freshers | Technomics Solutions </title>{% endblock title %}
 {% block body_tags %}id="freshers"{% endblock body_tags %}
 {% block banner %}
     <div class="banner" style='background: url(/site_media/{{ services_page.banner_image }}) no-repeat;'>   
@@ -10,17 +10,12 @@
 
 
 {% block content %}
-    {% if freshersform.errors %}
-        <p style="color: red;">
-            Please correct the error{{ freshersform.errors|pluralize }} below.
-        </p>
+   {% if form %}
+        <div id="fresher_form">
+            <form id="form_fresher" action="{% url 'freshers_apply' %}" method="post" enctype="multipart/form-data" >{% csrf_token %}
+                {{ form}} 
+                <input type="submit" name="submit" id="submit_form" value="Submit">
+            </form>
+        </div> 
     {% endif %}
-
-    <form action="{% url 'freshers_detail' %}" method="post">
-        <div>
-            {{ freshersform.as_p }}
-        </div>
-        {% csrf_token %}
-        <input type="submit" value="Submit">
-    </form>
 {% endblock %}
