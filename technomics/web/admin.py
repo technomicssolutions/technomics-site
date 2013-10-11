@@ -88,7 +88,7 @@ class  CandidateAdmin(admin.ModelAdmin):
     list_display = ('name', 'candidate_type', 'email', 'phone', 'address', 'qualification', 'resume')
     
 class VacancyAdmin(admin.ModelAdmin):
-    list_display = ('name', 'no_of_vacancy', 'opening_date', 'closing_date')
+    list_display = ('name', 'no_of_vacancy', 'description', 'opening_date', 'closing_date')
         
         
         

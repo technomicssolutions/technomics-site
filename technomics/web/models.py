@@ -239,6 +239,7 @@ class Submenu(Dates):
 class Vacancy(Dates):
     name = models.CharField('Name', max_length = 200, null=True, blank=True, help_text='Name of the Post')
     no_of_vacancy = models.IntegerField('No of Vacancy', max_length = 10, null = True, blank = True, default = '0', help_text = 'No of vacancies')
+    description = models.TextField('Description', null = True, blank = True)
     opening_date = models.DateField('Opening Date', null = True, blank = True, help_text = 'Opening date')
     closing_date = models.DateField('Closing Date', null = True, blank = True, help_text = 'Closing date')
 
@@ -251,13 +252,13 @@ class Vacancy(Dates):
             
 
 class  Candidate(Dates):
-    name = models.CharField('Name', max_length = 100)
+    name = models.CharField('Name', max_length = 150)
     candidate_type = models.CharField('Candidate type', max_length = 50, choices = CANDIDATE_TYPE, default = CANDIDATE_TYPE_FRESHER)
-    email = models.EmailField('Email', max_length = 100)
+    email = models.EmailField('Email', max_length = 120)
     phone = models.CharField('Phone', max_length = 15)
     address = models.TextField('Address', max_length = 500, null = True, blank = True)
     qualification = models.CharField('Qualification', max_length = 50, choices = QUALIFICATION_TYPE, default = QUALIFICATION_TYPE_BSC)
-    resume = models.FileField(upload_to='uploads/resumes/')
+    resume = models.FileField(upload_to='uploads/resumes/', null = True, blank =True)
     vacancy = models.ForeignKey('Vacancy', null = True, blank = True)
 
     class Meta:
@@ -267,6 +268,16 @@ class  Candidate(Dates):
     def __unicode__(self):
         return self.name
 
-    def send_contact_notification_mail_to_admins(self):
-        root_url = 'http://%s'%(Site.objects.get_current().domain)
-        print root_url
+    # def send_contact_notification_mail_to_admins(self):
+    #     root_url = 'http://%s'%(Site.objects.get_current().domain)
+    #     subject = 'Contact me %s_%s'%(self.candidate_type, self.name)
+    #     message = render_to_string('careers_notification.html', {
+    #         'name': self.name,
+    #         'email': self.email,
+    #         'type': self.candidate_type
+    #     }) 
+    #     try:
+    #         mail_admins(subject, message, fail_silently=False, connection=None, html_message=None)
+    #     except BadHeaderError:
+    #         return HttpResponse('Invalid Header Found')
+
