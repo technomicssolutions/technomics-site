@@ -56,14 +56,17 @@ def rendermenu(request, menuslug):
         elif menuslug == 'blog':
             blogs = Blog.objects.all()[:10]
             comment_form = CommentForm()
-            blog_form = BlogForm()
+            
             context = {
             'services_page': services_page,
             'blogs': blogs,
-            'comment_form': comment_form,
-            'blog_form': blog_form
+            'comment_form': comment_form
             }
-
+            
+            if request.user.is_staff:
+                blog_form = BlogForm()
+                context['blog_form'] = blog_form
+                
         return render(request, template, context)
 
 def rendersubmenu(request, menu_slug, submenuslug):
@@ -262,3 +265,6 @@ def freshers_detail(request):
             candidate.save()
             # candidate.send_contact_notification_mail_to_admins()
     return HttpResponse('You have successfully sent the Message')
+
+def add_blog(request):
+    return HttpResponse("ok")
