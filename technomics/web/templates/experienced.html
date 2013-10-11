@@ -10,12 +10,10 @@
 {% endblock banner %}
 	
 {% block content %}
-	<form  method="post">
-        <table>
-            {{ form }}
-        </table>
-        {% csrf_token %}
-        <input type="submit" value="Submit">
+<div id="experienced_form">
+    <form id="form_experienced" method="post" enctype="multipart/form-data" >{% csrf_token %}
+        {{ form }}
     </form>
-    
+    <input type="button" name="submit" id="submit_form" value="Submit">
+</div>  
 {% endblock %}

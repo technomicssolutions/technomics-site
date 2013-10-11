@@ -9,6 +9,8 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from web.models import Contactus, Dates, Homepage, Feature, Newsevents, Aboutus, Blog, Comment, Slideshow, Services, Services_section, Testimonials, Candidate
 from web.forms import CommentForm, FresherForm, CandidateExperiencedForm
+from web import CANDIDATE_TYPE_FRESHER, CANDIDATE_TYPE_EXPERIENCED
+
 
 def home(request):
     latest_content = Feature.objects.latest('id')
@@ -159,13 +161,27 @@ def rendersubmenu(request, menu_slug, submenuslug):
                 }
                 print "cxt", context
             return render(request, template, context)
-
+def careers_experienced(request):
+    context = {}
+    data_dict = request.POST
+    print "file", request.FILES['resume']
+    if request.method == 'POST':
+        candidate = Candidate()
+        candidate.name = data_dict['name']
+        candidate.candidate_type = CANDIDATE_TYPE_EXPERIENCED
+        candidate.email = data_dict['email']
+        candidate.phone = data_dict['phone']
+        candidate.address = data_dict['address']
+        candidate.qualification = data_dict['qualification']
+        # candidate.resume = 
+        # candidate.save()
+    return HttpResponse('You have successfully registered')
 
 @csrf_exempt
 def contact_us(request):
     context = {}
     if request.method == 'POST':
-        contact_us = Contactus();
+        contact_us = Contactus()
         contact_us.name = request.POST['name']
         print "name : ",request.POST['name']
         contact_us.email_id = request.POST['email']
