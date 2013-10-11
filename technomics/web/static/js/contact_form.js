@@ -19,24 +19,24 @@ window.addEvent('domready', function(){
  //        }); 
  //        ajaxRequest.send(); 
 	// }); 
-    $('submit_form').addEvent('click', function(e){
-        e.stop();
-        var form_data = $('form_experienced').toQueryString();
-        console.log('data'+form_data);
-        var ajaxRequest = new Request({ 
-            url: '/careers_experienced',
-            method: 'POST',
-            data: form_data,
-            onSuccess: function(){
-                console.log('You have successfully sent the Message');
-            }
-            // onFailure: function(){
-            //     console.log('error :'+ data);
-            // }
+    // $('submit_form').addEvent('click', function(e){
+    //     e.stop();
+    //     var form_data = $('form_experienced').toQueryString();
+    //     console.log('data'+form_data);
+    //     var ajaxRequest = new Request({ 
+    //         url: '/careers_experienced',
+    //         method: 'POST',
+    //         data: form_data,
+    //         onSuccess: function(){
+    //             console.log('You have successfully sent the Message');
+    //         }
+    //         // onFailure: function(){
+    //         //     console.log('error :'+ data);
+    //         // }
 
-        }); 
-        ajaxRequest.send(); 
-    }); 
+    //     }); 
+    //     ajaxRequest.send(); 
+    // }); 
 });
 
 
