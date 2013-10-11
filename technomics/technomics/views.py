@@ -193,20 +193,20 @@ def services(request):
 def freshers_detail(request):
     context = {}
     if request.method == 'POST':
-#        candidate = Candidate();
+        candidate = Candidate();
         print "name : ",request.POST['name']
-#        candidate.name = request.POST['name']
+        candidate.name = request.POST['name']
         print "email :",request.POST['email']
-#        candidate.email = request.POST['email']
+        candidate.email = request.POST['email']
         print "phone : ",request.POST['phone']
-#        candidate.phone = request.POST['phone']
+        candidate.phone = request.POST['phone']
         print "address : ",request.POST['address']
-#        candidate.address = request.POST['address']
+        candidate.address = request.POST['address']
         print "qualification : ",request.POST['qualification']
-#        candidate.qualification = request.POST['qualification']
+        candidate.qualification = request.POST['qualification']
         print "resume : ",request.POST['resume']
-#        candidate.resume = request.POST['resume']
-#        candidate.save();
-#        candidate.send_contact_notification_mail_to_admins();
+        candidate.resume = request.POST['resume']
+        candidate.save();
+        candidate.send_contact_notification_mail_to_admins();
     return HttpResponse('You have successfully submited details')
 
