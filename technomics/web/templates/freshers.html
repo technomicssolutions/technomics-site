@@ -9,11 +9,11 @@
 
 
 {% block content %}
-<!--    {% if freshersform.errors %}-->
-<!--        <p style="color: red;">-->
-<!--            Please correct the error{{ freshersform.errors|pluralize }} below.-->
-<!--        </p>-->
-<!--    {% endif %}-->
+    {% if freshersform.errors %}
+        <p style="color: red;">
+            Please correct the error{{ freshersform.errors|pluralize }} below.
+        </p>
+    {% endif %}
 
     <form action="{% url 'freshers_detail' %}" method="post">
         <div>
