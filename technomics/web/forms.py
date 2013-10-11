@@ -6,10 +6,6 @@ from django.forms import ModelForm
 # from crispy_forms.bootstrap import FormActions
 
 from .models import Candidate
-DEGREE = (
-       (1, ("B.Tech")),
-       (2, ("B.Sc")), 
-   )
 
 class CommentForm(forms.Form):
     author = forms.CharField(max_length=100)
