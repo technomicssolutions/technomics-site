@@ -6,7 +6,7 @@ import os.path
 print "path=======", os.path.dirname(__file__)
 from django.conf import settings
 from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 from django.core.urlresolvers import reverse
 from django.db import models
@@ -60,14 +60,12 @@ def rendermenu(request, menuslug):
             context = {
             'services_page': services_page,
             'blogs': blogs,
-            'comment_form': comment_form
+            'comment_form': comment_form,
+            'is_staff': request.user.is_staff
             }
-            
-            if request.user.is_staff:
-                blog_form = BlogForm()
-                context['blog_form'] = blog_form
                 
         return render(request, template, context)
+
 
 def rendersubmenu(request, menu_slug, submenuslug):
     if menu_slug:
@@ -167,6 +165,7 @@ def rendersubmenu(request, menu_slug, submenuslug):
                 }
             return render(request, template, context)
 
+
 class CareersView(View):
     def get(self, request, vacancy_id):
         template_name = 'experienced.html'
@@ -203,13 +202,40 @@ class CareersView(View):
                 candidate.address = data['address']
                 candidate.qualification = data['qualification']
                 candidate.vacancy = vacancy
-                with open(file_name, 'wb+') as destination:
+                with open(file_name, 'w') as destination:
                     for chunk in fileobj.chunks():
                         destination.write(chunk)
                 candidate.resume.name = "uploads/resumes/"+resume_file_name
                 candidate.save()
                 # candidate.send_contact_notification_mail_to_admins()
         return HttpResponse('You have successfully registered')
+
+
+class BlogView(View):
+    def get(self, request):
+        template_name = 'blog.html'
+        services_page = Services.objects.latest('id')
+        blog_form = BlogForm()
+        context = {
+            'blog_form': blog_form,
+            'services_page': services_page
+        }
+        return render(request, template_name, context)
+
+    def post(self, request):
+        context = {}
+        data_dict_form = BlogForm(request.POST)
+        data = request.POST
+        name = request.user.first_name + request.user.last_name
+        if request.method == 'POST':
+            if data_dict_form.is_valid():
+                blog = Blog()
+                blog.title = data['title']
+                blog.description = data['description']
+                blog.author = name
+                blog.save()
+                # candidate.send_contact_notification_mail_to_admins()
+        return HttpResponseRedirect('/blog/')
 
 @csrf_exempt
 def contact_us(request):

@@ -2,13 +2,12 @@
 {% load media %}
 {% load thumbnail %}
 {% block title %}<title> Blogs | Technomics Solutions </title>{% endblock title %}
-{% block body_tags %}id="blog"{% endblock body_tags %}
+{% block body_tags %}id=blog{% endblock body_tags %}
 {% block banner %}
+    <!-- {% include 'slideshow.html' %} -->
     <div class="banner" style='background: url(/site_media/{{ services_page.banner_image }}) no-repeat;'>   
     </div>
 {% endblock banner %}
-
-
 
 {% block content %}
     
@@ -33,15 +32,16 @@
                     {{ comments.3.description }}
                 {% endif %}
             {% endwith %}
-        
         {% endfor %}
     {% endif %}
     
-
+    {% if is_staff %}
+        <a href="{% url 'add_blog' %}">Apply</a>
+    {% endif %}
 
     <div id="">
         {% if blog_form %}
-            <form action="{% url 'add_blog' %}" method="post">
+            <form action="{% url 'add_blog' %}" method="post" enctype="multipart/form-data" >
                 <table>
                     {{ blog_form.as_p }}
                 </table>
