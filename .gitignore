@@ -2,4 +2,7 @@
 *.pyc
 *.egg
 *egg*
+*local_settings.py
+*~
 technomics/technomics/media
+
