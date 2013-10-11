@@ -265,6 +265,16 @@ class  Candidate(Dates):
     def __unicode__(self):
         return self.name
 
-    def send_contact_notification_mail_to_admins(self):
-        root_url = 'http://%s'%(Site.objects.get_current().domain)
-        print root_url
+    # def send_contact_notification_mail_to_admins(self):
+    #     root_url = 'http://%s'%(Site.objects.get_current().domain)
+    #     subject = 'Contact me %s_%s'%(self.candidate_type, self.name)
+    #     message = render_to_string('careers_notification.html', {
+    #         'name': self.name,
+    #         'email': self.email,
+    #         'type': self.candidate_type
+    #     }) 
+    #     try:
+    #         mail_admins(subject, message, fail_silently=False, connection=None, html_message=None)
+    #     except BadHeaderError:
+    #         return HttpResponse('Invalid Header Found')
+

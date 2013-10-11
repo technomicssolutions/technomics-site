@@ -21,14 +21,14 @@
             </ul>
         {% endfor %}
     </div>
-    {% if form %}
-        <div id="experienced_form">
-            <form id="form_experienced" action="{% url 'experienced_apply' vacancy_id=vacancy.id %}" method="post" enctype="multipart/form-data" >{% csrf_token %}
-                {{ form}} 
-                <input type="submit" name="submit" id="submit_form" value="Submit">
-            </form>
-        </div> 
-    {% endif %}
+{% endif %}
+{% if form %}
+    <div id="experienced_form">
+        <form id="form_experienced" action="{% url 'experienced_apply' vacancy_id=vacancy_id %}" method="post" enctype="multipart/form-data" >{% csrf_token %}
+            {{ form}} 
+            <input type="submit" name="submit" id="submit_form" value="Submit">
+        </form>
+    </div> 
 {% endif %}
  
 {% endblock %}

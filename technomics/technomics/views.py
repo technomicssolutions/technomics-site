@@ -1,6 +1,8 @@
 # Create your views here.
 
 import os
+import re
+import os.path
 from django.conf import settings
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
@@ -164,7 +166,6 @@ def rendersubmenu(request, menu_slug, submenuslug):
 
 class CareersView(View):
     def get(self, request, vacancy_id):
-        print "in get"
         template_name = 'experienced.html'
         services_page = Services.objects.latest('id')
         context = {}
@@ -172,18 +173,21 @@ class CareersView(View):
         context = {
             'form':experienced_form,
             'services_page': services_page,
+            'vacancy_id': vacancy_id,
         }
         return render(request, template_name, context)
 
-    def post(self, request,vacancy_id):
-        print "in views"
+    def post(self, request, vacancy_id):
         context = {}
         data_dict_form = CandidateFreshersForm(request.POST,request.FILES)
         data = request.POST
-        # print "data_dict = ", data_dict_form
-        # print "file", request.FILES['resume']
-        resume_candidate = 'uploads/resumes/experienced_%s'%(data['name'])
-        print "resume", resume_candidate
+        vacancy = Vacancy.objects.get(id = vacancy_id)
+        vacancy_name = re.sub(r"\s+", '_', vacancy.name.lower())
+        candidate_name = re.sub(r"\s+", '_', data['name'].lower())
+        resume_name = 'experienced_%s_%s'%(vacancy_name,candidate_name)
+        fileobj = request.FILES['resume']
+        file_extension = fileobj.name.split(".")[-1]
+        file_name = '%s.%s'%(resume_name, file_extension)
         if request.method == 'POST':
             if data_dict_form.is_valid():
                 candidate = Candidate()
@@ -193,8 +197,13 @@ class CareersView(View):
                 candidate.phone = data['phone']
                 candidate.address = data['address']
                 candidate.qualification = data['qualification']
-                # candidate.resume = 
-            # candidate.save()
+                candidate.vacancy = vacancy
+                with open(file_name, 'wb+') as destination:
+                    for chunk in fileobj.chunks():
+                        destination.write(chunk)
+                candidate.resume = file_name
+                candidate.save()
+                # candidate.send_contact_notification_mail_to_admins()
         return HttpResponse('You have successfully registered')
         
 # def careers_experienced(request):
