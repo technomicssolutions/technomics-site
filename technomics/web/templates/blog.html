@@ -2,17 +2,18 @@
 {% load media %}
 {% load thumbnail %}
 {% block title %}<title> Blogs | Technomics Solutions </title>{% endblock title %}
-{% block body_tags %}id="contactus"{% endblock body_tags %}
+{% block body_tags %}id="blog"{% endblock body_tags %}
 {% block banner %}
-    {% include 'slideshow.html' %}
+    <div class="banner" style='background: url(/site_media/{{ services_page.banner_image }}) no-repeat;'>   
+    </div>
 {% endblock banner %}
+
 
 
 {% block content %}
     
-    {% if blogs_formset.0 %}
-        {% for blog, form in blogs_formset %}
-<!--        form in formset.forms-->
+    {% if blogs %}
+        {% for blog in blogs  %}
             <h1> 
                 {{ blog.title }}
                 {{ blog.description }}
@@ -20,49 +21,28 @@
                 <br> 
             </h1>
             <h2>Comments</h2>
+            
             {% with comments=blog.comment_set.all %}
-<!--                form for adding comment-->
-                {{ form.as_p }}
+                {{ comment_form.as_p }}
                 {% if comments %}
-                    {% for comment in comments %}
-                        <p>
-                            {{ comment.author }}
-                            {{ comment.description }}
-                            <br>
-                        </p>
-                    {% endfor %}
+                    {{ comments.1.author }}
+                    {{ comments.1.description }}
+                    {{ comments.2.author }}
+                    {{ comments.2.description }}
+                    {{ comments.3.author }}
+                    {{ comments.3.description }}
                 {% endif %}
             {% endwith %}
         
         {% endfor %}
     {% endif %}
     
-<!-- here a comment form is needed   -->
 
 
     <div id="">
         <h1> Add blog</h1>
-        </div> 
         <div id="" >
-            <form id="blogs_form" method="post" action="add_blog" >{% csrf_token %}
-                <ul>
-                    <li> 
-                        <label title="Title" for="title">Title</label>
-                        <input type="text" name="title" id="title" title="Title"/>
-                    </li>
-                    <li>
-                        <label title="Description" for="description">Description</label>
-                        <input type="text" name="description" id="description" title="Description"/>
-                    </li>
-                    <li>
-                        <label for="Author" title="author">Author</label>
-                        <input type="text" name="author" id="author" title="Author">
-                    </li>
-                    <li>
-                        <input type="submit" value="Submit">
-                    </li>
-                </ul>
-            </form>
+            {{ blog_form.as_p }}
         </div>
     </div>
 {% endblock %}

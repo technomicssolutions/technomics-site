@@ -11,7 +11,7 @@ from django.views.generic.base import View
 
 from web.models import Contactus, Dates, Homepage, Feature, Newsevents, Aboutus, Blog, Comment, Slideshow, Services, Services_section, \
 Testimonials, Candidate, Vacancy
-from web.forms import CommentForm, CandidateFreshersForm, CandidateExperiencedForm
+from web.forms import CommentForm, CandidateFreshersForm, CandidateExperiencedForm, BlogForm
 from web import CANDIDATE_TYPE_FRESHER, CANDIDATE_TYPE_EXPERIENCED
 
 def home(request):
@@ -51,15 +51,14 @@ def rendermenu(request, menuslug):
                 'services_page': services_page,
             }
         elif menuslug == 'blog':
-            blogs = Blog.objects.all()
-            #                comments = Comment.objects.filter(blog_id=blog.id)
-            from django.forms.formsets import formset_factory
-            CommentFormSet = formset_factory(CommentForm, max_num=len(blogs))
-            formset = CommentFormSet()
+            blogs = Blog.objects.all()[:10]
+            comment_form = CommentForm()
+            blog_form = BlogForm()
             context = {
             'services_page': services_page,
-            'blogs_formset': zip(blogs,formset),
-            #                    'comments': comments
+            'blogs': blogs,
+            'comment_form': comment_form,
+            'blog_form': blog_form
             }
 
         return render(request, template, context)

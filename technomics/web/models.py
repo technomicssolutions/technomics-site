@@ -111,6 +111,7 @@ class Blog(Dates):
     class Meta:
         verbose_name = 'Blog'
         verbose_name_plural = 'Blog'
+        ordering = ['-created_date']
 
     def __unicode__(self):
         return self.title
@@ -124,6 +125,7 @@ class Comment(Dates):
     class Meta:
         verbose_name = 'Comment'
         verbose_name_plural = 'Comments'
+        ordering = ['-created_date']
             
 
 class Services(Dates):
