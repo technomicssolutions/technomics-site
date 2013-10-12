@@ -6,7 +6,9 @@ TEMPLATE_DEBUG = DEBUG
 
 fillpath = lambda x: os.path.join(os.path.dirname(__file__), x)
 ADMINS = (
-    ('geethu', 'geethusureh@gmail.com'),
+    ('Shajeer', 'shajeer@technomicssolutions.com'),
+    ('Vishnu', 'vishnu@technomicssolutions.com'),
+    ('Remya', 'remya@technomicssolutions.com'),
 )
 
 MANAGERS = ADMINS
