@@ -3,7 +3,6 @@
 import os
 import re
 import os.path
-print "path=======", os.path.dirname(__file__)
 from django.conf import settings
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse, HttpResponseRedirect
@@ -11,6 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.views.generic.base import View
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from web.models import Contactus, Dates, Homepage, Feature, Newsevents, Aboutus, Blog, Comment, Slideshow, Services, Services_section, \
 Testimonials, Candidate, Vacancy
@@ -54,16 +54,7 @@ def rendermenu(request, menuslug):
                 'services_page': services_page,
             }
         elif menuslug == 'blog':
-            blogs = Blog.objects.all()[:10]
-#            comment_form = CommentForm()
-            
-            context = {
-            'services_page': services_page,
-            'blogs': blogs,
-#            'comment_form': comment_form,
-            'is_staff': request.user.is_staff
-            }
-                
+            context = listing(request)
         return render(request, template, context)
 
 
@@ -213,13 +204,10 @@ class CareersView(View):
 
 class BlogView(View):
     def get(self, request):
+        context = listing(request)
         template_name = 'blog.html'
-        services_page = Services.objects.latest('id')
         blog_form = BlogForm()
-        context = {
-            'blog_form': blog_form,
-            'services_page': services_page
-        }
+        context ['blog_form'] = blog_form
         return render(request, template_name, context)
 
     def post(self, request):
@@ -235,23 +223,18 @@ class BlogView(View):
                 blog.author = name
                 blog.save()
                 blog.send_blog_notification_mail_to_admins()
-        return HttpResponseRedirect('/blog/')
+        return HttpResponse('You have successfully added the blog')
 
 
 class BlogCommentView(View):
     def get(self, request, blog_id):
+        page = request.GET.get('page')
+#        print page
+        context = listing(request)
         template_name = 'blog.html'
-        services_page = Services.objects.latest('id')
         comment_form = BlogCommentForm()
-        blogs = Blog.objects.all()[:10]
-        context = {
-        'services_page': services_page,
-        'blogs': blogs,
-        'is_staff': request.user.is_staff,
-        'comment_form': comment_form,
-        'services_page': services_page,
-        'blog_id': int(blog_id)
-    }
+        context['comment_form'] = comment_form
+        context['blog_id'] = int(blog_id)
         return render(request, template_name, context)
 
     def post(self, request, blog_id):
@@ -268,8 +251,7 @@ class BlogCommentView(View):
                 if request.user.is_staff:
                     comment.author = request.user.first_name + request.user.last_name
                 comment.save()
-                # candidate.send_contact_notification_mail_to_admins()
-        return HttpResponseRedirect('/blog/')
+        return HttpResponse('You have successfully added the comment')
 
 
 @csrf_exempt
@@ -327,4 +309,23 @@ def freshers_detail(request):
             candidate.send_career_notification_mail_to_admins()
     return HttpResponse('You have successfully sent the Message')
 
+def listing(request):
+    blogs_list = Blog.objects.all()
+    services_page = Services.objects.latest('id')
+    paginator = Paginator(blogs_list, 5)
 
+    page = request.GET.get('page')
+    print 'page', page
+    try:
+        blogs = paginator.page(page)
+    except PageNotAnInteger:
+        blogs = paginator.page(1)
+    except EmptyPage:
+        blogs = paginator.page(paginator.num_pages)
+
+    context = {
+    'services_page': services_page,
+    'blogs': blogs,
+    'is_staff': request.user.is_staff
+    }
+    return context
