@@ -24,10 +24,13 @@
             {% with comments=blog.comment_set.all %}
                 {{ comment_form.as_p }}
                 {% if comments %}
+                    {{ comments.1.created_date }}
                     {{ comments.1.author }}
                     {{ comments.1.description }}
+                    {{ comments.2.created_date }}
                     {{ comments.2.author }}
                     {{ comments.2.description }}
+                    {{ comments.3.created_date }}
                     {{ comments.3.author }}
                     {{ comments.3.description }}
                 {% endif %}
