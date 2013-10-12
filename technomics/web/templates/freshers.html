@@ -11,7 +11,7 @@
 
 {% block content %}
    {% if form %}
-        <div id="fresher_form">
+        <div id="fresher_form" class="clear">
             <form id="form_fresher" action="{% url 'freshers_apply' %}" method="post" enctype="multipart/form-data" >{% csrf_token %}
                 {{ form}} 
                 <input type="submit" name="submit" id="submit_form" value="Submit">

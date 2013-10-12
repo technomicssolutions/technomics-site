@@ -251,6 +251,9 @@ body {
 .clear {
     clear: both;
 }
+.content {
+    clear: both;
+}
 #services_page {
     .container {
         .content {
@@ -534,7 +537,43 @@ body {
     .container {
     }
 }
-
+form {
+    display: block;
+    width: 312px;
+    label {
+        display: block;
+        float: left;
+        font-weight: bold;
+        margin: 5px 5px 5px 0;
+        padding: 4px;
+        width: 95px;
+        color: #000000;
+    }
+    input {
+        width: 210px;
+        margin-top: 5px;
+        height: 25px;
+    }
+    textarea {
+        width: 310px;
+        height: 150px;
+        margin-top: 5px;
+        display: block;
+    }
+    select {
+        width: 97px;
+        margin : 5px 0 4px 0;
+        height: 25px;
+    }
+    input[type='submit'] {
+        width: 107px;
+        /*background-image: url(images/sendButton.jpg);*/
+        /*background-repeat: no-repeat;*/
+        display: block;
+        height: 39px;
+        margin: 10px 0 0 107px;
+    }
+}
 #experienced {
     .container {
         .banner {

@@ -2,7 +2,7 @@
 {% load media %}
 {% load thumbnail %}
 {% block title %}<title> Blogs | Technomics Solutions </title>{% endblock title %}
-{% block body_tags %}id=blog{% endblock body_tags %}
+{% block body_tags %}id=blogs{% endblock body_tags %}
 {% block banner %}
     <!-- {% include 'slideshow.html' %} -->
     <div class="banner" style='background: url(/site_media/{{ services_page.banner_image }}) no-repeat;'>   
@@ -18,11 +18,9 @@
     </script>
     {% if blogs %}
         {% for blog in blogs %}
-            <div>
+            <div class="clear blog">
                 <h1>{{ blog.title }}</h1>
-                    {{ blog.description }}
-                    {{ blog.author }}
-                    <br>
+                <p>{{ blog.description }}</p>
             </div>
             
             {% with comments=blog.comment_set.all %}
