@@ -234,7 +234,7 @@ class BlogView(View):
                 blog.description = data['description']
                 blog.author = name
                 blog.save()
-                # candidate.send_contact_notification_mail_to_admins()
+                blog.send_blog_notification_mail_to_admins()
         return HttpResponseRedirect('/blog/')
 
 
@@ -324,7 +324,7 @@ def freshers_detail(request):
                     destination.write(chunk)
             candidate.resume.name = "uploads/resumes/"+resume_file_name
             candidate.save()
-            # candidate.send_contact_notification_mail_to_admins()
+            candidate.send_career_notification_mail_to_admins()
     return HttpResponse('You have successfully sent the Message')
 
 

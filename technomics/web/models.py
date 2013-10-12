@@ -115,7 +115,22 @@ class Blog(Dates):
 
     def __unicode__(self):
         return self.title
-            
+
+    def send_blog_notification_mail_to_admins(self):
+        root_url = 'http://%s'%(Site.objects.get_current().domain)
+        print root_url
+        subject = 'Blog %s_%s'%(self.title, self.author)
+        message = render_to_string('blog_notification.html', {
+        'title': self.title,
+        'description': self.description,
+        'author': self.author
+        }) 
+        
+        try:
+            mail_admins(subject, message, fail_silently=False, connection=None, html_message=None)
+        except BadHeaderError:
+            return HttpResponse('Invalid Header Found')
+
 
 class Comment(Dates):
     blog_id = models.ForeignKey(Blog, help_text="Corresponding Blog")
@@ -268,16 +283,27 @@ class  Candidate(Dates):
     def __unicode__(self):
         return self.name
 
-    # def send_contact_notification_mail_to_admins(self):
-    #     root_url = 'http://%s'%(Site.objects.get_current().domain)
-    #     subject = 'Contact me %s_%s'%(self.candidate_type, self.name)
-    #     message = render_to_string('careers_notification.html', {
-    #         'name': self.name,
-    #         'email': self.email,
-    #         'type': self.candidate_type
-    #     }) 
-    #     try:
-    #         mail_admins(subject, message, fail_silently=False, connection=None, html_message=None)
-    #     except BadHeaderError:
-    #         return HttpResponse('Invalid Header Found')
+    def send_career_notification_mail_to_admins(self):
+        root_url = 'http://%s'%(Site.objects.get_current().domain)
+        print root_url
+        subject = 'Contact me %s_%s'%(self.candidate_type, self.name)
+        message = render_to_string('careers_notification.html', {
+        'name': self.name,
+        'email': self.email,
+        'type': self.candidate_type
+        }) 
+#        body = 'name :'+self.name+'\n'
+#        body += 'candidate_type :'+self.candidate_type+'\n'
+#        body += 'email :'+self.email+'\n'
+#        body += 'phone :'+self.phone+'\n'
+#        body += 'address :'+self.address+'\n'
+#        body += 'qualification :'+self.qualification+'\n'
+#        body += 'for vacancy :'+self.vacancy.name+'\n'
+#        email = EmailMessage(subject, body)
+#        print dir(email)
+        
+        try:
+            mail_admins(subject, message, fail_silently=False, connection=None, html_message=None)
+        except BadHeaderError:
+            return HttpResponse('Invalid Header Found')
 
