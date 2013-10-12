@@ -14,7 +14,7 @@ class BlogForm(ModelForm):
         fields = ('title', 'description')
 
 
-class CommentForm(ModelForm):
+class BlogCommentForm(ModelForm):
 
     class Meta:
         model = Comment

@@ -14,7 +14,7 @@ from django.views.generic.base import View
 
 from web.models import Contactus, Dates, Homepage, Feature, Newsevents, Aboutus, Blog, Comment, Slideshow, Services, Services_section, \
 Testimonials, Candidate, Vacancy
-from web.forms import CommentForm, CandidateFreshersForm, CandidateExperiencedForm, BlogForm
+from web.forms import BlogCommentForm, CandidateFreshersForm, CandidateExperiencedForm, BlogForm
 from web import CANDIDATE_TYPE_FRESHER, CANDIDATE_TYPE_EXPERIENCED
 
 def home(request):
@@ -55,12 +55,12 @@ def rendermenu(request, menuslug):
             }
         elif menuslug == 'blog':
             blogs = Blog.objects.all()[:10]
-            comment_form = CommentForm()
+#            comment_form = CommentForm()
             
             context = {
             'services_page': services_page,
             'blogs': blogs,
-            'comment_form': comment_form,
+#            'comment_form': comment_form,
             'is_staff': request.user.is_staff
             }
                 
@@ -186,7 +186,7 @@ class CareersView(View):
         if request.method == 'POST':
             if data_dict_form.is_valid():
                 candidate = Candidate()
-                vacancy = Vacancy.objects.get(id = vacancy_id)
+                vacancy = Vacancy.objects.get(id = int(vacancy_id))
                 vacancy_name = re.sub(r"\s+", '_', vacancy.name.lower())
                 candidate_name = re.sub(r"\s+", '_', data['name'].lower())
                 fileobj = request.FILES['resume']
@@ -236,6 +236,41 @@ class BlogView(View):
                 blog.save()
                 # candidate.send_contact_notification_mail_to_admins()
         return HttpResponseRedirect('/blog/')
+
+
+class BlogCommentView(View):
+    def get(self, request, blog_id):
+        template_name = 'blog.html'
+        services_page = Services.objects.latest('id')
+        comment_form = BlogCommentForm()
+        blogs = Blog.objects.all()[:10]
+        context = {
+        'services_page': services_page,
+        'blogs': blogs,
+        'is_staff': request.user.is_staff,
+        'comment_form': comment_form,
+        'services_page': services_page,
+        'blog_id': int(blog_id)
+    }
+        return render(request, template_name, context)
+
+    def post(self, request, blog_id):
+        print blog_id
+        context = {}
+        data_dict_form = BlogCommentForm(request.POST)
+        data = request.POST
+        if request.method == 'POST':
+            if data_dict_form.is_valid():
+                blog = Blog.objects.get(id=int(blog_id))
+                comment = Comment()
+                comment.blog_id = blog
+                comment.description = data['description']
+                if request.user.is_staff:
+                    comment.author = request.user.first_name + request.user.last_name
+                comment.save()
+                # candidate.send_contact_notification_mail_to_admins()
+        return HttpResponseRedirect('/blog/')
+
 
 @csrf_exempt
 def contact_us(request):

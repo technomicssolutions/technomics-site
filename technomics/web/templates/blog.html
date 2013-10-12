@@ -17,12 +17,27 @@
                 {{ blog.title }}
                 {{ blog.description }}
                 {{ blog.author }}
+                {{ blog.id }}
                 <br> 
             </h1>
             <h2>Comments</h2>
             
             {% with comments=blog.comment_set.all %}
-                {{ comment_form.as_p }}
+                <a href="{% url 'add_blog_comment' blog_id=blog.id %}">Add comment</a>
+                {% if blog_id %}
+                    {{ blog_id }}
+                    {{ blog.id }}
+                    {% if blog_id = blog.id %}
+                        <form action="{% url 'add_blog_comment' blog_id=blog.id %}" method="post" enctype="multipart/form-data" >
+                            <table>
+                                {{ comment_form.as_p }}
+                            </table>
+                            {% csrf_token %}
+                            <input type="submit" value="Submit">
+                        </form>
+                    {% endif %}
+                {% endif %}
+                
                 {% if comments %}
                     {{ comments.1.created_date }}
                     {{ comments.1.author }}
