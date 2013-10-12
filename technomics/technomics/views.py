@@ -292,5 +292,4 @@ def freshers_detail(request):
             # candidate.send_contact_notification_mail_to_admins()
     return HttpResponse('You have successfully sent the Message')
 
-def add_blog(request):
-    return HttpResponse("ok")
+

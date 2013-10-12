@@ -11,7 +11,7 @@ class BlogForm(ModelForm):
 
     class Meta:
         model = Blog
-        fields = ('title', 'description')#, 'created_date')
+        fields = ('title', 'description')
 
 
 class CommentForm(ModelForm):
