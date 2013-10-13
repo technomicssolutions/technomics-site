@@ -220,7 +220,7 @@ class BlogView(View):
                 blog = Blog()
                 blog.title = data['title']
                 blog.description = data['description']
-                blog.author = name
+                blog.author = request.user.username
                 blog.save()
                 blog.send_blog_notification_mail_to_admins()
         return HttpResponse('You have successfully added the blog')
@@ -228,8 +228,6 @@ class BlogView(View):
 
 class BlogCommentView(View):
     def get(self, request, blog_id):
-        page = request.GET.get('page')
-#        print page
         context = listing(request)
         template_name = 'blog.html'
         comment_form = BlogCommentForm()
@@ -248,8 +246,7 @@ class BlogCommentView(View):
                 comment = Comment()
                 comment.blog_id = blog
                 comment.description = data['description']
-                if request.user.is_staff:
-                    comment.author = request.user.first_name + request.user.last_name
+                comment.author = request.user.username
                 comment.save()
         return HttpResponse('You have successfully added the comment')
 
