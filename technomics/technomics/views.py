@@ -222,7 +222,6 @@ class BlogView(View):
                 blog.description = data['description']
                 blog.author = name
                 blog.save()
-                blog.send_blog_notification_mail_to_admins()
         return HttpResponse('You have successfully added the blog')
 
 
