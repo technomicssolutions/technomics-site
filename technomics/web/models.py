@@ -75,10 +75,10 @@ class Aboutus(Dates):
         return self.title
 
 class Contactus(Dates):
-    name = models.CharField(max_length=80, help_text='Name of the user')
-    email_id = models.EmailField(help_text='Email id of the user')
-    subject = models.CharField(max_length = 100, help_text='Subject of the user')
-    message = models.TextField(blank=True, null=True, help_text='The message sent by the user')
+    name = models.CharField('Name', max_length=80)
+    email_id = models.EmailField('Email', max_length = 120)
+    subject = models.CharField('Subject', max_length = 100)
+    message = models.TextField('Message', blank=True, null=True)
     
     def __unicode__(self):
         return self.name

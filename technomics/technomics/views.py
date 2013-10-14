@@ -14,7 +14,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from web.models import Contactus, Dates, Homepage, Feature, Newsevents, Aboutus, Blog, Comment, Slideshow, Services, Services_section, \
 Testimonials, Candidate, Vacancy, Menu
-from web.forms import BlogCommentForm, CandidateFreshersForm, CandidateExperiencedForm, BlogForm
+from web.forms import BlogCommentForm, CandidateFreshersForm, CandidateExperiencedForm, BlogForm, ContactUsForm
 from web import CANDIDATE_TYPE_FRESHER, CANDIDATE_TYPE_EXPERIENCED
 
 def home(request):
@@ -32,16 +32,31 @@ def home(request):
 
 @csrf_exempt
 def contact_us(request):
+    form = ContactUsForm(request.POST)
+    data_dict_form = request.POST
     context = {}
+    services_page = Services.objects.latest('id')
     if request.method == 'POST':
-        contact_us = Contactus()
-        contact_us.name = request.POST['name']
-        contact_us.email_id = request.POST['email']
-        contact_us.message = request.POST['message']
-        contact_us.subject = request.POST['subject']
-        contact_us.save();
-        contact_us.send_contact_notification_mail_to_admins();
-    return HttpResponse('You have successfully sent the Message')
+        if form.is_valid():
+            contact_us = Contactus()
+            contact_us.name = data_dict_form['name']
+            contact_us.email_id = data_dict_form['email_id']
+            contact_us.message = data_dict_form['message']
+            contact_us.subject = data_dict_form['subject']
+            contact_us.save();
+            contact_us.send_contact_notification_mail_to_admins()
+            form = ContactUsForm()
+            context ={
+                'form': form,
+                'message': 'Your message sent successfully',
+                'services_page': services_page,
+            }
+        else:
+            context ={
+                'form': form,
+                'services_page': services_page,
+            }
+    return render(request, 'contact_us.html', context)
 
 # def services(request):
 #     services_page = Services.objects.latest('id')
@@ -61,21 +76,23 @@ def rendermenu(request, menuslug):
         services_left = ''
         services_right = ''
         aboutus = ''
+        form = ''
         menu = Menu.objects.get(slug=menuslug)
         sub_menus = menu.submenu_set.all()
         if sub_menus.count():
             return rendersubmenu(request, menuslug, sub_menus[0].slug)
         
-        elif menuslug == 'about_us':            
+        if menuslug == 'about_us':            
             aboutus = Aboutus.objects.latest('id')
+        elif menuslug == 'contact_us':
+            form = ContactUsForm()
         context = {
             'aboutus': aboutus,
             'services_page': services_page,
             'services_left': services_left,
-            'services_right': services_right
+            'services_right': services_right,
+            'form': form,
         }
-            
-
         return render(request, template, context)
 
 
