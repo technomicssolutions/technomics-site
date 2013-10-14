@@ -226,6 +226,11 @@ class BlogCommentView(View):
         return HttpResponse('You have successfully added the comment')
 
 
+def blog_listing(request):
+    context = listing(request)
+    return render(request, 'blog.html',context)
+
+
 def listing(request):
     blogs_list = Blog.objects.all()
     services_page = Services.objects.latest('id')

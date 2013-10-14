@@ -206,6 +206,7 @@ MEDIA_BUNDLES = (
     ('main.js',
         'js/contact_form.js',
         'js/slideshow.js',
+        'js/add_comment.js',
     ),
 )
 
