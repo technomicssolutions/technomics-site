@@ -214,13 +214,13 @@ class BlogView(View):
         context = {}
         data_dict_form = BlogForm(request.POST)
         data = request.POST
-        name = request.user.first_name + request.user.last_name
+        name = request.user.username
         if request.method == 'POST':
             if data_dict_form.is_valid():
                 blog = Blog()
                 blog.title = data['title']
                 blog.description = data['description']
-                blog.author = request.user.username
+                blog.author = name
                 blog.save()
                 blog.send_blog_notification_mail_to_admins()
         return HttpResponse('You have successfully added the blog')

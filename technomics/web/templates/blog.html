@@ -10,12 +10,6 @@
 {% endblock banner %}
 
 {% block content %}
-    <script type="text/javascript">
-            tinyMCE.init({
-                    mode: "textareas",
-                    theme: "simple"
-            });
-    </script>
     {% if blogs %}
         {% for blog in blogs %}
             <div class="clear blog">
