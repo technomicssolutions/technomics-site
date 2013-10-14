@@ -10,9 +10,12 @@ window.addEvent('domready', function(){
                  url: '/blog/comment/add/'+blog_id+'/',
                  method: 'POST',
                  data: comment_data,
-                 onSuccess: function(){
+                 onSuccess: function(response){
 //                     console.log('You have successfully sent the Message');
-                     comment_form.hide();
+//                    console.log(response);
+                    comment_form.hide();
+                    $('comments').set('html', response);
+
                  }
 //                  onFailure: function(){
 //                      console.log('error :'+ data);
