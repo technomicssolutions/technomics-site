@@ -4,11 +4,10 @@
 {% block title %}<title> Careers | Freshers | Technomics Solutions </title>{% endblock title %}
 {% block body_tags %}id="freshers"{% endblock body_tags %}
 {% block banner %}
-    <div class="banner" style='background: url(/site_media/{{ services_page.banner_image }}) no-repeat;'>   
-    </div>
+    {% include 'banner.html' %}
 {% endblock banner %}
 
-
+    
 {% block content %}
    {% if form %}
         <div id="fresher_form" class="clear">

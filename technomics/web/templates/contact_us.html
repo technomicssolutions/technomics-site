@@ -4,9 +4,7 @@
 {% block title %}<title> Contact Us | Technomics Solutions </title>{% endblock title %}
 {% block body_tags %}id="contactus"{% endblock body_tags %}
 {% block banner %}
-    <div class="banner" style='background: url(/site_media/{{ services_page.banner_image }}) no-repeat;'>   
-    </div>
-    <!-- {% include 'slideshow.html' %} -->
+    {% include 'banner.html' %}
 {% endblock banner %}
 
 
@@ -52,5 +50,6 @@
                 </ul>
             </form>
         </div>
+        <div class="clear"></div>
     </div>
 {% endblock %}
