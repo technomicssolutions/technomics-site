@@ -26,7 +26,7 @@
             </p>
         </div> 
         <div id="contact_us" >
-            <form id="contact_form" method="post" >{% csrf_token %}
+            <form id="contact_form" method="post" action="{% url 'contactus'%}">{% csrf_token %}
                 <ul>
                     <li> 
                         <label title="Name" for="name">Name</label>
@@ -45,7 +45,7 @@
                         <textarea name="message" id="message" title="Message" ></textarea>
                     </li>
                     <li>
-                        <input type="button" name="send" id="send" >
+                        <input type="submit" name="send" id="send" value="">
                     </li>
                 </ul>
             </form>
