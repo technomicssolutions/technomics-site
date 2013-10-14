@@ -116,21 +116,6 @@ class Blog(Dates):
     def __unicode__(self):
         return self.title
 
-    def send_blog_notification_mail_to_admins(self):
-        root_url = 'http://%s'%(Site.objects.get_current().domain)
-        print root_url
-        subject = 'Blog %s_%s'%(self.title, self.author)
-        message = render_to_string('blog_notification.html', {
-        'title': self.title,
-        'description': self.description,
-        'author': self.author
-        }) 
-        
-        try:
-            mail_admins(subject, message, fail_silently=False, connection=None, html_message=None)
-        except BadHeaderError:
-            return HttpResponse('Invalid Header Found')
-
 
 class Comment(Dates):
     blog_id = models.ForeignKey(Blog, help_text="Corresponding Blog")
