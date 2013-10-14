@@ -144,6 +144,7 @@ class CareersView(View):
                 candidate.resume.name = "uploads/resumes/"+resume_file_name
                 candidate.save()
                 candidate.send_career_notification_mail_to_admins()
+
         return HttpResponse('You have successfully registered')
 
 def freshers_detail(request):
@@ -212,7 +213,6 @@ class BlogCommentView(View):
         return render(request, template_name, context)
 
     def post(self, request, blog_id):
-        print blog_id
         context = {}
         data_dict_form = BlogCommentForm(request.POST)
         data = request.POST
