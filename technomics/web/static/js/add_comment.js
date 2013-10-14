@@ -3,14 +3,16 @@ window.addEvent('domready', function(){
     if (send_comment) {
         send_comment.addEvent('click', function(e){
              e.stop();
-             var comment_data = $('comment_form').toQueryString();
+             var comment_form = $('comment_form') 
+             var comment_data = comment_form.toQueryString();
              var blog_id = $('hidden_blog_id').get('name');
              var ajaxRequest = new Request({ 
                  url: '/blog/comment/add/'+blog_id+'/',
                  method: 'POST',
                  data: comment_data,
                  onSuccess: function(){
-                     console.log('You have successfully sent the Message');
+//                     console.log('You have successfully sent the Message');
+                     comment_form.hide();
                  }
 //                  onFailure: function(){
 //                      console.log('error :'+ data);
