@@ -238,7 +238,10 @@ class BlogCommentView(View):
                 comment.description = data['description']
                 comment.author = request.user.username
                 comment.save()
-        return HttpResponse('You have successfully added the comment')
+        context = listing(request)
+        template_name = 'blog.html'
+        context['blog_id'] = int(blog_id)
+        return render(request, template_name, context)
 
 
 def blog_listing(request):
