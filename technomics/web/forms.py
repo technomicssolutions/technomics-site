@@ -1,12 +1,14 @@
 from django import forms
 from django.forms import ModelForm
-# from crispy_forms.helper import FormHelper
-# from crispy_forms.layout import Div, Fieldset, Layout, Submit
 
-# from crispy_forms.bootstrap import FormActions
+from .models import Blog, Comment, Candidate, Contactus
 
-from .models import Blog, Comment, Candidate
+class ContactUsForm(ModelForm):
 
+    class Meta:
+        model = Contactus
+        fields = ('name', 'email_id','subject' , 'message')
+        
 
 class BlogForm(ModelForm):
 
