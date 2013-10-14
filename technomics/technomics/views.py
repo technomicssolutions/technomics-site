@@ -209,6 +209,7 @@ class BlogCommentView(View):
         return render(request, template_name, context)
 
     def post(self, request, blog_id):
+        print "reached post of BlogCommentView"
         context = {}
         data_dict_form = BlogCommentForm(request.POST)
         data = request.POST
