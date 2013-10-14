@@ -238,6 +238,9 @@ class Menu(Dates):
         self.slug = slug(self.title)
         super(Menu, self).save(*args, **kwargs)
 
+    def __unicode__(self):
+        return self.title
+
 class Submenu(Dates):
     menu = models.ForeignKey(Menu, help_text = 'Corresponding menu')
     title = models.CharField('Submenu', max_length = 200 , help_text = 'Name of the submenu')
@@ -247,7 +250,10 @@ class Submenu(Dates):
 
     def save(self, *args, **kwargs):
         self.slug = slug(self.title)
-        super(Submenu, self).save(*args, **kwargs)                      
+        super(Submenu, self).save(*args, **kwargs) 
+
+    def __unicode__(self):
+        return self.title                     
         
 
 
@@ -285,7 +291,6 @@ class  Candidate(Dates):
 
     def send_career_notification_mail_to_admins(self):
         root_url = 'http://%s'%(Site.objects.get_current().domain)
-        print root_url
         subject = 'Contact me %s_%s'%(self.candidate_type, self.name)
         message = render_to_string('careers_notification.html', {
         'name': self.name,
