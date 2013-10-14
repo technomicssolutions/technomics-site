@@ -13,7 +13,7 @@ from django.views.generic.base import View
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from web.models import Contactus, Dates, Homepage, Feature, Newsevents, Aboutus, Blog, Comment, Slideshow, Services, Services_section, \
-Testimonials, Candidate, Vacancy
+Testimonials, Candidate, Vacancy, Menu
 from web.forms import BlogCommentForm, CandidateFreshersForm, CandidateExperiencedForm, BlogForm
 from web import CANDIDATE_TYPE_FRESHER, CANDIDATE_TYPE_EXPERIENCED
 
@@ -61,13 +61,11 @@ def rendermenu(request, menuslug):
         services_left = ''
         services_right = ''
         aboutus = ''
-
-        if menuslug == 'services':
-            services_page = Services.objects.latest('id')
-            services_section = Services_section.objects.all()
-            services_left = services_section[0]
-            services_right = services_section[1]
-
+        menu = Menu.objects.get(slug=menuslug)
+        sub_menus = menu.submenu_set.all()
+        if sub_menus.count():
+            return rendersubmenu(request, menuslug, sub_menus[0].slug)
+        
         elif menuslug == 'about_us':            
             aboutus = Aboutus.objects.latest('id')
         context = {
@@ -144,7 +142,6 @@ class CareersView(View):
                 candidate.resume.name = "uploads/resumes/"+resume_file_name
                 candidate.save()
                 candidate.send_career_notification_mail_to_admins()
-
         return HttpResponse('You have successfully registered')
 
 def freshers_detail(request):
