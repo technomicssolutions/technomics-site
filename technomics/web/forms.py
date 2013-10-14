@@ -6,7 +6,6 @@ from django.forms import ModelForm
 # from crispy_forms.bootstrap import FormActions
 
 from .models import Blog, Comment, Candidate
-from django.conf import settings
 
 
 class BlogForm(ModelForm):
@@ -15,11 +14,7 @@ class BlogForm(ModelForm):
         model = Blog
         fields = ('title', 'description')
 
-    class Media:
-        js = (settings.TINYMCE_JS_URL,
-            '',)
-
-
+    
 class BlogCommentForm(ModelForm):
 
     class Meta:
