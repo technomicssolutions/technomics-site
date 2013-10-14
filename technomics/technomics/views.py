@@ -204,9 +204,9 @@ class CareersView(View):
 
 class BlogView(View):
     def get(self, request):
-        context = listing(request)
-        template_name = 'blog.html'
+        template_name = 'add_blog.html'
         blog_form = BlogForm()
+        context = {}
         context ['blog_form'] = blog_form
         return render(request, template_name, context)
 
