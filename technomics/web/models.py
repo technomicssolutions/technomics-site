@@ -293,7 +293,7 @@ class  Candidate(Dates):
 #        print dir(email)
         
         try:
-            mail_admins(subject, message, fail_silently=False, connection=None, html_message=None)
+            mail_managers(subject, message, fail_silently=False, connection=None, html_message=None)
         except BadHeaderError:
             return HttpResponse('Invalid Header Found')
 
