@@ -71,20 +71,7 @@
         <a href="{% url 'add_blog' %}?page={{ blogs.number }}">Add blog</a>
     {% endif %}
 
-    <div id="">
-        {% if blog_form %}
-            <form action="{% url 'add_blog' %}?page={{ blogs.number }}" method="post" enctype="multipart/form-data" >
-                <table>
-                    <label for="id_subject">Title:</label>
-                    {{ blog_form.title }}
-                    <label for="id_subject">Description:</label>
-                    {{ blog_form.description }}
-                </table>
-                {% csrf_token %}
-                <input type="submit" value="Submit">
-            </form>
-        {% endif %}
-    </div>
+    
 {% endblock %}
 
 
