@@ -132,8 +132,8 @@ var ImageSlider = new Class({
 });
 window.addEvent('domready', function(){
     if ($('slideshow')) {
-        if($$('.banner').length > 0) {
-            var slide = new ImageSlider($$('.banner')[0]);
+        if($$('.slide_banner').length > 0) {
+            var slide = new ImageSlider($$('.slide_banner')[0]);
         }
     } 
 });
