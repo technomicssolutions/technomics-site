@@ -262,11 +262,12 @@ def listing(request):
     except EmptyPage:
         blogs = paginator.page(paginator.num_pages)
 
+    comment_form = BlogCommentForm()
     context = {
     'services_page': services_page,
     'blogs': blogs,
     'is_staff': request.user.is_staff,
     'blog_id': '',
-    'comment_form': '',
+    'comment_form': comment_form,
     }
     return context
