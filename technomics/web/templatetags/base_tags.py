@@ -15,3 +15,7 @@ def truncatechars(value, limit):
     else:
         truncated_value = value[0:limit-3]
     return truncated_value
+    
+@register.filter
+def uppercase(value):
+	return value.upper()
