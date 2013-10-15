@@ -18,14 +18,18 @@ from web.forms import BlogCommentForm, CandidateFreshersForm, CandidateExperienc
 from web import CANDIDATE_TYPE_FRESHER, CANDIDATE_TYPE_EXPERIENCED
 
 def home(request):
-    latest_content = Feature.objects.latest('id')
-    latest_events = Newsevents.objects.latest('id')
-    slideshow = Slideshow.objects.latest('id')
-    context = { 
-        'latest_content': latest_content,
-        'latest_events': latest_events,
-        'slideshow' : slideshow,
-    }
+    try:
+        latest_content = Feature.objects.latest('id')
+        latest_events = Newsevents.objects.latest('id')
+        slideshow = Slideshow.objects.latest('id')
+        context = { 
+            'latest_content': latest_content,
+            'latest_events': latest_events,
+            'slideshow' : slideshow,
+        }
+    except:
+        context = {}
+    
     return render(request, 'home.html',context)
 
 @csrf_exempt

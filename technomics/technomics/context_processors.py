@@ -12,7 +12,6 @@ def site_variables(request):
         header_obj = ''
 
     menu_obj = Menu.objects.all().order_by('order');
-
     return {
         'SITE_ROOT_URL_S': 'http://%s/'%(current_site.domain),
         'SITE_ROOT_URL': 'http://%s'%(current_site.domain),
