@@ -13,19 +13,17 @@ from django.views.generic.base import View
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from web.models import Contactus, Dates, Homepage, Feature, Newsevents, Aboutus, Blog, Comment, Slideshow, Services, Services_section, \
-Testimonials, Candidate, Vacancy, Menu
+    Candidate, Vacancy, Menu
 from web.forms import BlogCommentForm, CandidateFreshersForm, CandidateExperiencedForm, BlogForm, ContactUsForm
 from web import CANDIDATE_TYPE_FRESHER, CANDIDATE_TYPE_EXPERIENCED
 
 def home(request):
     latest_content = Feature.objects.latest('id')
     latest_events = Newsevents.objects.latest('id')
-    testimonials = Testimonials.objects.latest('id')
     slideshow = Slideshow.objects.latest('id')
     context = { 
         'latest_content': latest_content,
         'latest_events': latest_events,
-        'testimonials' : testimonials,
         'slideshow' : slideshow,
     }
     return render(request, 'home.html',context)
