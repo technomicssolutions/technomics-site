@@ -54,17 +54,6 @@ def contact_us(request):
                 'form': form,
             }
     return render(request, 'contact_us.html', context)
-
-# def services(request):
-#     services_page = Services.objects.latest('id')
-#     services_section = Services_section.objects.all()
-#     services_left = services_section[0]
-#     services_right = services_section[1]
-#     context = {'services_page': services_page,
-#                'services_left': services_left,
-#                'services_right': services_right
-#     }
-#     return render(request, 'services.html', context)
     
 def rendermenu(request, menuslug):
     if menuslug:
