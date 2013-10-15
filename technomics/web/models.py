@@ -104,8 +104,8 @@ class Contactus(Dates):
         verbose_name_plural = 'Contact Us'
 
 class Blog(Dates):
-    title = models.CharField('Content Subhead', max_length=500, null=True, blank=True, help_text='Sub heading of the content in the page')
-    description = models.TextField('Content description', null=True, blank=True, help_text='Content description')
+    title = models.CharField('Content Subhead', max_length=500)
+    description = models.TextField('Content Description')
     author = models.CharField(max_length=80, help_text='Name of the author')
 
     class Meta:

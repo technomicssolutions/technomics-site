@@ -470,7 +470,72 @@ body {
         background: url(images/banners/blog.png) no-repeat;
     }
     .container {
+        .blogs_div {
+            border: 3px solid #3D7FA2;
+            border-radius: 20px;
+            display: block;
+            height: auto;
+            width: auto;
+            margin-bottom: 30px;
+            h1 {
+                margin: auto;
+                display: block;
+                margin-left: 35px;
+                margin-top: 25px;
+                width: auto;
+                height: auto;
+            }
+            #blog_description {
+                display: block;
+                font-size: 16px;
+                width: auto;
+                height: auto;
+                margin: 20px;
+                line-height: 29px;
+            }
+            a{
+                font-size: 14px;
+                color: #000000;
+                display: block;
+                height: 19px;
+                padding: 7px;
+                width: 130px;
+                background-color: #FFFFFF;
+                margin: 0 0 15px 20px;
+                background-color: #E6E6E6;
+                border-radius: 10px;
+                border: 1px solid #000000;
+                text-align: center;
+            }
+            #comment_form_div {
+                height: auto;
+                width: auto;
+                #comment_form {
+                    label {
+                        display: block;
+                        font-size: 15px;
+                        height: auto;
+                        width: auto;
+                        margin-left: 15px;
+                    }
+                    textarea {
+                        display: block;
+                        float: left;
+                        margin-left: 15px;
+                    }
+                    input[type='button'] {
+                        float: left;
+                        height: 30px;
+                        margin: 5px 0 0 15px;
+                        width: 76px;
+                    }
+                }
+            }
+
+        }
+
     } 
+
 }
 #bankingandfinancial {
     .banner {
@@ -770,68 +835,44 @@ form {
 #comment_form_div {
     display: none;
 }
-#blogs {
-    .blogs_div {
-        border: 3px solid #3D7FA2;
-        border-radius: 20px;
-        display: block;
-        height: auto;
-        width: auto;
-        margin-bottom: 30px;
-        h1 {
-            margin: auto;
-            display: block;
-            margin-left: 35px;
-            margin-top: 25px;
+#add_blog {
+    .banner {
+        background: url(images/banners/blog.png) no-repeat;
+    }
+    .container {
+        #add_blog_div {
             width: auto;
             height: auto;
         }
-        #blog_description {
+        form {
             display: block;
-            font-size: 16px;
-            width: auto;
+            width: 330px;
             height: auto;
-            margin: 20px;
-            line-height: 29px;
-        }
-        a{
-            font-size: 14px;
-            color: #000000;
-            display: block;
-            height: 19px;
-            padding: 7px;
-            width: 130px;
-            background-color: #FFFFFF;
-            margin: 0 0 15px 20px;
-            background-color: #E6E6E6;
-            border-radius: 10px;
-            border: 1px solid #000000;
-            text-align: center;
-        }
-        #comment_form_div {
-            height: auto;
-            width: auto;
-            #comment_form {
-                label {
-                    display: block;
-                    font-size: 15px;
-                    height: auto;
-                    width: auto;
-                    margin-left: 15px;
-                }
-                textarea {
-                    display: block;
-                    float: left;
-                    margin-left: 15px;
-                }
-                input[type='button'] {
-                    float: left;
-                    height: 30px;
-                    margin: 5px 0 0 15px;
-                    width: 76px;
-                }
+            label {
+                display: block;
+                float: left;
+                font-weight: bold;
+                margin: 5px 5px 5px 0;
+                padding: 4px;
+                width: 130px;
+            }
+            input {
+                width: 310px;
+                margin-top: 5px;
+                height: 25px;
+            }
+            textarea {
+                width: 310px;
+                height: 150px;
+                margin: 10px 0 10px 0;
+                display: block;
+            }
+            input[type='submit'] {
+                width: 107px;
+                display: block;
+                height: 39px;
+                margin: 25px 0 0 0px;
             }
         }
-
     }
 }
