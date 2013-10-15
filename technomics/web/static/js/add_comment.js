@@ -9,7 +9,6 @@ window.addEvent('domready', function(){
             ;
         }
         else {
-            alert(comment_form);
             comment_form.inject(item.getParent(), 'after');
         }
         });
