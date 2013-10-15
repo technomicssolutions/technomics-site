@@ -120,7 +120,7 @@ class Blog(Dates):
 class Comment(Dates):
     blog_id = models.ForeignKey(Blog, help_text="Corresponding Blog")
     author = models.CharField(max_length=80, help_text='Name of the user')
-    description = models.TextField('Content description', null=True, blank=True, help_text='Content description')
+    description = models.TextField('Content description', null=True, blank=True)
 
     class Meta:
         verbose_name = 'Comment'
@@ -262,10 +262,10 @@ class  Candidate(Dates):
     candidate_type = models.CharField('Candidate type', max_length = 50, choices = CANDIDATE_TYPE, default = CANDIDATE_TYPE_FRESHER)
     email = models.EmailField('Email', max_length = 120)
     phone = models.CharField('Phone', max_length = 15)
-    address = models.TextField('Address', max_length = 500, null = True, blank = True)
+    address = models.TextField('Address', max_length = 500)
     qualification = models.CharField('Qualification', max_length = 50, choices = QUALIFICATION_TYPE, default = QUALIFICATION_TYPE_BSC)
-    resume = models.FileField(upload_to='uploads/resumes/', null = True, blank =True)
-    vacancy = models.ForeignKey('Vacancy', null = True, blank = True)
+    resume = models.FileField(upload_to='uploads/resumes/')
+    vacancy = models.ForeignKey('Vacancy')
 
     class Meta:
         verbose_name = 'Candidate'
@@ -274,7 +274,8 @@ class  Candidate(Dates):
     def __unicode__(self):
         return self.name
 
-    def send_career_notification_mail_to_admins(self):
+    def send_career_notification_mail_to_managers(self):
+        print "in mail sending"
         root_url = 'http://%s'%(Site.objects.get_current().domain)
         subject = 'Contact me %s_%s'%(self.candidate_type, self.name)
         message = render_to_string('careers_notification.html', {

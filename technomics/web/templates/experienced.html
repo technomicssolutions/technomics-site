@@ -20,8 +20,15 @@
         {% endfor %}
     </div>
 {% endif %}
-
+{% if message %}
+    <div class="message">
+        <h1> {{message }}</h1>
+    </div>
+{% endif %}
 {% if form %}
+    <!-- {% if message %}
+        <h1> {{message }}</h1>
+    {% endif %} -->
     <div id="experienced_form" class="clear">
         <form id="form_experienced" action="{% url 'experienced_apply' vacancy_id=vacancy_id %}" method="post" enctype="multipart/form-data" >{% csrf_token %}
             {{ form}} 

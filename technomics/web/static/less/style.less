@@ -77,7 +77,7 @@ body {
         background-position: left center;
         display: block;
         margin-left: 100px;
-        width: 135px;
+        width: 157px;
         height: 30px;
         float:  right; 
         p {
@@ -686,6 +686,10 @@ form {
                         height: 39px;
                         margin: 10px 0 0 107px;
                     }
+                    .errorlist {
+                        color: red;
+                        font-size: 14px;
+                    }
                 }
             }
         }
@@ -752,10 +756,14 @@ form {
         display: block;
         height: auto;
         width: auto;
+        margin-bottom: 30px;
         h1 {
             margin: auto;
             display: block;
             margin-left: 35px;
+            margin-top: 25px;
+            width: auto;
+            height: auto;
         }
         #blog_description {
             display: block;
@@ -773,11 +781,35 @@ form {
             padding: 7px;
             width: 130px;
             background-color: #FFFFFF;
-            margin-left: 20px;
+            margin: 0 0 15px 20px;
             background-color: #E6E6E6;
             border-radius: 10px;
             border: 1px solid #000000;
             text-align: center;
+        }
+        #comment_form_div {
+            height: auto;
+            width: auto;
+            #comment_form {
+                label {
+                    display: block;
+                    font-size: 15px;
+                    height: auto;
+                    width: auto;
+                    margin-left: 15px;
+                }
+                textarea {
+                    display: block;
+                    float: left;
+                    margin-left: 15px;
+                }
+                input[type='button'] {
+                    float: left;
+                    height: 30px;
+                    margin: 5px 0 0 15px;
+                    width: 76px;
+                }
+            }
         }
 
     }
