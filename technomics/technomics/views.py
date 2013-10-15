@@ -213,20 +213,21 @@ class BlogView(View):
                 blog.description = data['description']
                 blog.author = name
                 blog.save()
-        return HttpResponse('You have successfully added the blog')
+        template_name = 'blog.html'
+        context = listing(request)
+        return render(request, template_name, context)
 
 
 class BlogCommentView(View):
     def get(self, request, blog_id):
-        context = listing(request)
         template_name = 'blog.html'
+        context = listing(request)
         comment_form = BlogCommentForm()
         context['comment_form'] = comment_form
         context['blog_id'] = int(blog_id)
         return render(request, template_name, context)
 
     def post(self, request, blog_id):
-        print "reached post of BlogCommentView"
         context = {}
         data_dict_form = BlogCommentForm(request.POST)
         data = request.POST
@@ -238,9 +239,8 @@ class BlogCommentView(View):
                 comment.description = data['description']
                 comment.author = request.user.username
                 comment.save()
-        context = listing(request)
         template_name = 'blog.html'
-        context['blog_id'] = int(blog_id)
+        context = listing(request)
         return render(request, template_name, context)
 
 
@@ -266,6 +266,8 @@ def listing(request):
     context = {
     'services_page': services_page,
     'blogs': blogs,
-    'is_staff': request.user.is_staff
+    'is_staff': request.user.is_staff,
+    'blog_id': '',
+    'comment_form': '',
     }
     return context
