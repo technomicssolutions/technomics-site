@@ -32,7 +32,7 @@
     <div id="experienced_form" class="clear">
         <form id="form_experienced" action="{% url 'experienced_apply' vacancy_id=vacancy_id %}" method="post" enctype="multipart/form-data" >{% csrf_token %}
             {{ form}} 
-            <input type="submit" name="submit" id="submit_form" value="Submit">
+            <input type="submit" name="submit" id="submit_form" value="">
         </form>
     </div> 
 {% endif %}
