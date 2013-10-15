@@ -1,7 +1,6 @@
 window.addEvent('domready', function(){
     
     var blog_comment_links = $$('.blog_comment');
-    console.log(blog_comment_links);
     var comment_form = $('comment_form');
     blog_comment_links.each(function(item, index){
 //        alert(index + " = " + item);
@@ -11,9 +10,8 @@ window.addEvent('domready', function(){
             ;
         }
         else {
-            console.log(item.getParent());
-            alert("hello");
-//            item.getParent().inject(comment_form, 'after');
+            alert(comment_form);
+            comment_form.inject(item.getParent(), 'after');
         }
         });
 });
