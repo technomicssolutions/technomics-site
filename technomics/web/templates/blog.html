@@ -19,7 +19,7 @@
                     {% if is_staff %}
                         <a id="blog_comment" href="{% url 'add_blog_comment' blog_id=blog.id %}?page={{ blogs.number }}">Leave a comment</a>
                     {% endif %}
-                    <div id="comment_form">
+                    <div id="comment_form_div">
                         {% if blog_id %}
                             {% if blog_id = blog.id %}
                                 {% if comment_form %}

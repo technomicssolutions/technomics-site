@@ -35,7 +35,6 @@ def contact_us(request):
     form = ContactUsForm(request.POST)
     data_dict_form = request.POST
     context = {}
-    services_page = Services.objects.latest('id')
     if request.method == 'POST':
         if form.is_valid():
             contact_us = Contactus()
@@ -49,12 +48,10 @@ def contact_us(request):
             context ={
                 'form': form,
                 'message': 'Your message sent successfully',
-                'services_page': services_page,
             }
         else:
             context ={
                 'form': form,
-                'services_page': services_page,
             }
     return render(request, 'contact_us.html', context)
 
@@ -71,10 +68,7 @@ def contact_us(request):
     
 def rendermenu(request, menuslug):
     if menuslug:
-        services_page = Services.objects.latest('id')
         template = "%s.html" % menuslug
-        services_left = ''
-        services_right = ''
         aboutus = ''
         form = ''
         menu = Menu.objects.get(slug=menuslug)
@@ -88,9 +82,6 @@ def rendermenu(request, menuslug):
             form = ContactUsForm()
         context = {
             'aboutus': aboutus,
-            'services_page': services_page,
-            'services_left': services_left,
-            'services_right': services_right,
             'form': form,
         }
         return render(request, template, context)
@@ -102,7 +93,6 @@ def rendersubmenu(request, menu_slug, submenuslug):
             template = "%s.html" % submenuslug
             freshersform = ''
             vacancies = ''
-            services_page = Services.objects.latest('id')
             
             if submenuslug == 'freshers':
                 freshersform = CandidateFreshersForm()
@@ -110,7 +100,6 @@ def rendersubmenu(request, menu_slug, submenuslug):
             elif submenuslug == 'experienced':
                 vacancies = Vacancy.objects.all().exclude(name = 'Freshers')
             context = {
-                'services_page': services_page,
                 'form': freshersform,
                 'vacancies': vacancies,
             }
@@ -120,18 +109,17 @@ def rendersubmenu(request, menu_slug, submenuslug):
 class CareersView(View):
     def get(self, request, vacancy_id):
         template_name = 'experienced.html'
-        services_page = Services.objects.latest('id')
         context = {}
         experienced_form = CandidateExperiencedForm()
         context = {
             'form':experienced_form,
-            'services_page': services_page,
             'vacancy_id': vacancy_id,
         }
         return render(request, template_name, context)
 
     def post(self, request, vacancy_id):
         context = {}
+        form = ''
         data_dict_form = CandidateExperiencedForm(request.POST,request.FILES)
         data = request.POST
         if request.method == 'POST':
@@ -158,12 +146,24 @@ class CareersView(View):
                         destination.write(chunk)
                 candidate.resume.name = "uploads/resumes/"+resume_file_name
                 candidate.save()
-                candidate.send_career_notification_mail_to_admins()
-        return HttpResponse('You have successfully registered')
+                candidate.send_career_notification_mail_to_managers()
+                vacancies = Vacancy.objects.all().exclude(name = 'Freshers')
+                experienced_form = CandidateExperiencedForm()
+                context = {
+                    'vacancies': vacancies,
+                    'message':'Your application sent successfully.'
+                }
+            else:
+                context ={
+                    'form': data_dict_form,
+                    'vacancy_id': vacancy_id,
+                }
+        return HttpResponseRedirect(reverse('render_submenupage', kwargs={'menu_slug' :'careers', 'submenuslug' :'experienced'}))
 
 def freshers_detail(request):
     context = {}
     data_dict_form = CandidateFreshersForm(request.POST,request.FILES)
+    form = ''
     data = request.POST
     if request.method == 'POST':
         if data_dict_form.is_valid():
@@ -189,8 +189,18 @@ def freshers_detail(request):
                     destination.write(chunk)
             candidate.resume.name = "uploads/resumes/"+resume_file_name
             candidate.save()
-            candidate.send_career_notification_mail_to_admins()
-    return HttpResponse('You have successfully sent the Message')
+            candidate.send_career_notification_mail_to_managers()
+            form = CandidateFreshersForm()
+            context = {
+                'form': form,
+                'message':'Your application sent successfully.'
+            }
+        else:
+            form = CandidateFreshersForm()
+            context ={
+                'form': data_dict_form,
+            }
+    return HttpResponseRedirect(reverse('render_submenupage', kwargs={'menu_slug' :'careers', 'submenuslug' :'freshers'}))
 
 
 class BlogView(View):

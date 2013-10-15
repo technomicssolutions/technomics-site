@@ -1,4 +1,10 @@
 window.addEvent('domready', function(){
+    var blog_comment = $('blog_comment');
+    if (blog_comment) {
+        blog_comment.addEvent('click', function(e) {
+            comment_form.show();
+        });
+    }
     var send_comment = $('send_comment');
     if (send_comment) {
         send_comment.addEvent('click', function(e){
