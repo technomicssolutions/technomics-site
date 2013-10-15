@@ -275,7 +275,6 @@ class  Candidate(Dates):
         return self.name
 
     def send_career_notification_mail_to_managers(self):
-        print "in mail sending"
         root_url = 'http://%s'%(Site.objects.get_current().domain)
         subject = 'Contact me %s_%s'%(self.candidate_type, self.name)
         message = render_to_string('careers_notification.html', {
