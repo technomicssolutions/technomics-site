@@ -12,13 +12,6 @@
         <table cellspacing="10" cellpadding="10">
             <tr><th>Post</th><th>Vacancies</th><th>Opening date</th><th>Closing date</th><th>&nbsp;</th></tr>
         {% for vacancy in vacancies%}
-           <!--  <ul>
-                <li>{{ vacancy.name }}</li>
-                <li>{{ vacancy.no_of_vacancy}}</li>
-                <li>{{ vacancy.opening_date}}</li>
-                <li>{{ vacancy.closing_date}}</li>
-                <a href="{% url 'experienced_apply' vacancy_id=vacancy.id %}">Apply</a>
-            </ul> -->
             <tr>
                 <td>{{ vacancy.name }}</td>
                 <td>{{ vacancy.no_of_vacancy}}</td>
