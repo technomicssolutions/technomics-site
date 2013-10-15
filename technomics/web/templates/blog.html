@@ -18,7 +18,7 @@
             {% with comments=blog.comment_set.all %}
                 <div id="comment_div">
                     {% if is_staff %}
-                        <a class="blog_comment" href="{% url 'add_blog_comment' blog_id=blog.id %}?page={{ blogs.number }}">Leave a comment</a>
+                        <a class="blog_comment" id="leave_comment" >Leave a comment</a>
                     {% endif %}
                     <div id="comments">
                         {% if comments %}
@@ -34,19 +34,18 @@
                             {{ comments.2.description }}
                         {% endif %}
                     </div>
+                    <form id="comment_form_{{ blog.id }}" class="form_comment" method="post" enctype="multipart/form-data" >
+                        <table>
+                            {{ comment_form.as_p }}
+                        </table>
+                        {% csrf_token %}
+                        <input type="button" id="send_comment" value="Submit" >
+                    </form>
                 </div>
             {% endwith %}
         </div>
         {% endfor %}
-        <div id="comment_form_div">
-            <form id="comment_form" method="post" enctype="multipart/form-data" >
-                <table>
-                    {{ comment_form.as_p }}
-                </table>
-                {% csrf_token %}
-                <input type="button" id="send_comment" value="Submit" >
-            </form>
-        </div>
+        
         <div class="pagination">
             <span class="step-links">
             {% if blogs.has_previous %}
