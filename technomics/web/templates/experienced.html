@@ -9,18 +9,14 @@
 {% block content %}
 {% if vacancies %}
     <div id="vacancy_details">
-        <table cellspacing="10" cellpadding="10">
-            <tr><th>Post</th><th>Vacancies</th><th>Opening date</th><th>Closing date</th><th>&nbsp;</th></tr>
         {% for vacancy in vacancies%}
-            <tr>
-                <td>{{ vacancy.name }}</td>
-                <td>{{ vacancy.no_of_vacancy}}</td>
-                <td>{{ vacancy.opening_date}}</td>
-                <td>{{ vacancy.closing_date}}</td>
-                <td><a href="{% url 'experienced_apply' vacancy_id=vacancy.id %}"><input type="button" name="apply" id="apply" title="Apply" value="Apply"></a></td>
-            </tr>
-        {% endfor %}
-        </table>
+            <h1>{{ vacancy.name }}</h1>
+            <p>{{vacancy.description}}</p>
+            <p>No of positions : <span class="hilight">{{ vacancy.no_of_vacancy}}</span> </p>
+            <p>Opened from <span class="hilight">{{ vacancy.opening_date}}</span> to <span class="hilight">{{ vacancy.closing_date}}</span></p>
+            <a href="{% url 'experienced_apply' vacancy_id=vacancy.id %}"><input type="button" name="apply" id="apply" title="Apply" value="Apply"></a>
+            <hr>
+        {% endfor %}    
     </div>
 {% endif %}
 {% if message %}

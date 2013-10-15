@@ -153,22 +153,6 @@ class Services_section(Dates):
         return '<img height="50px" src="/site_media/%s"/>' % self.section_image
     image_thumb.allow_tags = True
 
-class Testimonials(Dates):
-    title = models.CharField('Content Subhead', max_length=100, null=True, blank=True, help_text='Heading of the content in the page')
-    description = models.TextField('Content description', null=True, blank=True, help_text='Content description')
-    image = models.ImageField(upload_to='uploads/images/', help_text="Upload image to be displayed in Testimonials section page")
-    
-    class Meta:
-        verbose_name = 'Testimonials'
-        verbose_name_plural = 'Testimonials'
-
-    def __unicode__(self):
-        return self.title
-
-    def image_thumb(self):
-        return '<img height="50px" src="/site_media/%s"/>' % self.image
-    image_thumb.allow_tags = True
-
 class Slideshow(Dates):
     left_arrow = models.ImageField(upload_to='uploads/images/', help_text="Upload image to be displayed in the banner" )
     right_arrow = models.ImageField(upload_to='uploads/images', help_text="Upload image to be displayed in the banner" )
