@@ -1,5 +1,7 @@
 {% if comment%}
-    <p class="comment_description">{{ comment.description }}</p>
-    <p class="comment_details">{{ comment.created_date }} {{ comment.author.first_name }} {{ comment.author.last_name }}</p>
-    <hr>
+    <<p class="comment_description">{{ comment.description }}
+        <p class="comment_details">{{ comment.created_date }}
+        {{ comment.author.first_name }}&nbsp{{ comment.author.last_name }}
+        </p>
+    </p>
 {% endif %}
