@@ -320,11 +320,7 @@ body {
                 width: 50%;
                 float: left;
                 #contact_form {
-                    /*ul {
-                        list-style: none;
-                        padding: 0;
-                        li {
-                            position: relative;*/
+                    
                     label {
                         display: block;
                         float: left;
@@ -332,6 +328,7 @@ body {
                         margin: 5px 5px 5px 0;
                         padding: 4px;
                         width: 95px;
+                        color: #1D5073;
                     }
                     input {
                         width: 210px;
@@ -351,9 +348,10 @@ body {
                         background-repeat: no-repeat;
                         height: 39px;
                         margin: 10px 0 0 0;
-                    }/*
-                        }
-                    }*/
+                    }
+                    h3 {
+                        color: #1D5073;
+                    }
                 }
             }
             #contactus {
@@ -361,7 +359,7 @@ body {
                 height: auto;
                 float: right;
                 p {
-                    margin: 0 0 15px 0;
+                    margin: 0 0 15px 15px;
                     font-size: 14px;
                 }
             }
@@ -376,7 +374,7 @@ body {
     .container {
         .content {
             font-size: 15px;
-            height: 570px;
+            height: auto;
             #left_content {
                 width: 49%;
                 height: auto;
@@ -388,11 +386,18 @@ body {
                 height: auto;
                 float: left;
             }
+            h2 {
+                color: #1D5073;
+            }
+            p {
+                line-height: 23px;
+                display: block;
+            }
         }
     }
 }
 
-#smartbook {
+#smartbook_div {
     .banner {
         background: url(images/banners/smartbook.png) no-repeat;
     }
@@ -702,7 +707,11 @@ body {
             h2 {
                 margin: auto;
                 display: block;
-                color: gray;
+                color: #1D5073;
+            }
+            li {
+                line-height: 26px;
+                list-style-type: circle;
             }
         }
     }
