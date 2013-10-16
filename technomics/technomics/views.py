@@ -5,12 +5,15 @@ import re
 import os.path
 from django.conf import settings
 from django.shortcuts import get_object_or_404, render
+from django.template.loader import render_to_string
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.views.generic.base import View
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from datetime import datetime
+from django.utils import simplejson
 
 from web.models import Contactus, Dates, Homepage, Feature, Newsevents, Aboutus, Blog, Comment, Slideshow, Services, Services_section, \
     Candidate, Vacancy, Menu
@@ -206,7 +209,7 @@ class BlogView(View):
         context = {}
         data_dict_form = BlogForm(request.POST)
         data = request.POST
-        name = request.user.username
+        name = request.user
         if request.method == 'POST':
             if data_dict_form.is_valid():
                 blog = Blog()
@@ -230,6 +233,7 @@ class BlogCommentView(View):
 
     def post(self, request, blog_id):
         context = {}
+        context_new = {}
         data_dict_form = BlogCommentForm(request.POST)
         data = request.POST
         if request.method == 'POST':
@@ -238,12 +242,10 @@ class BlogCommentView(View):
                 comment = Comment()
                 comment.blog_id = blog
                 comment.description = data['description']
-                comment.author = request.user.username
-                comment.save()
-        template_name = 'blog.html'
-        context = listing(request)
-        return render(request, template_name, context)
-
+                comment.author = request.user
+                comment.save()               
+                comment_obj = render_to_string('comment.html', {'comment': comment})
+                return HttpResponse(comment_obj)
 
 def blog_listing(request):
     context = listing(request)
@@ -252,11 +254,9 @@ def blog_listing(request):
 
 def listing(request):
     blogs_list = Blog.objects.all()
-    services_page = Services.objects.latest('id')
     paginator = Paginator(blogs_list, 5)
 
     page = request.GET.get('page')
-    print 'page', page
     try:
         blogs = paginator.page(page)
     except PageNotAnInteger:
@@ -266,10 +266,9 @@ def listing(request):
 
     comment_form = BlogCommentForm()
     context = {
-    'services_page': services_page,
-    'blogs': blogs,
-    'is_staff': request.user.is_staff,
-    'blog_id': '',
-    'comment_form': comment_form,
+        'blogs': blogs,
+        'is_staff': request.user.is_staff,
+        'blog_id': '',
+        'comment_form': comment_form,
     }
     return context

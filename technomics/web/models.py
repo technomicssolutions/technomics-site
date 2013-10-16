@@ -104,9 +104,9 @@ class Contactus(Dates):
         verbose_name_plural = 'Contact Us'
 
 class Blog(Dates):
-    title = models.CharField('Content Subhead', max_length=500)
-    description = models.TextField('Content Description')
-    author = models.CharField(max_length=80, help_text='Name of the author')
+    title = models.CharField('Title', max_length=500)
+    description = models.TextField('Description')
+    author = models.ForeignKey(User)
 
     class Meta:
         verbose_name = 'Blog'
@@ -119,7 +119,7 @@ class Blog(Dates):
 
 class Comment(Dates):
     blog_id = models.ForeignKey(Blog, help_text="Corresponding Blog")
-    author = models.CharField(max_length=80, help_text='Name of the user')
+    author = models.ForeignKey(User)
     description = models.TextField('Comment', null=True, blank=True)
 
     class Meta:

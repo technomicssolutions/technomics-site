@@ -12,44 +12,35 @@
     {% if blogs %}
         {% for blog in blogs %}
             <div class="blogs_div">
-            <h1>{{ blog.title }}</h1>
-            <p id="blog_description">{{ blog.description }}</p>
-            <p id="blog_details">Created on {{ blog.created_date }} wrote by {{ blog.author }}</p>    
-            {% with comments=blog.comment_set.all %}
-                <div id="comment_div">
-                    {% if is_staff %}
-                        <a class="blog_comment" id="leave_comment" >Leave a comment</a>
-                    {% endif %}
-                    <div id="comments">
-                        {% if comments %}
-                            <h2>Comments</h2>
-                            {% if comments.0 %}
-                                {{ comments.0.created_date }}
-                                {{ comments.0.author }}
-                                {{ comments.0.description }}
+                <h1>{{ blog.title }}</h1>
+                <p id="blog_description">{{ blog.description }}</p>
+                <p id="blog_details">Created on {{ blog.created_date }} wrote by {{ blog.author.first_name }}&nbsp{{ blog.author.last_name }}</p>                  
+                <div class="comment_div">
+                    <h2>Comments</h2>
+                        
+                    <div class="comments">
+                        {% for comment in blog.comment_set.all|slice:":3" %}
+                            {% if comment%}
+                            <div class="comment">
+                                <p class="comment_description">{{ comment.description }}</p>
+                                <p class="comment_details">{{ comment.created_date }}
+                                {{ comment.author.first_name }}&nbsp{{ comment.author.last_name }}
+                                </p>
                                 <hr>
+                            </div>
                             {% endif %}
-                            {% if comments.1 %}
-                                {{ comments.1.created_date }}
-                                {{ comments.1.author }}
-                                {{ comments.1.description }}
-                                <hr>
-                            {% endif %}
-                            {% if comments.2 %}
-                                {{ comments.2.created_date }}
-                                {{ comments.2.author }}
-                                {{ comments.2.description }}
-                            {% endif %}
-                        {% endif %}
+                        {% endfor %}
                     </div>
                     <form id="{{ blog.id }}" class="form_comment" method="post" enctype="multipart/form-data" >
                         {{ comment_form }}
                         {% csrf_token %}
                         <input type="button" id="send_comment" class="comment_submit" value="Submit" >
                     </form>
+                    {% if is_staff %}
+                        <a class="blog_comment" >Leave a comment</a>
+                    {% endif %}
                 </div>
-            {% endwith %}
-        </div>
+            </div>
         {% endfor %}
         
         <div class="pagination">
