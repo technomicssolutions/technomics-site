@@ -474,7 +474,8 @@ body {
     }
     .container {
         .blogs_div {
-            border: 3px solid #3D7FA2;
+            /*border-bottom: 1px solid gray;*/
+            border: 1px solid gray;
             border-radius: 20px;
             display: block;
             height: auto;
@@ -510,15 +511,48 @@ body {
                 border: 1px solid #000000;
                 text-align: center;
             }
-            #comment_form_div {
-                height: auto;
-                width: auto;
-                #comment_form {
+            #blog_details {
+                margin-left: 15px;
+                font-size: 14px;
+            }
+            #comment_div{
+                label {
+                    display: block;
+                    font-size: 15px;
+                    height: auto;
+                    width: 125px;
+                    margin: 15px;
+                }
+                textarea {
+                    display: block;
+                    float: left;
+                    margin-left: 15px;
+                }
+                #send_comment {
+                    margin-bottom: 25px;
+                    margin-left: 15px;
+                    width: 146px;
+                }
+                #comments {
+                    margin: 0 0 30px 15px;
+                    font-size: 15px;
+                    width: 907px;
+                    height: auto;
+                    line-height: 25px;
+                }
+                /*input[type='submit'] {
+                    float: left;
+                    height: 30px;
+                    margin: 5px 0 0 15px;
+                    width: 76px;
+                }*/
+
+                 /*form_comment{
                     label {
                         display: block;
                         font-size: 15px;
                         height: auto;
-                        width: auto;
+                        width: 135px;
                         margin-left: 15px;
                     }
                     textarea {
@@ -532,9 +566,8 @@ body {
                         margin: 5px 0 0 15px;
                         width: 76px;
                     }
-                }
+                }*/
             }
-
         }
 
     } 

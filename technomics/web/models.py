@@ -120,7 +120,7 @@ class Blog(Dates):
 class Comment(Dates):
     blog_id = models.ForeignKey(Blog, help_text="Corresponding Blog")
     author = models.CharField(max_length=80, help_text='Name of the user')
-    description = models.TextField('Content description', null=True, blank=True)
+    description = models.TextField('Comment', null=True, blank=True)
 
     class Meta:
         verbose_name = 'Comment'

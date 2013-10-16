@@ -14,39 +14,44 @@
             <div class="blogs_div">
             <h1>{{ blog.title }}</h1>
             <p id="blog_description">{{ blog.description }}</p>
-            <p>On {{ blog.created_date }} {{ blog.author }} wrote</p>    
+            <p id="blog_details">Created on {{ blog.created_date }} wrote by {{ blog.author }}</p>    
             {% with comments=blog.comment_set.all %}
                 <div id="comment_div">
                     {% if is_staff %}
-                        <a class="blog_comment" href="{% url 'add_blog_comment' blog_id=blog.id %}?page={{ blogs.number }}">Leave a comment</a>
+                        <a class="blog_comment" id="leave_comment" >Leave a comment</a>
                     {% endif %}
                     <div id="comments">
                         {% if comments %}
                             <h2>Comments</h2>
-                            {{ comments.0.created_date }}
-                            {{ comments.0.author }}
-                            {{ comments.0.description }}
-                            {{ comments.1.created_date }}
-                            {{ comments.1.author }}
-                            {{ comments.1.description }}
-                            {{ comments.2.created_date }}
-                            {{ comments.2.author }}
-                            {{ comments.2.description }}
+                            {% if comments.0 %}
+                                {{ comments.0.created_date }}
+                                {{ comments.0.author }}
+                                {{ comments.0.description }}
+                                <hr>
+                            {% endif %}
+                            {% if comments.1 %}
+                                {{ comments.1.created_date }}
+                                {{ comments.1.author }}
+                                {{ comments.1.description }}
+                                <hr>
+                            {% endif %}
+                            {% if comments.2 %}
+                                {{ comments.2.created_date }}
+                                {{ comments.2.author }}
+                                {{ comments.2.description }}
+                            {% endif %}
                         {% endif %}
                     </div>
+                    <form id="{{ blog.id }}" class="form_comment" method="post" enctype="multipart/form-data" >
+                        {{ comment_form }}
+                        {% csrf_token %}
+                        <input type="button" id="send_comment" class="comment_submit" value="Submit" >
+                    </form>
                 </div>
             {% endwith %}
         </div>
         {% endfor %}
-        <div id="comment_form_div">
-            <form id="comment_form" method="post" enctype="multipart/form-data" >
-                <table>
-                    {{ comment_form.as_p }}
-                </table>
-                {% csrf_token %}
-                <input type="button" id="send_comment" value="Submit" >
-            </form>
-        </div>
+        
         <div class="pagination">
             <span class="step-links">
             {% if blogs.has_previous %}
