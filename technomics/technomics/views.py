@@ -221,7 +221,7 @@ class BlogView(View):
                 blog.save()
         template_name = 'blog.html'
         context = listing(request)
-        return render(request, template_name, context)
+        return HttpResponseRedirect(reverse('render_menupage', kwargs={'menuslug':'blog'}))
 
 
 class BlogCommentView(View):

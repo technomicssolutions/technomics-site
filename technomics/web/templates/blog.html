@@ -46,23 +46,25 @@
         
         <div class="pagination">
             <span class="step-links">
-            {% if blogs.has_previous %}
-            <a href="?page={{ blogs.previous_page_number }}">Previous</a>
-            {% endif %}
+                {% if blogs.has_previous %}
+                    <a href="?page={{ blogs.previous_page_number }}">Previous</a>
+                {% endif %}
 
-            <span class="current">
-            Page {{ blogs.number }} of {{ blogs.paginator.num_pages }}.
-            </span>
+                <span class="current">
+                    Page {{ blogs.number }} of {{ blogs.paginator.num_pages }}.
+                </span>
 
-            {% if blogs.has_next %}
-            <a href="?page={{ blogs.next_page_number }}">Next</a>
-            {% endif %}
+                {% if blogs.has_next %}
+                    <a href="?page={{ blogs.next_page_number }}">Next</a>
+                {% endif %}
             </span>
         </div>
     {% endif %}
     
     {% if is_staff %}
-        <a href="{% url 'add_blog' %}">Add blog</a>
+        <div class="add_blog">
+            <a href="{% url 'add_blog' %}" class="add_blogs">Add Blog</a>
+        </div>
     {% endif %}
 
     <p id="hidden_blog_id" name="{{ blog_id }}"></p>
