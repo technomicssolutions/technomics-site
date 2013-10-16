@@ -262,50 +262,6 @@ body {
 .content {
     clear: both;
 }
-/*#services_page {
-    .container {
-        .content {
-            #content_section {           
-                padding-bottom: 22px;
-                h3{
-                    font-size: 26px;
-                    font-weight: 200;
-                }
-            }
-            #services_section{
-                display: block;
-                height: 475px;
-                width: 100%;
-                text-align:justify;
-                h3{
-                    color: white;
-                    font-size: large;
-                    font-weight: bold;
-                    text-align: left;
-                    width: 96%;
-                    text-decoration: none;
-                    background-color: gray;
-                    height: 35px;
-                    padding-top: 12px;
-                    padding-left: 20px;
-                }
-            }
-            .left_section{
-                display: block;
-                float: left;
-                width: 475px;
-                padding-right: 74px;
-            }
-            .right_section{
-                display: block;
-                float: left;
-                width: 475px;
-            }
-        }
-    }
-}
-*/
-
 #aboutus {
     .banner {
         background: url(images/banners/about.png) no-repeat;
@@ -516,6 +472,9 @@ body {
                 font-size: 14px;
             }
             .comment_div{
+                h2 {
+                    margin: 16px 0 15px 15px;
+                }
                 label {
                     display: block;
                     font-size: 15px;
@@ -552,6 +511,39 @@ body {
                         position: relative;
                     }
                 }
+                form {
+                    display: block;
+                    width: 312px;
+                    label {
+                        display: block;
+                        float: left;
+                        font-weight: bold;
+                        margin: 5px 5px 5px 0;
+                        padding: 4px;
+                        width: 95px;
+                    }
+                    input {
+                        width: 210px;
+                        margin-top: 5px;
+                        height: 25px;
+                    }
+                    textarea {
+                        width: 310px;
+                        height: 150px;
+                        margin-top: 5px;
+                        display: block;
+                    }
+                    input[type='button'] {
+                        width: 107px;
+                        height: 39px;
+                        margin: 10px 0 0 0px;
+                        float: left;
+                    }
+
+                }
+                /*.comment{
+                    border-bottom: 1px solid #AAAAAA;
+                }*/
                 /*input[type='submit'] {
                     float: left;
                     height: 30px;
@@ -736,7 +728,7 @@ body {
     .container {
     }
 }
-form {
+/*form {
     display: block;
     width: 312px;
     label {
@@ -763,15 +755,15 @@ form {
         margin : 5px 0 4px 0;
         height: 25px;
     }
-    input[type='submit'] {
-        width: 107px;
+    input[type='submit'] {*/
+        /*width: 107px;*/
         /*background-image: url(images/sendButton.jpg);*/
         /*background-repeat: no-repeat;*/
-        display: block;
+        /*display: block;
         height: 39px;
         margin: 10px 0 0 107px;
     }
-}
+}*/
 #experienced {
     .banner {
         background: url(images/banners/careers.png) no-repeat;
@@ -819,7 +811,9 @@ form {
 
                 form {
                     display: block;
-                    width: 312px;
+                    width: 314px;
+                    height: auto;
+                    height: 566px;
                     label {
                         display: block;
                         float: left;
@@ -828,8 +822,8 @@ form {
                         padding: 4px;
                         width: 95px;
                     }
-                    input {
-                        width: 210px;
+                    input[type='text']{
+                        width: 310px;
                         margin-top: 5px;
                         height: 25px;
                     }
@@ -840,17 +834,22 @@ form {
                         display: block;
                     }
                     select {
-                        width: 97px;
-                        margin : 5px 0 4px 0;
+                        width: 206px;
+                        margin : 8px 0 8px 0;
                         height: 25px;
+                        float: left;
                     }
                     input[type='submit'] {
                         width: 107px;
-                        /*background-image: url(images/sendButton.jpg);*/
-                        /*background-repeat: no-repeat;*/
-                        display: block;
+                        background-image: url(images/sendButton.jpg);
+                        background-repeat: no-repeat;
                         height: 39px;
-                        margin: 10px 0 0 107px;
+                        margin: 10px 0 0 0;
+                        float: left;
+                    }
+                    input[type='file'] {
+                        width: 206px;
+                        margin: 8px 0 5px 0;
                     }
                     .errorlist {
                         color: red;

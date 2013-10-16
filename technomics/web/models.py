@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.conf import settings
 from .utils import slug
-from web import CANDIDATE_TYPE, CANDIDATE_TYPE_FRESHER, QUALIFICATION_TYPE, QUALIFICATION_TYPE_BSC
+from web import CANDIDATE_TYPE, CANDIDATE_TYPE_FRESHER, QUALIFICATION_TYPE, QUALIFICATION_TYPE_BSC, EXPERIENCE_TYPE
 # Create your models here.
 
 
@@ -248,6 +248,7 @@ class  Candidate(Dates):
     phone = models.CharField('Phone', max_length = 15)
     address = models.TextField('Address', max_length = 500)
     qualification = models.CharField('Qualification', max_length = 50, choices = QUALIFICATION_TYPE, default = QUALIFICATION_TYPE_BSC)
+    experience = models.CharField('Experience', max_length = 20, choices = EXPERIENCE_TYPE)
     resume = models.FileField(upload_to='uploads/resumes/')
     vacancy = models.ForeignKey('Vacancy')
 

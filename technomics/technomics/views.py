@@ -134,6 +134,7 @@ class CareersView(View):
                 candidate.phone = data['phone']
                 candidate.address = data['address']
                 candidate.qualification = data['qualification']
+                candidate.experience = data['experience']
                 candidate.vacancy = vacancy
                 with open(file_name, 'w') as destination:
                     for chunk in fileobj.chunks():
@@ -177,6 +178,7 @@ def freshers_detail(request):
             candidate.phone = data['phone']
             candidate.address = data['address']
             candidate.qualification = data['qualification']
+            candidate.experience = '0'
             candidate.vacancy = vacancy
             with open(file_name, 'wb+') as destination:
                 for chunk in fileobj.chunks():

@@ -35,4 +35,4 @@ class CandidateExperiencedForm(ModelForm):
 
     class Meta:
         model = Candidate
-        fields = ('name', 'email','phone', 'address','qualification','resume')
+        fields = ('name', 'email','phone', 'address','qualification','experience', 'resume')

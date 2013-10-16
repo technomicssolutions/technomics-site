@@ -81,7 +81,7 @@ class MenuAdmin(admin.ModelAdmin):
     exclude = ('slug',)
 
 class  CandidateAdmin(admin.ModelAdmin):
-    list_display = ('name', 'candidate_type', 'email', 'phone', 'address', 'qualification', 'resume')
+    list_display = ('name', 'candidate_type', 'email', 'phone', 'address', 'qualification', 'experience', 'resume')
     
 class VacancyAdmin(admin.ModelAdmin):
     list_display = ('name', 'no_of_vacancy', 'description', 'opening_date', 'closing_date')
