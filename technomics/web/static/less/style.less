@@ -56,7 +56,8 @@ body {
             li {
                 clear:both;
                 border-style:none;
-                width: 200px;
+                min-width: 250px;
+                height: auto;
                 height: 20px;
                 padding: 3px;
                 right: 39px;
@@ -577,12 +578,36 @@ body {
     } 
 }
 
-#industrialmanufacturing {
+#industrialmanufacturing_div {
     .banner {
         background: url(images/banners/industrial.png) no-repeat;
     }
     .container {
-     }
+    }
+    ul {
+        font-size: 15px;
+        font-weight: bold;
+        color: #1D5073;
+        
+        li {
+            font-size: 15px;
+            line-height: 23px;
+            list-style: circle outside none;
+            margin-left: 50px;
+            line-height: 30px;
+            font-weight: normal;
+            color: #000;
+        }
+    }
+    #industrial_products {
+        list-style-type:decimal;
+        font-size: 20px;
+        line-height: 40px;
+        color: #1D5073;
+        width: 520px;
+        margin: auto;
+    }
+    
 }
 
 #hospitality {
