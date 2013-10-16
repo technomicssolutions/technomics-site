@@ -6,12 +6,12 @@ TEMPLATE_DEBUG = DEBUG
 
 fillpath = lambda x: os.path.join(os.path.dirname(__file__), x)
 ADMINS = (
-    ('Shajeer', 'shajeer@technomicssolutions.com'),
-    ('Vishnu', 'vishnu@technomicssolutions.com'),
-    ('Remya', 'remya@technomicssolutions.com'),
+    ('Technomics', 'info@technomicssolutions.com'),
 )
 
-MANAGERS = ADMINS
+MANAGERS = (
+    ('Careers','careers@technomicssolutions.com'),
+)
 
 DATABASES = {
     'default': {
