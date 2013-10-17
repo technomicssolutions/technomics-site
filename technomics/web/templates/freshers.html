@@ -2,13 +2,14 @@
 {% load media %}
 {% load thumbnail %}
 {% block title %}<title> Careers | Freshers | Technomics Solutions </title>{% endblock title %}
-{% block body_tags %}id="freshers"{% endblock body_tags %}
+{% block body_id %}freshers{% endblock body_id %}
 {% block banner %}
     <div class="banner"> </div>  
 {% endblock banner %}
 
     
 {% block content %}
+
    {% if form %}
         <div id="fresher_form" class="clear">
             <form id="form_fresher" action="{% url 'freshers_apply' %}" method="post" enctype="multipart/form-data" >{% csrf_token %}

@@ -89,6 +89,13 @@ body {
         }
     }
 }
+.errorlist {   
+    color: #FF0000;
+    margin-left: 55px;
+    padding-left: 0;
+    width: 182px;
+    font-size: 13px;
+}
 .footer {
     width: 1024px;
     margin: auto;
@@ -467,6 +474,7 @@ body {
                 border-radius: 10px;
                 border: 1px solid #000000;
                 text-align: center;
+                cursor: pointer;
             }
             .blog_details {
                 font-size: 12px;
@@ -490,9 +498,13 @@ body {
                         width: 1020px;
                     }
                     .comment_submit {
-                        margin:20px 0 25px 0px;
                         width: 112px;
                         float: right;
+                        cursor: pointer;
+                    }
+                    .comment_button_div {
+                        width: auto;
+                        height: auto;
                     }
                 }
                 .comments {
@@ -515,15 +527,22 @@ body {
             }
         }
         .pagination {
+            width: auto;
+            height: auto;
+            display: block;
             .step-links {
                 float: right;
             }
         }
         .add_blog {
+            width: auto;
+            height: auto;
+            display: block;
+            padding-top: 25px;
+            margin-bottom: 50px;
             .add_blogs{
                 font-size: 14px;
                 color: #000000;
-                display: block;
                 height: 19px;
                 padding: 7px;
                 width: 85px;
@@ -532,6 +551,7 @@ body {
                 border-radius: 10px;
                 border: 1px solid #000000;
                 text-align: center;
+                float: right;
             }
         }
     } 
@@ -775,10 +795,6 @@ body {
                         width: 206px;
                         margin: 8px 0 5px 0;
                     }
-                    .errorlist {
-                        color: red;
-                        font-size: 14px;
-                    }
                 }
             }
         }
@@ -857,7 +873,7 @@ body {
         }
         form {
             display: block;
-            width: 330px;
+            width: 316px;
             height: auto;
             label {
                 display: block;
@@ -865,7 +881,7 @@ body {
                 font-weight: bold;
                 margin: 5px 5px 5px 0;
                 padding: 4px;
-                width: 130px;
+                width: 92px;
             }
             input {
                 width: 310px;
@@ -879,10 +895,20 @@ body {
                 display: block;
             }
             input[type='submit'] {
-                width: 107px;
-                display: block;
-                height: 39px;
+                width: 82px;
+                height: 27px;
                 margin: 25px 0 0 0px;
+            }
+            a.cancel_button {
+                text-align: center;
+                input[type='button']{
+                    height: 27px;
+                    width: 78px;
+                }
+            }
+            .button_div {
+                width: 161px;
+                margin: auto;
             }
         }
     }

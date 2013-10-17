@@ -34,31 +34,6 @@ def home(request):
         context = {}
     
     return render(request, 'home.html',context)
-
-@csrf_exempt
-def contact_us(request):
-    form = ContactUsForm(request.POST)
-    data_dict_form = request.POST
-    context = {}
-    if request.method == 'POST':
-        if form.is_valid():
-            contact_us = Contactus()
-            contact_us.name = data_dict_form['name']
-            contact_us.email_id = data_dict_form['email_id']
-            contact_us.message = data_dict_form['message']
-            contact_us.subject = data_dict_form['subject']
-            contact_us.save();
-            contact_us.send_contact_notification_mail_to_admins()
-            form = ContactUsForm()
-            context ={
-                'form': form,
-                'message': 'Your message sent successfully',
-            }
-        else:
-            context ={
-                'form': form,
-            }
-    return render(request, 'contact_us.html', context)
     
 def rendermenu(request, menuslug):
     if menuslug:
@@ -192,12 +167,49 @@ def freshers_detail(request):
                 'message':'Your application sent successfully.'
             }
         else:
-            form = CandidateFreshersForm()
             context ={
                 'form': data_dict_form,
             }
+            return render(request, 'freshers.html',context)
     return HttpResponseRedirect(reverse('render_submenupage', kwargs={'menu_slug' :'careers', 'submenuslug' :'freshers'}))
 
+class ContactUsView(View):
+
+    def get(self,request):
+
+        context = {}
+        form = ''
+        form = ContactUsForm()
+        context = {
+            'form': form,
+        }
+        return render(request,'contact_us.html', context)
+
+    def post(self, request):
+
+        form = ContactUsForm(request.POST)
+        data_dict_form = request.POST
+        context = {}
+        if request.method == 'POST':
+            if form.is_valid():
+                contact_us = Contactus()
+                contact_us.name = data_dict_form['name']
+                contact_us.email_id = data_dict_form['email_id']
+                contact_us.message = data_dict_form['message']
+                contact_us.subject = data_dict_form['subject']
+                contact_us.save();
+                contact_us.send_contact_notification_mail_to_admins()
+                form = ContactUsForm()
+                context ={
+                    'form': form,
+                    'message': 'Your message sent successfully',
+                }
+            else:
+                context ={
+                    'form': form,
+                }
+        return render(request, 'contact_us.html', context)
+        
 
 class BlogView(View):
     def get(self, request):
@@ -219,7 +231,9 @@ class BlogView(View):
                 blog.description = data['description']
                 blog.author = name
                 blog.save()
-        template_name = 'blog.html'
+            else:
+                context ['blog_form'] = data_dict_form
+                return render(request, 'add_blog.html', context)
         context = listing(request)
         return HttpResponseRedirect(reverse('render_menupage', kwargs={'menuslug':'blog'}))
 

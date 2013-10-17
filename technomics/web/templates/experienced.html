@@ -2,7 +2,7 @@
 {% load media %}
 {% load thumbnail %}
 {% block title %}<title> Careers | Experienced | Technomics Solutions </title>{% endblock title %}
-{% block body_tags %}id=experienced{% endblock body_tags %}
+{% block body_id %}experienced{% endblock body_id %}
 {% block banner %}
     <div class="banner"></div>
 {% endblock banner %}
@@ -25,9 +25,6 @@
     </div>
 {% endif %}
 {% if form %}
-    <!-- {% if message %}
-        <h1> {{message }}</h1>
-    {% endif %} -->
     <div id="experienced_form" class="clear">
         <form id="form_experienced" action="{% url 'experienced_apply' vacancy_id=vacancy_id %}" method="post" enctype="multipart/form-data" >{% csrf_token %}
             {{ form}} 
