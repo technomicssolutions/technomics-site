@@ -10,7 +10,7 @@ body {
         float: left;
         height: auto;
         width: 262px;
-
+        outline: 0;
     }
     .menus {
         width: auto;
@@ -28,6 +28,7 @@ body {
                     text-decoration: none;
                     color: #1D5073;
                     font-size: 15px;
+                    outline: 0;
                 }
                 ul {
                     display: none;
@@ -359,6 +360,7 @@ ul.errorlist {
                         background-repeat: no-repeat;
                         height: 39px;
                         margin: 10px 0 0 0;
+                        outline: 0;
                     }                   
                 }
             }
@@ -507,6 +509,7 @@ ul.errorlist {
                         height: 27px;
                         float: right;
                         margin-right: 10px;
+                        outline: 0;
                     }
                     .comment_button_div {
                         width: auto;
@@ -806,6 +809,7 @@ ul.errorlist {
                         height: 39px;
                         margin: 10px 0 0 0;
                         float: left;
+                        outline: 0;
                     }
                     input[type='file'] {
                         color: #1D5073;
@@ -864,6 +868,7 @@ ul.errorlist {
                         display: block;
                         height: 39px;
                         margin: 25px 0 0 0px;
+                        outline: 0;
                     }
                     input[type='file'] {
                         color: #1D5073;
@@ -937,4 +942,11 @@ ul.errorlist {
 
 hr {
     color: #1D5073;
+}
+button::-moz-focus-inner,
+input[type="reset"]::-moz-focus-inner,
+input[type="button"]::-moz-focus-inner,
+input[type="submit"]::-moz-focus-inner,
+input[type="file"] > input[type="button"]::-moz-focus-inner {
+    border: none;
 }
