@@ -34,10 +34,11 @@
                         {{ comment_form }}
                         {% csrf_token %}
                         <div class='comment_button_div'>
-                            <input type="button" class="comment_submit" value="Submit" >
                             <a href="{% url 'render_menupage' menuslug='blog'%}" class='comment_cancel_button'>
                                 <input type="button" value="Cancel">
                             </a>
+                            <input type="button" class="comment_submit" value="Submit" >
+                            
                         </div>
                     </form>
                     {% if is_staff %}

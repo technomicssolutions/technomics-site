@@ -89,12 +89,16 @@ body {
         }
     }
 }
-.errorlist {   
+ul.errorlist {   
     color: #FF0000;
     margin-left: 55px;
     padding-left: 0;
     width: 182px;
     font-size: 13px;
+    li {
+        width: 230px;
+        height: auto;
+    }
 }
 .footer {
     width: 1024px;
@@ -462,7 +466,7 @@ body {
                 height: auto;
                 line-height: 29px;
             }
-            a{
+            a.blog_comment {
                 font-size: 14px;
                 color: #000000;
                 display: block;
@@ -496,15 +500,25 @@ body {
                         float: left;
                         height: 73px;
                         width: 1020px;
+                        margin-bottom: 12px;
                     }
                     .comment_submit {
-                        width: 112px;
+                        width: 78px;
+                        height: 27px;
                         float: right;
-                        cursor: pointer;
+                        margin-right: 10px;
                     }
                     .comment_button_div {
                         width: auto;
                         height: auto;
+                        a.comment_cancel_button {
+                            float: right;
+                            text-align: center;
+                            input[type='button']{
+                                height: 27px;
+                                width: 78px;
+                            }
+                        }
                     }
                 }
                 .comments {
@@ -757,14 +771,16 @@ body {
                     display: block;
                     width: 314px;
                     height: auto;
-                    height: 566px;
+                    margin-bottom: 70px;
                     label {
                         display: block;
+                        color: #1D5073;
                         float: left;
                         font-weight: bold;
                         margin: 5px 5px 5px 0;
                         padding: 4px;
                         width: 95px;
+                        height: 13px;
                     }
                     input[type='text']{
                         width: 310px;
@@ -792,8 +808,10 @@ body {
                         float: left;
                     }
                     input[type='file'] {
+                        color: #1D5073;
                         width: 206px;
                         margin: 8px 0 5px 0;
+                        height: 25px;
                     }
                 }
             }
@@ -814,6 +832,7 @@ body {
                     width: 330px;
                     height: auto;
                     label {
+                        color: #1D5073;
                         display: block;
                         float: left;
                         font-weight: bold;
@@ -847,6 +866,7 @@ body {
                         margin: 25px 0 0 0px;
                     }
                     input[type='file'] {
+                        color: #1D5073;
                         width: 206px;
                         margin: 8px 0 5px 0;
                     }
@@ -882,6 +902,7 @@ body {
                 margin: 5px 5px 5px 0;
                 padding: 4px;
                 width: 92px;
+                color: #1D5073;
             }
             input {
                 width: 310px;

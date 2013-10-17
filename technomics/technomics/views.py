@@ -128,6 +128,7 @@ class CareersView(View):
                     'form': data_dict_form,
                     'vacancy_id': vacancy_id,
                 }
+                return render(request, 'experienced.html', context)
         return HttpResponseRedirect(reverse('render_submenupage', kwargs={'menu_slug' :'careers', 'submenuslug' :'experienced'}))
 
 def freshers_detail(request):
