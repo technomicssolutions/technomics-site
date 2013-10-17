@@ -74,6 +74,39 @@ def rendersubmenu(request, menu_slug, submenuslug):
             }
             return render(request, template, context)
 
+class EditBlogView(View):
+
+    def get(self, request, blog_id):
+        template_name = 'edit_blog.html'
+        blog_obj = Blog.objects.get(id = blog_id)
+        blog_form = BlogForm(initial = {'title': blog_obj.title,'description':blog_obj.description,})
+        context = {
+            'form': blog_form,
+            'blog_id': blog_id,
+        }
+        return render(request, template_name, context)
+
+    def post(self,request, blog_id):
+        context = {}
+        data_dict_form = BlogForm(request.POST)
+        data = request.POST
+        name = request.user
+        if request.method == 'POST':
+            if data_dict_form.is_valid():
+                blog = Blog.objects.get(id = blog_id)
+                blog.title = data['title']
+                blog.description = data['description']
+                blog.author = name
+                blog.save()
+            else:
+                context = {
+                    'form': blog_form,
+                    'blog_id': blog_id,
+                }
+                return render(request, 'edit_blog.html', context)
+        context = listing(request)
+        return HttpResponseRedirect(reverse('render_menupage', kwargs={'menuslug':'blog'}))
+
 
 class CareersView(View):
     def get(self, request, vacancy_id):

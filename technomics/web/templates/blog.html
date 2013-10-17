@@ -15,7 +15,10 @@
             <div class="blogs_div">
                 <h1>{{ blog.title }}</h1>
                 <p class="blog_description">{{ blog.description }}</p>
-                <p class="blog_details"> {{ blog.created_date }} {{ blog.author.first_name }} {{ blog.author.last_name }}</p>                  
+                <p class="blog_details"> {{ blog.created_date }} {{ blog.author.first_name }} {{ blog.author.last_name }}</p>   
+                {% if blog.author == user %}
+                    <a class="edit_button" href="{% url 'edit_blog' blog_id=blog.id %}" >Edit Blog</a>
+                {% endif %}               
                 <div class="comment_div">
                     <div class="comments">
                         <h2>Comments</h2>
