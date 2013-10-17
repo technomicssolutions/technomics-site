@@ -196,7 +196,11 @@ GLOBAL_MEDIA_DIRS = () #(os.path.join(os.path.dirname(__file__), 'static'),)
 MEDIA_BUNDLES = (
     ('main.css',
         'less/style.less', 
-        'less/slideshow.less',       
+        'less/slideshow.less',  
+        'css/tinymce/content.inline.min.css',
+        'css/tinymce/content.min.css',    
+        'css/tinymce/skin.ie7.min.css', 
+        'css/tinymce/skin.min.css',   
     ),    
     ('mootools.js',
         {'filter': 'mediagenerator.filters.media_url.MediaURL'},
@@ -207,6 +211,8 @@ MEDIA_BUNDLES = (
         'js/contact_form.js',
         'js/slideshow.js',
         'js/add_comment.js',
+        'js/menu.js',
+        'js/tinymce/tinymce.min.js'
     ),
 )
 

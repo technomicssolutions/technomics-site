@@ -32,7 +32,7 @@
         {% endcomment %}
     </head>
 
-    <body {% block body_tags %}{% endblock body_tags %} id="home_body">
+    <body id="{% block body_id %}home_body{% endblock body_id %}" >
        
         <div class="container" >
             {% block body %}
