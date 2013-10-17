@@ -901,12 +901,12 @@ ul.errorlist {
 #comment_form_div {
     display: none;
 }
-#add_blog {
+#add_blog, #edit_blog {
     .banner {
         background: url(images/banners/blog.png) no-repeat;
     }
     .container {
-        #add_blog_div {
+        #add_blog_div, #edit_blog_div {
             width: auto;
             height: auto;
         }
@@ -960,58 +960,7 @@ ul.errorlist {
     }
 }
 
-#edit_blog {
-    .banner {
-        background: url(images/banners/blog.png) no-repeat;
-    }
-    .container {
-        #edit_blog_div {
-            width: auto;
-            height: auto;
-        }
-        form {
-            display: block;
-            width: 316px;
-            height: auto;
-            label {
-                display: block;
-                float: left;
-                font-weight: bold;
-                margin: 5px 5px 5px 0;
-                padding: 4px;
-                width: 92px;
-                color: #1D5073;
-            }
-            input {
-                width: 310px;
-                margin-top: 5px;
-                height: 25px;
-            }
-            textarea {
-                width: 310px;
-                height: 150px;
-                margin: 10px 0 10px 0;
-                display: block;
-            }
-            input[type='submit'] {
-                width: 82px;
-                height: 27px;
-                margin: 0px 10px 0 0px;
-            }
-            a.cancel_button {
-                text-align: center;
-                input[type='button']{
-                    height: 27px;
-                    width: 78px;
-                }
-            }
-            .button_div {
-                width: 170px;
-                margin: auto;
-            }
-        }
-    }
-}
+
 hr {
     color: #1D5073;
 }
