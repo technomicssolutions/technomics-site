@@ -14,7 +14,6 @@ window.addEvent('domready', function(){
         var comment_parent = this.getParent().getParent();
         var comments_div = comment_parent.getElement('.comments');
         var comments = comments_div.getElements('.comment');
-        console.log(comments);
         var ajaxRequest = new Request({ 
             url: url,
             method: 'POST',

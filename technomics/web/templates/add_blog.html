@@ -6,10 +6,10 @@
     <script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
 
     <script>
-        /*tinymce.init({
+        tinymce.init({
             selector: "textarea",
             theme: "modern",
-            width: 300,
+            width: 1000,
             height: 300,
             plugins: [
                  "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
@@ -27,33 +27,30 @@
                 {title: 'Table styles'},
                 {title: 'Table row 1', selector: 'tr', classes: 'tablerow1'}
             ]
-         }); */
+         }); 
     </script>
 {% endblock extrahead %}
-{% block body_tags %}id=add_blog{% endblock body_tags %}
-
-
-
+{% block body_id %}add_blog{% endblock body_id %}
 {% block banner %}
-   <div class="banner">   
-</div>
+    <div class="banner">   
+    </div>
 {% endblock banner %}
 
 {% block content %}
    <div id="add_blog_div">
         {% if blog_form %}
             <form id="add_blog_form" action="{% url 'add_blog' %}" method="post" enctype="multipart/form-data" >
-                <!-- <table>
-                    <label for="id_subject">Title:</label>
-                    {{ blog_form.title }}
-                    <label for="id_subject">Description:</label>
-                    {{ blog_form.description }}
-                </table> -->
                 {% csrf_token %}
                 {{ blog_form }}
-                <input type="submit" value="Submit">
+                <div class="button_div">
+                    <input type="submit" value="Submit">
+                    <a href="{% url 'render_menupage' menuslug='blog'%}" class='cancel_button'>
+                        <input type="button" value="Cancel">
+                    </a>
+                </div>
             </form>
         {% endif %}
+        <div class="clear"></div>
     </div>
 {% endblock %}
 

@@ -3,7 +3,7 @@
 {% load thumbnail %}
 {% block title %}<title> Blogs | Technomics Solutions </title>{% endblock title %}
 
-{% block body_tags %}id=blogs{% endblock body_tags %}
+{% block body_id %}blogs{% endblock body_id %}
 {% block banner %}
     <div class="banner">   
 </div>
@@ -17,26 +17,29 @@
                 <p class="blog_description">{{ blog.description }}</p>
                 <p class="blog_details"> {{ blog.created_date }} {{ blog.author.first_name }} {{ blog.author.last_name }}</p>                  
                 <div class="comment_div">
-                    {%if blog.comment_set.all %}
+                    <div class="comments">
                         <h2>Comments</h2>
-                            
-                        <div class="comments">
-                            {% for comment in blog.comment_set.all|slice:":3" %}
-                                {% if comment%}
-                                <div class="comment">
-                                    <p class="comment_description">{{ comment.description }}</p>
-                                    <p class="comment_details">{{ comment.created_date }}
-                                    {{ comment.author.first_name }}&nbsp{{ comment.author.last_name }}
-                                    </p>
-                                </div>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
-                    {% endif %}
+                        {% for comment in blog.comment_set.all|slice:":3" %}
+                            {% if comment%}
+                            <div class="comment">
+                                <p class="comment_description">{{ comment.description }}</p>
+                                <p class="comment_details">{{ comment.created_date }}
+                                {{ comment.author.first_name }}&nbsp{{ comment.author.last_name }}
+                                </p>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
                     <form id="{{ blog.id }}" class="form_comment" method="post" enctype="multipart/form-data" >
                         {{ comment_form }}
                         {% csrf_token %}
-                        <input type="button" class="comment_submit" value="Submit" >
+                        <div class='comment_button_div'>
+                            <a href="{% url 'render_menupage' menuslug='blog'%}" class='comment_cancel_button'>
+                                <input type="button" value="Cancel">
+                            </a>
+                            <input type="button" class="comment_submit" value="Submit" >
+                            
+                        </div>
                     </form>
                     {% if is_staff %}
                         <a class="blog_comment" >Leave a comment</a>
@@ -64,7 +67,7 @@
     
     {% if is_staff %}
         <div class="add_blog">
-            <a href="{% url 'add_blog' %}" class="add_blogs">Add Blog</a>
+            <a href="{% url 'add_blog' %}" class="add_blogs">New Blog</a>
         </div>
     {% endif %}
 

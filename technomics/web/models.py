@@ -78,7 +78,7 @@ class Contactus(Dates):
     name = models.CharField('Name', max_length=80)
     email_id = models.EmailField('Email', max_length = 120)
     subject = models.CharField('Subject', max_length = 100)
-    message = models.TextField('Message', blank=True, null=True)
+    message = models.TextField('Message')
     
     def __unicode__(self):
         return self.name
@@ -267,15 +267,6 @@ class  Candidate(Dates):
         'email': self.email,
         'type': self.candidate_type
         }) 
-#        body = 'name :'+self.name+'\n'
-#        body += 'candidate_type :'+self.candidate_type+'\n'
-#        body += 'email :'+self.email+'\n'
-#        body += 'phone :'+self.phone+'\n'
-#        body += 'address :'+self.address+'\n'
-#        body += 'qualification :'+self.qualification+'\n'
-#        body += 'for vacancy :'+self.vacancy.name+'\n'
-#        email = EmailMessage(subject, body)
-#        print dir(email)
         
         try:
             mail_managers(subject, message, fail_silently=False, connection=None, html_message=None)
