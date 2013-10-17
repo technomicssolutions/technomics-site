@@ -44,6 +44,9 @@
                     {% if is_staff %}
                         <a class="blog_comment" >Leave a comment</a>
                     {% endif %}
+                    {% if blog.author == user %}
+                        <a class="edit_button" href="{% url 'edit_blog' blog_id=blog.id %}" >Edit</a>
+                    {% endif %}
                 </div>
             </div>
         {% endfor %}
