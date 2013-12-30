@@ -100,7 +100,7 @@ class EditBlogView(View):
                 blog.save()
             else:
                 context = {
-                    'form': blog_form,
+                    'form': data_dict_form,
                     'blog_id': blog_id,
                 }
                 return render(request, 'edit_blog.html', context)
